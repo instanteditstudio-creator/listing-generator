@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoveyTemplatesCo — Trend Spotter</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#FAF7F2;font-family:'DM Sans',sans-serif;color:#1A1A1A;min-height:100vh;}
+header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:#F2DDD5;}
+.logo b{color:#E8856A;font-style:normal;}
+.wrap{max-width:960px;margin:0 auto;padding:32px 20px;}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+.stat-card{background:#fff;border:1px solid #E8E0DA;border-radius:12px;padding:16px;}
+.stat-label{font-size:12px;color:#888;margin-bottom:6px;}
+.stat-value{font-size:26px;font-weight:600;color:#1A1A1A;}
+.stat-value.hot{color:#C45C5C;}
+.filters{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.filter-btn{padding:8px 18px;border:1px solid #E8E0DA;border-radius:99px;font-size:12px;font-weight:500;cursor:pointer;background:#FAF7F2;color:#888;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.filter-btn.active{background:#1A1A1A;color:#fff;border-color:#1A1A1A;}
+.trend-card{background:#fff;border:1px solid #E8E0DA;border-radius:16px;padding:20px;margin-bottom:12px;}
+.heat-badge{display:inline-flex;align-items:center;font-size:12px;font-weight:600;padding:4px 12px;border-radius:99px;margin-bottom:8px;}
+.heat-badge.hot{background:#FDF0F0;color:#C45C5C;}
+.heat-badge.warm{background:#FDF5F0;color:#E8856A;}
+.heat-badge.growing{background:#EEF7F2;color:#2D6A4F;}
+.trend-title{font-size:16px;font-weight:600;color:#1A1A1A;margin-bottom:5px;}
+.trend-why{font-size:13px;color:#777;line-height:1.6;margin-bottom:10px;}
+.heat-bar{height:6px;border-radius:99px;background:#F0E8E0;margin-bottom:14px;overflow:hidden;}
+.heat-fill{height:100%;border-radius:99px;}
+.ideas-section{border-top:1px solid #F0E8E0;padding-top:12px;margin-top:4px;}
+.ideas-label{font-size:11px;font-weight:600;color:#AAA;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;}
+.ideas-grid{display:flex;flex-wrap:wrap;gap:6px;}
+.idea-tag{font-size:12px;padding:5px 12px;border-radius:99px;background:#FAF7F2;border:1px solid #E8E0DA;color:#1A1A1A;cursor:pointer;transition:all .15s;}
+.idea-tag:hover{border-color:#C45C5C;color:#C45C5C;background:#FDF5F3;}
+.create-btn{padding:10px 18px;background:#C45C5C;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;flex-shrink:0;transition:all .15s;}
+.create-btn:hover{background:#B04848;}
+.trend-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;}
+.trend-meta{flex:1;}
+
+/* Brief panel */
+.brief-panel{display:none;background:#FAF7F2;border:1px solid #E8E0DA;border-radius:12px;padding:20px;margin-top:14px;}
+.brief-panel.open{display:block;}
+.brief-section{margin-bottom:18px;}
+.brief-section-title{font-size:11px;font-weight:700;color:#C45C5C;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+.brief-section-content{font-size:13px;color:#444;line-height:1.7;}
+.color-swatches{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
+.swatch{width:40px;height:40px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);}
+.swatch-label{font-size:10px;color:#888;margin-top:3px;text-align:center;}
+.swatch-wrap{display:flex;flex-direction:column;align-items:center;}
+.brief-list{list-style:none;padding:0;}
+.brief-list li{padding:5px 0;font-size:13px;color:#444;border-bottom:1px solid #F0E8E0;display:flex;align-items:flex-start;gap:8px;}
+.brief-list li:last-child{border-bottom:none;}
+.brief-list li::before{content:'✦';color:#C45C5C;font-size:10px;margin-top:4px;flex-shrink:0;}
+.etsy-title-box{background:#fff;border:1px solid #E8E0DA;border-radius:8px;padding:12px;font-size:12px;color:#444;line-height:1.6;font-family:monospace;}
+.close-brief-btn{background:none;border:1px solid #E8E0DA;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;color:#888;font-family:'DM Sans',sans-serif;margin-top:8px;}
+.close-brief-btn:hover{border-color:#C45C5C;color:#C45C5C;}
+
+/* Upcoming */
+.section-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:16px;}
+.upcoming-card{background:#fff;border:1px solid #E8E0DA;border-radius:12px;padding:16px 20px;margin-bottom:10px;display:flex;align-items:center;gap:16px;}
+.upcoming-days{background:#1A1A1A;color:#fff;border-radius:10px;padding:10px 14px;text-align:center;flex-shrink:0;min-width:64px;}
+.days-num{font-size:20px;font-weight:700;display:block;line-height:1;}
+.days-label{font-size:10px;opacity:.6;letter-spacing:.05em;}
+.upcoming-info{flex:1;}
+.event-name{font-size:15px;font-weight:600;margin-bottom:3px;}
+.event-date{font-size:12px;color:#888;margin-bottom:6px;}
+.event-items{display:flex;flex-wrap:wrap;gap:5px;}
+.event-tag{font-size:11px;padding:3px 9px;border-radius:99px;background:#FAF7F2;border:1px solid #E8E0DA;color:#666;}
+.urgency{font-size:11px;font-weight:600;padding:4px 10px;border-radius:99px;flex-shrink:0;}
+.urgency.high{background:#FDF0F0;color:#C45C5C;}
+.urgency.medium{background:#FDF5F0;color:#E8856A;}
+.urgency.low{background:#EEF7F2;color:#2D6A4F;}
+
+/* Insights */
+.insights-card{background:#1A1A1A;border-radius:16px;padding:24px;margin-top:28px;}
+.insights-card h3{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:#F2DDD5;margin-bottom:6px;}
+.insights-card p{font-size:13px;color:#777;margin-bottom:16px;}
+.insight-btns{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+.insight-btn{padding:10px 16px;background:rgba(255,255,255,0.1);color:#F2DDD5;border:1px solid rgba(255,255,255,0.2);border-radius:10px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.insight-btn.active-insight{background:rgba(255,255,255,0.22);border-color:rgba(255,255,255,0.4);}
+.insight-content{display:none;background:rgba(255,255,255,0.07);border-radius:12px;padding:18px;}
+.insight-content.open{display:block;}
+.insight-content h4{font-size:14px;font-weight:600;color:#F2DDD5;margin-bottom:12px;}
+.insight-content p{font-size:13px;color:#AAA;line-height:1.7;margin-bottom:10px;}
+.insight-content ul{list-style:none;padding:0;}
+.insight-content ul li{font-size:13px;color:#CCC;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;gap:8px;}
+.insight-content ul li::before{content:'→';color:#E8856A;flex-shrink:0;}
+.insight-content ul li:last-child{border-bottom:none;}
+
+@media(max-width:600px){.stats-row{grid-template-columns:repeat(2,1fr)}.trend-header{flex-direction:column}.create-btn{width:100%}.upcoming-card{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><b>Lovey</b>TemplatesCo</div>
+  <div style="font-size:11px;color:#555;letter-spacing:.1em;text-transform:uppercase;">Trend Spotter</div>
+</header>
+
+<div class="wrap">
+
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px;">
+    <div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin-bottom:5px;">What Shoppers Want <em style="color:#C45C5C;">Right Now</em></h1>
+      <p style="font-size:13px;color:#888;">Digital download trends with ready-made design briefs — no guesswork needed</p>
+    </div>
+    <button onclick="refreshStats()" style="padding:10px 18px;background:#FAF7F2;border:1px solid #E8E0DA;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;" id="refreshBtn">↻ Refresh</button>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-label">Hot trends</div><div class="stat-value hot">3</div></div>
+    <div class="stat-card"><div class="stat-label">Growing fast</div><div class="stat-value">6</div></div>
+    <div class="stat-card"><div class="stat-label">Create NOW</div><div class="stat-value hot">4</div></div>
+    <div class="stat-card"><div class="stat-label">Upcoming events</div><div class="stat-value">2</div></div>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-f="all" onclick="filterBy('all')">All trends</button>
+    <button class="filter-btn" data-f="invitation" onclick="filterBy('invitation')">Invitations</button>
+    <button class="filter-btn" data-f="planner" onclick="filterBy('planner')">Planners</button>
+    <button class="filter-btn" data-f="party" onclick="filterBy('party')">Party prints</button>
+    <button class="filter-btn" data-f="seasonal" onclick="filterBy('seasonal')">Seasonal</button>
+    <button class="filter-btn" data-f="bundle" onclick="filterBy('bundle')">Bundles</button>
+  </div>
+
+  <div id="trendsList"></div>
+
+  <div style="margin-top:32px;">
+    <div class="section-title">Upcoming events — create these now</div>
+    <div id="upcomingList"></div>
+  </div>
+
+  <div class="insights-card">
+    <h3>Shop strategy insights</h3>
+    <p>Everything you need to grow LoveyTemplatesCo — built right in</p>
+    <div class="insight-btns">
+      <button class="insight-btn" onclick="showInsight('top5')">Top 5 this month</button>
+      <button class="insight-btn" onclick="showInsight('forecast')">3 month forecast</button>
+      <button class="insight-btn" onclick="showInsight('niches')">Low competition niches</button>
+      <button class="insight-btn" onclick="showInsight('pricing')">Pricing strategy</button>
+      <button class="insight-btn" onclick="showInsight('bundles')">Bundle ideas</button>
+    </div>
+    <div class="insight-content" id="insight-top5">
+      <h4>Top 5 designs to create this month</h4>
+      <p>Based on current Etsy search volume and seasonal timing, these are your highest-priority designs for May-June:</p>
+      <ul>
+        <li><strong style="color:#F2DDD5;">Bachelorette Weekend Itinerary</strong> — Multi-page printable pack. Offer in 3 color schemes. Price at $8-12. This is your single biggest opportunity right now.</li>
+        <li><strong style="color:#F2DDD5;">Graduation Party Invite 2026</strong> — Season is happening NOW. Create bold and floral versions. Price at $5-8. Add matching thank you card for bundle.</li>
+        <li><strong style="color:#F2DDD5;">Summer Pool Party Invitation</strong> — Tropical and retro themes. Buyers want instant downloads for summer parties being planned now. Price at $5-7.</li>
+        <li><strong style="color:#F2DDD5;">Bridal Shower Games Bundle</strong> — 5-game bundle commands $12-18. Higher price point, less competition than individual items. Your biggest AOV opportunity.</li>
+        <li><strong style="color:#F2DDD5;">Baby Shower Invitation Boho</strong> — Evergreen bestseller. Pampas grass and neutral tones dominate. Create gender neutral version. Price at $5-8.</li>
+      </ul>
+    </div>
+    <div class="insight-content" id="insight-forecast">
+      <h4>Next 3 months forecast</h4>
+      <ul>
+        <li><strong style="color:#F2DDD5;">June</strong> — Father's Day (June 15), graduation thank yous, summer party season kicks off. Create: celebration invites, outdoor party themes.</li>
+        <li><strong style="color:#F2DDD5;">July</strong> — 4th of July (July 4) is peak. Start creating NOW. Also: summer bachelorette peak, pool party invites. Create: patriotic themes, tropical bachelorette.</li>
+        <li><strong style="color:#F2DDD5;">August</strong> — Back to school, late summer weddings, engagement season begins. Create: teacher appreciation, fall wedding invites, engagement party invites.</li>
+      </ul>
+      <p style="margin-top:12px;">Pro tip: Etsy SEO takes 2-4 weeks to index. List your seasonal designs at least 6 weeks before the event for maximum visibility.</p>
+    </div>
+    <div class="insight-content" id="insight-niches">
+      <h4>Low competition niches with high demand</h4>
+      <ul>
+        <li><strong style="color:#F2DDD5;">Retirement party invitations</strong> — Searches are high, listings are low. Office colleagues buy for coworkers. Bon voyage and golf themes work great.</li>
+        <li><strong style="color:#F2DDD5;">Quinceañera invitations</strong> — Massive underserved market. Spanish language option doubles your reach. Floral and elegant styles dominate.</li>
+        <li><strong style="color:#F2DDD5;">Friendsgiving invitation</strong> — Low competition, grows every year. Modern and fun vs traditional. November peak but year-round searches.</li>
+        <li><strong style="color:#F2DDD5;">Milestone anniversary party</strong> — 25th, 50th anniversary invitations. Elegant and timeless. Buyers are less price sensitive — price at $8-12.</li>
+        <li><strong style="color:#F2DDD5;">Kids birthday invitations</strong> — Dinosaur, unicorn, princess themes have huge volume. Design one core template that works across themes with color swaps.</li>
+      </ul>
+    </div>
+    <div class="insight-content" id="insight-pricing">
+      <h4>Pricing strategy for LoveyTemplatesCo</h4>
+      <p>Your current $9.99 price is actually strong for a new shop. Here is how to position it:</p>
+      <ul>
+        <li><strong style="color:#F2DDD5;">Keep $9.99 for premium designs</strong> — Your Talk Thirty To Me and detailed illustrated designs justify this price. Don't discount these.</li>
+        <li><strong style="color:#F2DDD5;">Add a $5-7 tier</strong> — Simpler single-page designs. Easier entry point that builds reviews faster. More reviews = more trust = more $9.99 sales.</li>
+        <li><strong style="color:#F2DDD5;">Create $14-18 bundles</strong> — Invitation + thank you + party sign bundle. Higher value, higher perceived quality. Buyers feel they are getting a deal.</li>
+        <li><strong style="color:#F2DDD5;">Run a launch sale at 40% off</strong> — Your first 10 sales are crucial for Etsy algorithm. Temporarily price at $5.99 to get initial reviews and momentum.</li>
+        <li><strong style="color:#F2DDD5;">Never go below $4</strong> — Low prices signal low quality on Etsy. You want buyers who value quality.</li>
+      </ul>
+    </div>
+    <div class="insight-content" id="insight-bundles">
+      <h4>Bundle ideas to increase your average order value</h4>
+      <ul>
+        <li><strong style="color:#F2DDD5;">The Party Suite</strong> — Invitation + thank you card + party sign. Price at $14-16. Saves buyer time finding matching designs.</li>
+        <li><strong style="color:#F2DDD5;">The Bachelorette Pack</strong> — Itinerary + invitation + activity cards. Price at $16-20. Groups split the cost making it feel affordable.</li>
+        <li><strong style="color:#F2DDD5;">The Shower Bundle</strong> — Invitation + games (bingo + who knows the bride) + favor tags. Price at $12-18. Shower planners want everything coordinated.</li>
+        <li><strong style="color:#F2DDD5;">The Birthday Collection</strong> — Invitation + thank you + banner. Price at $12-15. Parents want coordinated birthday aesthetics.</li>
+        <li><strong style="color:#F2DDD5;">The Wedding Planner Pack</strong> — Save the date + invitation + RSVP card + program. Price at $20-28. Highest price point on Etsy digital downloads.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var currentFilter='all';
+var openBrief=null;
+var openInsight=null;
+
+var BRIEFS={
+  bachelorette:{
+    title:'Bachelorette Weekend Itinerary',
+    why:'Bachelorette searches spike 340% in spring and summer. Groups of bridesmaids want coordinated printable itineraries with schedules, activities, and packing lists. This is your single biggest opportunity right now.',
+    palette:['#1A1A1A','#F5E6D3','#C4607A','#E89AAA','#FAF7F2'],
+    paletteNames:['Midnight','Cream','Rose','Blush','Ivory'],
+    typography:'Use a bold script for the header "Weekend Itinerary" and clean sans-serif for schedule details. Mix weights — heavy for headings, light for body text.',
+    elements:['Multi-page design: Cover page + Day 1 + Day 2 + Packing list','Timeline layout with morning/afternoon/evening sections','Space for hotel name, address, and check-in details','Decorative elements: champagne glasses, palm leaves, or disco balls','Include "Bride\'s Name\'s Bachelorette" as header','Footer with dates and destination city'],
+    sizes:['A4 / US Letter for full itinerary pages','5x7 for cover card','Offer both landscape and portrait'],
+    etsyTitle:'Bachelorette Weekend Itinerary Template, Editable Bachelorette Party Schedule Canva, Girls Trip Itinerary Printable, Bach Weekend Planner Digital Download',
+    price:'$8-14 for single, $16-22 for full bundle with multiple pages'
+  },
+  thirty:{
+    title:'30th Birthday Cocktail Invitation',
+    why:'Milestone birthday invitations dominate Etsy searches year-round. Cocktail and "Dirty Thirty" themes are consistently in the top 20 searches. This is exactly your niche and you already have a strong design.',
+    palette:['#C43030','#FAF7F2','#1A1A1A','#E8D5A3','#8B1A1A'],
+    paletteNames:['Cherry','Ivory','Black','Gold','Deep Red'],
+    typography:'Bold script for "thirty" wordmark — this should be 40-50% of the design. Clean caps for event details. Avoid mixing more than 2 fonts.',
+    elements:['Large dramatic script "thirty" or "Thirty" as focal point','Cocktail or martini glass illustration','Lipstick kiss marks as scattered accents','Bold event details in clean sans-serif','Date, time, venue in organized hierarchy','RSVP line at bottom'],
+    sizes:['5x7 inches standard invitation size','A2 envelope compatible'],
+    etsyTitle:'30th Birthday Invitation Template, Dirty Thirty Cocktail Party Invite Canva, Talk Thirty to Me Birthday Invitation Printable, Editable 30th Invite Digital Download',
+    price:'$7-10 single, $12-16 with matching thank you card'
+  },
+  bridal:{
+    title:'Bridal Shower Games Bundle',
+    why:'Brides and shower planners buy 3-5 game items per event. Bundles consistently outperform individual items in Etsy search. Higher cart value means better shop metrics.',
+    palette:['#C4607A','#F5E6D3','#FAF7F2','#E89AAA','#8B3A50'],
+    paletteNames:['Rose','Peach','Ivory','Blush','Berry'],
+    typography:'Elegant script for headings, clean readable sans for game content. Ensure game cards are highly legible at both screen and print sizes.',
+    elements:['Bridal Bingo — 5x5 grid with wedding-related squares','Who Knows the Bride Best — 20 questions format','Bridal Shower Trivia — 15 questions with answer key','Wedding Advice Cards — fill-in format for guests','Word Search — wedding terms hidden in grid'],
+    sizes:['5x7 for bingo and game cards','8.5x11 for trivia and advice sheets','Include print instructions in listing'],
+    etsyTitle:'Bridal Shower Games Bundle Printable, Editable Bridal Bingo Who Knows the Bride Trivia Canva Template, Bachelorette Party Games Digital Download',
+    price:'$12-18 for full 5-game bundle'
+  },
+  summer:{
+    title:'Summer Party Invitation',
+    why:'Summer party season is happening RIGHT NOW. Pool parties, BBQs, and summer birthdays — buyers want instant downloads they can customize immediately. Tropical and retro themes are dominating.',
+    palette:['#2D6A4F','#F5C842','#E8856A','#FAF7F2','#1A4A35'],
+    paletteNames:['Tropical','Sunshine','Coral','Ivory','Forest'],
+    typography:'Bold playful fonts for the headline. Fun and energetic, not formal. Tropical or retro display fonts work great. Keep event details clean and readable.',
+    elements:['Bold headline "Pool Party" or "Summer Bash"','Tropical elements: palm leaves, flamingos, pineapples, or citrus slices','Bright warm color blocking in background','Event details in clean hierarchy','Date, time, address, RSVP clearly organized','Fun tagline like "Come soak up the sun"'],
+    sizes:['5x7 inches standard','Square 5x5 for social media sharing version'],
+    etsyTitle:'Summer Pool Party Invitation Template, Editable Tropical BBQ Party Invite Canva, Summer Birthday Invitation Printable, Pool Party Digital Download',
+    price:'$5-8 single, $10-14 with matching party printables'
+  },
+  baby:{
+    title:'Baby Shower Invitation Boho',
+    why:'Baby shower invitations are the highest volume evergreen category on Etsy. Boho, pampas grass, and neutral aesthetics completely dominate current searches. Offer gender neutral AND girl versions.',
+    palette:['#8B7355','#F5EDE0','#C4A882','#2D6A4F','#FAF7F2'],
+    paletteNames:['Taupe','Linen','Sand','Sage','Ivory'],
+    typography:'Delicate script for the header, light weight sans-serif for details. Airy and flowing — nothing heavy or bold. Think elegant simplicity.',
+    elements:['Pampas grass or dried botanicals as main illustration','Soft arch or half-circle frame element','Gentle color palette — nothing bright or saturated','Clean minimal layout with generous whitespace','Baby name prominently featured in script','Simple event details with subtle dividers'],
+    sizes:['5x7 inches standard invitation','4x6 as alternative'],
+    etsyTitle:'Boho Baby Shower Invitation Template, Editable Pampas Grass Baby Shower Invite Canva, Neutral Boho Baby Invite Printable, Gender Neutral Baby Shower Digital Download',
+    price:'$5-8 single, $10-14 with diaper raffle and book request cards'
+  },
+  graduation:{
+    title:'Graduation Party Invitation 2026',
+    why:'Graduation season is peak RIGHT NOW. 2026 grads are actively searching for invites and party decor. This is time-sensitive — create and list immediately to catch this wave.',
+    palette:['#1A1A1A','#E8D5A3','#FAF7F2','#2D4A6E','#8B6914'],
+    paletteNames:['Black','Gold','Ivory','Navy','Dark Gold'],
+    typography:'Bold confident fonts. Graduation invites call for strong typography — this is a proud moment. Class year "2026" should be large and prominent.',
+    elements:['"Class of 2026" prominently displayed','Graduate\'s name as focal point','Diploma scroll or graduation cap illustration','School colors as customizable accent','Party details: date, time, venue, dress code','RSVP information clearly stated'],
+    sizes:['5x7 inches standard','A2 or A6 alternative sizes'],
+    etsyTitle:'Graduation Party Invitation 2026 Template, Editable Class of 2026 Grad Party Invite Canva, High School College Graduation Invitation Printable Digital Download',
+    price:'$5-8 single, $10-14 with thank you card'
+  },
+  wedding:{
+    title:'Wedding Planning Bundle Printable',
+    why:'Engaged couples are in research and planning mode. Multi-page planning bundles command $15-25 and have less competition than invitations. One sale earns more than two invitation sales.',
+    palette:['#2A1F1F','#F5EDE0','#C4A882','#8B7355','#FAF7F2'],
+    paletteNames:['Espresso','Linen','Gold','Taupe','Ivory'],
+    typography:'Elegant serif for headings, clean sans for functional content. This is a working document — prioritize readability and usability over decoration.',
+    elements:['12-month planning checklist with task categories','Budget tracker with vendor columns and totals','Guest list with RSVP tracking columns','Vendor contact sheet with name, phone, email, notes','Day-of timeline template with hourly breakdown','Seating chart planning page'],
+    sizes:['US Letter / A4 — all pages should be printable','Include both PDF and Canva link in delivery'],
+    etsyTitle:'Wedding Planning Printable Bundle, Editable Wedding Planner Checklist Budget Tracker Canva, Wedding Organizer Printable, Bride Planning Kit Digital Download',
+    price:'$14-22 for full bundle — worth the premium price'
+  },
+  gender:{
+    title:'Gender Reveal Invitation',
+    why:'Gender reveals happen year-round making this an evergreen product. Dramatic reveal elements and simple clean designs sell consistently. Offer both "classic" and "modern" styles.',
+    palette:['#C4607A','#2C4A7C','#FAF7F2','#F5C8D8','#B5D4F5'],
+    paletteNames:['Pink','Blue','Ivory','Light Pink','Light Blue'],
+    typography:'Bold playful script for headline "He or She? Let\'s see!" Clean readable sans for event details. Keep it fun and exciting.',
+    elements:['"He or She?" or "What Will Baby Be?" headline','Pink and blue color elements in balance','Reveal element reference: smoke bombs, confetti, balloon pop','Event details: date, time, location','RSVP and game instructions if applicable','Space for parents names'],
+    sizes:['5x7 inches standard'],
+    etsyTitle:'Gender Reveal Invitation Template, Editable He or She Gender Reveal Party Invite Canva, Pink or Blue Baby Gender Reveal Invitation Printable Digital Download',
+    price:'$5-8 single'
+  },
+  july4:{
+    title:'4th of July Party Printables',
+    why:'Independence Day party decor and invites spike in May and June as people plan ahead. Create now to get indexed in Etsy search before the rush hits. Red white and blue themes dominate.',
+    palette:['#C43030','#1A2A6E','#FAF7F2','#E8D5A3','#8B1A1A'],
+    paletteNames:['Red','Navy','White','Gold','Deep Red'],
+    typography:'Bold patriotic fonts — strong and proud. Stars and stripes energy. Use condensed bold fonts for maximum impact. Mix vintage Americana with modern clean.',
+    elements:['Stars and stripes design elements','Fireworks or sparkler illustrations','"4th of July" or "Independence Day" headline','Party details clearly organized','American flag elements as accents','Vintage distressed texture optional'],
+    sizes:['5x7 invitation','Food labels 3x4 or 4x2','Water bottle labels 8.5x2','Banner pieces for garland'],
+    etsyTitle:'4th of July Party Invitation Template, Editable Fourth of July BBQ Party Invite Canva, Independence Day Party Printable, July 4th Party Bundle Digital Download',
+    price:'$6-10 single, $14-18 for full party bundle with labels and banner'
+  },
+  bundle:{
+    title:'Party Planning Complete Bundle',
+    why:'Coordinated bundles consistently outperform individual items on Etsy. Buyers love finding everything they need in one place. Bundles also earn more per sale and look more professional.',
+    palette:['#C45C5C','#E8856A','#FAF7F2','#2D6A4F','#1A1A1A'],
+    paletteNames:['Rose','Coral','Ivory','Sage','Black'],
+    typography:'Consistent typography across all pieces in the bundle — this is what makes it feel like a "suite" rather than random individual items. Pick 2 fonts and stick to them.',
+    elements:['5x7 invitation as anchor piece','Matching thank you card 4x6','Party favor tags 3x3 or round','Food and drink labels 3x4','Welcome sign 8x10','Table numbers set of 1-20'],
+    sizes:['Each piece at its standard print size','Deliver as one Canva file with multiple pages'],
+    etsyTitle:'Party Invitation Bundle Template, Editable Party Suite Invitation Thank You Favor Tags Canva, Coordinated Party Printable Set, Complete Party Bundle Digital Download',
+    price:'$14-20 depending on number of pieces'
+  },
+  kids:{
+    title:'Kids Birthday Party Planner',
+    why:'Parents want printable organization tools that are fun and kid-friendly. Budget trackers and checklists in themed designs sell well and have less competition than invitations.',
+    palette:['#C45C5C','#F5C842','#52B788','#E8856A','#FAF7F2'],
+    paletteNames:['Red','Yellow','Green','Orange','Ivory'],
+    typography:'Round and playful fonts — nothing sharp or formal. Kid-friendly and fun. Bold for headings, clean for functional content areas.',
+    elements:['Party planning checklist by category','Guest list with gift tracking column','Party day timeline hour by hour','Budget tracker with categories','Shopping checklist for party supplies','Game and activity planning page'],
+    sizes:['US Letter / A4 for all planning pages','Offer in multiple theme colors'],
+    etsyTitle:'Kids Birthday Party Planner Printable, Editable Birthday Party Planning Checklist Budget Tracker Canva, Party Organizer Printable, Birthday Party Planner Digital Download',
+    price:'$8-14 for full planner bundle'
+  },
+  retirement:{
+    title:'Retirement Party Invitation',
+    why:'Underserved niche with lower competition than birthday invitations. Office colleagues and families buy these for coworkers and parents. Year-round demand with premium pricing potential.',
+    palette:['#1A1A1A','#E8D5A3','#FAF7F2','#2D4A6E','#8B6914'],
+    paletteNames:['Black','Gold','Ivory','Navy','Dark Gold'],
+    typography:'Elegant and refined — this celebrates a major life milestone. Clean serif or sophisticated script. Avoid anything too casual or party-like.',
+    elements:['"Cheers to the Next Chapter" or "Finally Free" headline','Travel, golf, or relaxation themed illustration','Years of service acknowledgment optional','Party details clearly organized','Elegant border or frame element','Classy understated design — not too party-focused'],
+    sizes:['5x7 inches standard invitation'],
+    etsyTitle:'Retirement Party Invitation Template, Editable Retirement Invite Canva, Cheers to Retirement Party Printable, Retirement Celebration Invitation Digital Download',
+    price:'$7-10 — buyers are less price sensitive for milestone events'
+  }
+};
+
+var TRENDS=[
+  {id:'bachelorette',cat:'invitation',heat:98,title:'Bachelorette weekend itinerary',why:'Bachelorette searches spike 340% in spring and summer. Groups want coordinated printable itineraries.',tags:['Trending','High demand'],color:'#C45C5C'},
+  {id:'thirty',cat:'invitation',heat:96,title:'30th birthday cocktail invitation',why:'Milestone birthdays dominate Etsy. "Dirty Thirty" cocktail themes are surging — exactly your niche!',tags:['Your niche','Bestseller'],color:'#C45C5C'},
+  {id:'bridal',cat:'party',heat:93,title:'Bridal shower games bundle',why:'Brides buy 3-5 game items per shower. Bundles drive higher cart value and repeat buyers.',tags:['Bundle opportunity','High value'],color:'#C45C5C'},
+  {id:'summer',cat:'seasonal',heat:91,title:'Summer party invitations',why:'Summer party season is happening RIGHT NOW. Pool parties, BBQs — buyers want instant downloads.',tags:['Create NOW','Seasonal'],color:'#E8856A'},
+  {id:'baby',cat:'invitation',heat:89,title:'Baby shower invitation boho',why:'Baby shower invitations are evergreen bestsellers. Boho and neutral aesthetics completely dominate.',tags:['Evergreen','High volume'],color:'#E8856A'},
+  {id:'graduation',cat:'seasonal',heat:87,title:'Graduation party invite 2026',why:'Graduation season is peak right now. 2026 grads are actively searching. Time sensitive!',tags:['Create NOW','High search'],color:'#E8856A'},
+  {id:'wedding',cat:'planner',heat:84,title:'Wedding planning bundle printable',why:'Engaged couples want complete planning bundles. Multi-page packs command $15-25 prices.',tags:['High price','Bundle'],color:'#E8856A'},
+  {id:'gender',cat:'invitation',heat:82,title:'Gender reveal invitation',why:'Year-round celebration. Simple dramatic designs with reveal elements sell consistently.',tags:['Evergreen','Fun niche'],color:'#2D6A4F'},
+  {id:'july4',cat:'seasonal',heat:80,title:'4th of July party printables',why:'Independence Day decor spikes in May-June as people plan. Create now to catch early searchers.',tags:['Coming up','Plan now'],color:'#2D6A4F'},
+  {id:'bundle',cat:'bundle',heat:78,title:'Party planning complete bundle',why:'Coordinated bundles consistently outperform individual items. Higher cart value and better metrics.',tags:['Bundle','High AOV'],color:'#2D6A4F'},
+  {id:'kids',cat:'planner',heat:76,title:'Kids birthday party planner',why:'Parents want printable organization tools. Fun designs in kid-friendly themes sell well.',tags:['Niche opp','Parent market'],color:'#2D6A4F'},
+  {id:'retirement',cat:'invitation',heat:74,title:'Retirement party invitation',why:'Underserved niche with low competition. Office colleagues buy for coworkers year-round.',tags:['Low competition','Office market'],color:'#2D6A4F'}
+];
+
+var UPCOMING=[
+  {event:"Father's Day",date:'June 15',days:39,items:['Party invitation','Thank you card','Gift certificate'],urgency:'high'},
+  {event:'4th of July',date:'July 4',days:58,items:['Party invitation','Food labels','Banner'],urgency:'high'},
+  {event:'Back to School',date:'August',days:90,items:['Teacher card','First day sign','Supply list'],urgency:'medium'},
+  {event:'Fall Wedding Season',date:'Sep-Oct',days:120,items:['Wedding invite','Save the date','Rehearsal dinner'],urgency:'medium'},
+  {event:'Halloween',date:'October 31',days:177,items:['Halloween party invite','Costume party','Kids party'],urgency:'low'},
+  {event:'Thanksgiving',date:'November 27',days:204,items:['Friendsgiving invite','Dinner invitation','Gratitude card'],urgency:'low'}
+];
+
+function getBadgeClass(h){return h>=90?'hot':h>=80?'warm':'growing';}
+function getBadgeLabel(h){return h>=90?'Hot '+h+'%':h>=80?'Warm '+h+'%':'Growing '+h+'%';}
+
+function renderTrends(){
+  var list=currentFilter==='all'?TRENDS:TRENDS.filter(function(t){return t.cat===currentFilter;});
+  if(!list.length){document.getElementById('trendsList').innerHTML='<p style="color:#888;font-size:14px;padding:20px 0;">No trends in this category.</p>';return;}
+  var html='';
+  list.forEach(function(t){
+    html+='<div class="trend-card" id="tc-'+t.id+'">';
+    html+='<div class="trend-header">';
+    html+='<div class="trend-meta">';
+    html+='<span class="heat-badge '+getBadgeClass(t.heat)+'">'+getBadgeLabel(t.heat)+'</span>';
+    t.tags.forEach(function(tag){html+=' <span style="font-size:11px;padding:3px 9px;border-radius:99px;background:#F5F0EA;color:#888;margin-left:4px;">'+tag+'</span>';});
+    html+='<div class="trend-title">'+t.title+'</div>';
+    html+='<div class="trend-why">'+t.why+'</div>';
+    html+='<div class="heat-bar"><div class="heat-fill" style="width:'+t.heat+'%;background:'+t.color+'"></div></div>';
+    html+='</div>';
+    html+='<button class="create-btn" onclick="toggleBrief(\''+t.id+'\')">View design brief</button>';
+    html+='</div>';
+    html+='<div class="brief-panel" id="bp-'+t.id+'"></div>';
+    html+='</div>';
+  });
+  document.getElementById('trendsList').innerHTML=html;
+}
+
+function toggleBrief(id){
+  var panel=document.getElementById('bp-'+id);
+  var btn=document.querySelector('#tc-'+id+' .create-btn');
+  if(panel.classList.contains('open')){
+    panel.classList.remove('open');
+    panel.innerHTML='';
+    btn.textContent='View design brief';
+    return;
+  }
+  // Close any other open brief
+  document.querySelectorAll('.brief-panel.open').forEach(function(p){
+    p.classList.remove('open');p.innerHTML='';
+  });
+  document.querySelectorAll('.create-btn').forEach(function(b){b.textContent='View design brief';});
+
+  var b=BRIEFS[id];
+  if(!b){panel.innerHTML='<p style="font-size:13px;color:#888;">Brief coming soon!</p>';panel.classList.add('open');return;}
+
+  var swatches='';
+  b.palette.forEach(function(c,i){swatches+='<div class="swatch-wrap"><div class="swatch" style="background:'+c+';"></div><div class="swatch-label">'+b.paletteNames[i]+'</div></div>';});
+
+  var html='';
+  html+='<div class="brief-section"><div class="brief-section-title">Why this sells</div><div class="brief-section-content">'+b.why+'</div></div>';
+  html+='<div class="brief-section"><div class="brief-section-title">Color palette</div><div class="color-swatches">'+swatches+'</div></div>';
+  html+='<div class="brief-section"><div class="brief-section-title">Typography</div><div class="brief-section-content">'+b.typography+'</div></div>';
+  html+='<div class="brief-section"><div class="brief-section-title">Design elements to include</div><ul class="brief-list">';
+  b.elements.forEach(function(el){html+='<li>'+el+'</li>';});
+  html+='</ul></div>';
+  html+='<div class="brief-section"><div class="brief-section-title">Sizes to offer</div><ul class="brief-list">';
+  b.sizes.forEach(function(s){html+='<li>'+s+'</li>';});
+  html+='</ul></div>';
+  html+='<div class="brief-section"><div class="brief-section-title">Etsy listing title to use</div><div class="etsy-title-box">'+b.etsyTitle+'</div></div>';
+  html+='<div class="brief-section"><div class="brief-section-title">Recommended price</div><div class="brief-section-content" style="font-size:15px;font-weight:600;color:#C45C5C;">'+b.price+'</div></div>';
+  html+='<button class="close-brief-btn" onclick="toggleBrief(\''+id+'\')">Close brief</button>';
+
+  panel.innerHTML=html;
+  panel.classList.add('open');
+  btn.textContent='Close brief';
+  document.getElementById('tc-'+id).scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function filterBy(f){
+  currentFilter=f;
+  // Close any open brief
+  document.querySelectorAll('.brief-panel.open').forEach(function(p){p.classList.remove('open');p.innerHTML='';});
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-f')===f);});
+  renderTrends();
+}
+
+function renderUpcoming(){
+  var html='';
+  UPCOMING.forEach(function(u){
+    html+='<div class="upcoming-card"><div class="upcoming-days"><span class="days-num">'+u.days+'</span><span class="days-label">DAYS</span></div>';
+    html+='<div class="upcoming-info"><div class="event-name">'+u.event+'</div><div class="event-date">'+u.date+'</div>';
+    html+='<div class="event-items">';
+    u.items.forEach(function(i){html+='<span class="event-tag">'+i+'</span>';});
+    html+='</div></div>';
+    html+='<span class="urgency '+u.urgency+'">'+(u.urgency==='high'?'Create now':u.urgency==='medium'?'Start soon':'Plan ahead')+'</span>';
+    html+='</div>';
+  });
+  document.getElementById('upcomingList').innerHTML=html;
+}
+
+function showInsight(type){
+  // Close all
+  document.querySelectorAll('.insight-content').forEach(function(c){c.classList.remove('open');});
+  document.querySelectorAll('.insight-btn').forEach(function(b){b.classList.remove('active-insight');});
+  var el=document.getElementById('insight-'+type);
+  var btn=event.target;
+  if(el){el.classList.add('open');btn.classList.add('active-insight');}
+}
+
+function refreshStats(){
+  var btn=document.getElementById('refreshBtn');
+  btn.textContent='↻ Refreshing...';
+  btn.disabled=true;
+  setTimeout(function(){btn.textContent='↻ Refresh';btn.disabled=false;},800);
+}
+
+renderTrends();
+renderUpcoming();
+</script>
+</body>
+</html>
