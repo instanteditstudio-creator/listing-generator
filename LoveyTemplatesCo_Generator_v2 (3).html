@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoveyTemplatesCo — Listing Generator v2</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#FAF7F2;font-family:'DM Sans',sans-serif;color:#2A1F1F;min-height:100vh;}
+header{background:#1A1A1A;padding:16px 36px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:#F2DDD5;letter-spacing:.04em;}
+.logo span{color:#E8856A;font-style:normal;font-weight:700;}
+.tagline{font-size:11px;color:#666;letter-spacing:.12em;text-transform:uppercase;}
+.main{max-width:900px;margin:0 auto;padding:40px 20px;}
+.hero{text-align:center;margin-bottom:40px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:36px;font-weight:400;line-height:1.2;margin-bottom:10px;}
+.hero h1 em{font-style:italic;color:#C45C5C;}
+.hero p{color:#9A8A85;font-size:14px;max-width:460px;margin:0 auto;line-height:1.7;}
+.card{background:#fff;border:1px solid #EAE0DA;border-radius:16px;padding:28px;margin-bottom:16px;box-shadow:0 2px 16px rgba(0,0,0,0.04);}
+.card-title{font-size:15px;margin-bottom:16px;display:flex;align-items:center;gap:10px;color:#1A1A1A;font-weight:500;}
+.badge{background:#C45C5C;color:white;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;}
+.badge.accent{background:#E8856A;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:12px;color:#9A8A85;margin-bottom:5px;font-weight:500;letter-spacing:.02em;}
+.field input,.field select,.field textarea{width:100%;padding:10px 13px;border:1px solid #EAE0DA;border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;background:#FAF7F2;color:#1A1A1A;outline:none;transition:border-color .2s;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#C45C5C;background:#fff;}
+.field textarea{resize:vertical;min-height:76px;}
+.drop{border:2px dashed #EAE0DA;border-radius:12px;padding:32px;text-align:center;cursor:pointer;transition:all .2s;background:#FAF7F2;position:relative;}
+.drop:hover,.drop.over{border-color:#C45C5C;background:#FDF5F3;}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.drop-icon{font-size:28px;margin-bottom:8px;}
+.drop strong{color:#C45C5C;font-size:14px;}
+.drop p{color:#9A8A85;font-size:12px;margin-top:4px;}
+.preview{display:none;align-items:center;gap:12px;padding:12px 14px;background:#FDF5F3;border:1px solid #F2DDD5;border-radius:10px;margin-top:10px;}
+.preview.show{display:flex;}
+.preview img{width:44px;height:56px;object-fit:cover;border-radius:6px;border:1px solid #EAE0DA;}
+.preview-info{flex:1;}
+.preview-info .n{font-size:13px;font-weight:500;}
+.preview-info .s{font-size:11px;color:#9A8A85;margin-top:2px;}
+.rm{background:none;border:none;color:#9A8A85;cursor:pointer;font-size:18px;padding:4px;line-height:1;}
+.rm:hover{color:#C45C5C;}
+.style-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.style-chip{border:1px solid #EAE0DA;border-radius:10px;padding:12px 8px;cursor:pointer;text-align:center;font-size:12px;transition:all .15s;background:#FAF7F2;color:#666;user-select:none;}
+.style-chip:hover{border-color:#C45C5C;}
+.style-chip.sel{border-color:#C45C5C;background:#FDF5F3;color:#C45C5C;font-weight:600;}
+.style-chip .si{font-size:20px;display:block;margin-bottom:4px;}
+.names-row{display:flex;gap:8px;align-items:center;}
+.names-row input{flex:1;}
+.add-btn{padding:10px 16px;border:1px solid #EAE0DA;border-radius:10px;background:#FAF7F2;cursor:pointer;font-size:13px;color:#C45C5C;font-weight:500;white-space:nowrap;transition:all .15s;}
+.add-btn:hover{border-color:#C45C5C;background:#FDF5F3;}
+.name-tag{display:flex;align-items:center;gap:8px;background:#FDF5F3;border:1px solid #F2DDD5;border-radius:8px;padding:8px 12px;font-size:13px;margin-top:7px;}
+.name-tag span{flex:1;color:#1A1A1A;}
+.name-tag button{background:none;border:none;color:#9A8A85;cursor:pointer;font-size:14px;}
+.gen-btn{width:100%;padding:18px;background:#C45C5C;color:white;border:none;border-radius:14px;font-family:'Playfair Display',serif;font-size:22px;font-style:italic;cursor:pointer;transition:all .2s;letter-spacing:.02em;margin-top:6px;}
+.gen-btn:hover{background:#B04848;transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,92,92,.3);}
+.gen-btn:disabled{background:#9A8A85;cursor:not-allowed;transform:none;box-shadow:none;}
+.progress{display:none;margin-top:20px;}
+.progress.show{display:block;}
+.progress .card-title{font-size:15px;}
+.pbar-wrap{background:#EAE0DA;border-radius:99px;height:7px;overflow:hidden;margin:14px 0;}
+.pbar{height:100%;background:linear-gradient(90deg,#C45C5C,#E8856A);border-radius:99px;width:0%;transition:width .4s ease;}
+.step-item{display:flex;align-items:center;gap:10px;font-size:13px;color:#9A8A85;padding:8px 12px;border-radius:8px;transition:all .2s;}
+.step-item.active{color:#1A1A1A;background:#FDF5F3;}
+.step-item.done{color:#C45C5C;}
+.step-dot{width:8px;height:8px;border-radius:50%;background:#EAE0DA;flex-shrink:0;}
+.step-item.active .step-dot,.step-item.done .step-dot{background:#C45C5C;}
+.results{display:none;margin-top:32px;}
+.results.show{display:block;}
+.results-header{text-align:center;margin-bottom:28px;}
+.results-header h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:400;margin-bottom:6px;}
+.results-header p{color:#9A8A85;font-size:13px;}
+.img-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;}
+.img-card{border:1px solid #EAE0DA;border-radius:12px;overflow:hidden;background:#fff;}
+.img-card img{width:100%;display:block;}
+.img-label{padding:10px 12px;font-size:11px;font-weight:500;color:#9A8A85;text-transform:uppercase;letter-spacing:.07em;border-top:1px solid #EAE0DA;display:flex;justify-content:space-between;align-items:center;}
+.dl-btn{background:#C45C5C;color:white;border:none;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;}
+.dl-btn:hover{background:#B04848;}
+.dl-all{width:100%;padding:16px;background:#1A1A1A;color:white;border:none;border-radius:14px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;}
+.dl-all:hover{background:#333;transform:translateY(-1px);}
+.err{background:#FDF0F0;border:1px solid #EBCACA;border-radius:10px;padding:12px 16px;font-size:13px;color:#C45C5C;margin-bottom:14px;display:none;}
+.err.show{display:block;}
+.key-card{border:2px solid #F2DDD5;}
+.key-row{display:flex;gap:8px;}
+.key-row input{flex:1;padding:10px 13px;border:1px solid #EAE0DA;border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;background:#FAF7F2;color:#1A1A1A;outline:none;}
+.key-row input:focus{border-color:#C45C5C;}
+.key-btn{padding:10px 16px;border:none;border-radius:10px;background:#C45C5C;color:white;cursor:pointer;font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.key-btn.outline{background:none;border:1px solid #EAE0DA;color:#666;}
+.key-status{font-size:12px;margin-top:8px;color:#9A8A85;}
+.key-status.ok{color:#5C7A5C;}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(196,92,92,.3);border-top-color:#C45C5C;border-radius:50%;animation:spin .8s linear infinite;margin-right:8px;vertical-align:middle;}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:600px){.two{grid-template-columns:1fr}.style-grid{grid-template-columns:repeat(2,1fr)}.img-grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:26px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><span>Lovey</span>TemplatesCo</div>
+  <div class="tagline">Listing Image Generator v2</div>
+</header>
+
+<div class="main">
+  <div class="hero">
+    <h1>Turn Your Design Into<br><em>6 Images That Sell</em></h1>
+    <p>Upload your PNG, fill in the details, and get 6 scroll-stopping listing images — professional, fun, and ready to upload.</p>
+  </div>
+
+  <!-- API Key -->
+  <div class="card key-card">
+    <div class="card-title"><div class="badge accent">🔑</div>Stability AI Key <span style="font-size:12px;color:#9A8A85;font-weight:300;margin-left:4px;">— for AI photo backgrounds</span></div>
+    <p style="font-size:12px;color:#9A8A85;margin-bottom:12px;line-height:1.6;">Stored only on your device. Without a key the app still works with gradient backgrounds.</p>
+    <div class="key-row">
+      <input type="password" id="apiKey" placeholder="Paste your Stability AI key (sk-...)" />
+      <button class="key-btn outline" onclick="toggleKey()">Show</button>
+      <button class="key-btn" onclick="saveKey()">Save Key</button>
+    </div>
+    <div class="key-status" id="keyStatus">Get a free key at platform.stability.ai → Account → API Keys</div>
+  </div>
+
+  <!-- Step 1 -->
+  <div class="card">
+    <div class="card-title"><div class="badge">1</div>Upload Your Design — PNG (export from Canva)</div>
+    <div class="drop" id="dropZone">
+      <input type="file" id="fileInput" accept="image/*" />
+      <div class="drop-icon">🖼️</div>
+      <strong>Drop your PNG here or click to browse</strong>
+      <p>Export from Canva as PNG for best results — your design appears exactly as designed</p>
+    </div>
+    <div class="preview" id="preview">
+      <img id="prevThumb" src="" alt="" />
+      <div class="preview-info">
+        <div class="n" id="prevName"></div>
+        <div class="s" id="prevSize"></div>
+      </div>
+      <button class="rm" id="rmBtn">✕</button>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="card">
+    <div class="card-title"><div class="badge">2</div>Design Details</div>
+    <div class="two">
+      <div class="field"><label>LISTING TITLE</label><input type="text" id="title" placeholder="e.g. Dinner Party Invitation" /></div>
+      <div class="field"><label>CANVA TEMPLATE LINK</label><input type="text" id="canvaLink" placeholder="https://www.canva.com/design/..." /></div>
+    </div>
+    <div class="two">
+      <div class="field"><label>TEMPLATE TYPE</label>
+        <select id="ttype">
+          <option>Invitation</option><option>Birthday Invitation</option><option>Bridal / Bachelorette</option>
+          <option>Baby Shower</option><option>Itinerary / Planner</option><option>Menu / Food</option>
+          <option>Party Sign</option><option>Greeting Card</option><option>Other Template</option>
+        </select>
+      </div>
+      <div class="field"><label>DESIGN SIZE</label>
+        <select id="dsize">
+          <option>5×7 inches</option><option>4×6 inches</option><option>5×5 inches (Square)</option>
+          <option>A4 / Letter</option><option>Half Sheet</option><option>Custom Size</option>
+        </select>
+      </div>
+    </div>
+    <div class="field"><label>DESIGN VIBE & KEYWORDS <span style="font-weight:300;">— helps pick colors & AI background scenes</span></label>
+      <input type="text" id="vibe" placeholder="e.g. green, elegant, cocktail, illustrated, dinner party, fun" />
+    </div>
+    <div class="field"><label>WHAT'S EDITABLE IN THIS TEMPLATE?</label>
+      <textarea id="editable" placeholder="e.g. Name, date, time, venue, RSVP details. All text is fully editable. Colors and fonts can be swapped in Canva."></textarea>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="card">
+    <div class="card-title"><div class="badge">3</div>"Make It Yours" — 3 Sample Names</div>
+    <p style="font-size:13px;color:#9A8A85;margin-bottom:14px;line-height:1.6;">Add 3 example names to show buyers how their invitation looks personalized. This is your #1 conversion tool!</p>
+    <div class="names-row">
+      <input type="text" id="nameIn" placeholder="e.g. Ashley" />
+      <button class="add-btn" id="addBtn" onclick="addName()">+ Add Name</button>
+    </div>
+    <div id="nameList"></div>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="card">
+    <div class="card-title"><div class="badge">4</div>Background Scene Style</div>
+    <p style="font-size:13px;color:#9A8A85;margin-bottom:14px;">The AI will create a unique, realistic photo scene in this style for your hero and closeup images.</p>
+    <div class="style-grid" id="styleGrid">
+      <div class="style-chip sel" data-v="editorial"><span class="si">🌿</span>Editorial / Natural</div>
+      <div class="style-chip" data-v="luxury"><span class="si">✨</span>Luxury / Minimal</div>
+      <div class="style-chip" data-v="moody"><span class="si">🕯️</span>Moody / Romantic</div>
+      <div class="style-chip" data-v="bright"><span class="si">☀️</span>Bright / Airy</div>
+      <div class="style-chip" data-v="boho"><span class="si">🌸</span>Boho / Earthy</div>
+      <div class="style-chip" data-v="modern"><span class="si">🖤</span>Modern / Bold</div>
+    </div>
+  </div>
+
+  <div class="err" id="errBox"></div>
+  <button class="gen-btn" id="genBtn" onclick="generate()">✦ Generate My 6 Listing Images</button>
+
+  <!-- Progress -->
+  <div class="progress" id="progressBox">
+    <div class="card">
+      <div class="card-title"><span class="spin"></span>Generating your images...</div>
+      <div class="pbar-wrap"><div class="pbar" id="pbar"></div></div>
+      <div id="stepList"></div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="resultsBox">
+    <div class="results-header">
+      <h2>✦ Your 6 Images Are Ready</h2>
+      <p>Download individually or all at once — then upload straight to Etsy</p>
+    </div>
+    <div class="img-grid" id="imgGrid"></div>
+    <button class="dl-all" onclick="dlAll()">⬇ Download All 6 Images</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+// ── State ─────────────────────────────────────────────────
+const W=2000,H=2000;
+let imgDataUrl=null, names=[], selStyle='editorial', apiKey='sk-m34tZlTCDrzuhf3nagf1qGmuR2sc6AXMDVyipfW39ZAdtth7', genCanvases=[];
+
+const STEPS=[
+  'Analyzing design palette & building style',
+  'Generating AI background — Hero image...',
+  'Generating AI background — Closeup image...',
+  'Building What\'s Included graphic',
+  'Building Make It Yours graphic',
+  'Building Design Details graphic',
+  'Building How It Works graphic',
+  'Packaging all 6 images'
+];
+
+// ── API Key ───────────────────────────────────────────────
+function toggleKey(){const i=document.getElementById('apiKey');i.type=i.type==='password'?'text':'password';event.target.textContent=i.type==='password'?'Show':'Hide';}
+function saveKey(){const v=document.getElementById('apiKey').value.trim();if(!v.startsWith('sk-')&&v.length<10){showKeyStatus('⚠ Key should start with sk-','#C45C5C');return;}apiKey=v;showKeyStatus('✓ Key saved — AI backgrounds enabled','#5C7A5C');}
+function showKeyStatus(msg,color){const el=document.getElementById('keyStatus');el.textContent=msg;el.style.color=color;el.className='key-status'+(color==='#5C7A5C'?' ok':'');}
+
+// ── File Upload ───────────────────────────────────────────
+const dz=document.getElementById('dropZone');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');const f=e.dataTransfer.files[0];if(f)handleFile(f);});
+document.getElementById('fileInput').addEventListener('change',e=>{if(e.target.files[0])handleFile(e.target.files[0]);});
+document.getElementById('rmBtn').addEventListener('click',()=>{imgDataUrl=null;document.getElementById('preview').classList.remove('show');document.getElementById('fileInput').value='';});
+
+function handleFile(file){
+  if(!file.type.startsWith('image/')){showErr('Please upload a PNG or JPG image. Export from Canva as PNG.');return;}
+  const reader=new FileReader();
+  reader.onload=e=>{
+    imgDataUrl=e.target.result;
+    document.getElementById('prevThumb').src=e.target.result;
+    document.getElementById('prevName').textContent=file.name;
+    document.getElementById('prevSize').textContent=(file.size/1024/1024).toFixed(1)+' MB';
+    document.getElementById('preview').classList.add('show');
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── Names ─────────────────────────────────────────────────
+document.getElementById('nameIn').addEventListener('keydown',e=>{if(e.key==='Enter')addName();});
+function addName(){const v=document.getElementById('nameIn').value.trim();if(!v||names.length>=3)return;names.push(v);document.getElementById('nameIn').value='';renderNames();}
+function removeName(i){names.splice(i,1);renderNames();}
+function renderNames(){document.getElementById('nameList').innerHTML=names.map((n,i)=>`<div class="name-tag"><span>✦ ${n}</span><button onclick="removeName(${i})">✕</button></div>`).join('');}
+
+// ── Style Chips ───────────────────────────────────────────
+document.querySelectorAll('.style-chip').forEach(c=>{c.addEventListener('click',()=>{document.querySelectorAll('.style-chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');selStyle=c.dataset.v;});});
+
+// ── Helpers ───────────────────────────────────────────────
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+function showErr(msg){const e=document.getElementById('errBox');e.textContent=msg;e.className='err'+(msg?' show':'');}
+function hideErr(){showErr('');}
+
+function getPalette(vibe,type){
+  const v=(vibe||'').toLowerCase(),t=(type||'').toLowerCase();
+  if(v.includes('black')||selStyle==='modern')return{p:'#1A1A1A',s:'#444',bg:'#F5F5F0',tx:'#1A1A1A',light:'#F0F0EE'};
+  if(v.includes('blue')||v.includes('navy'))return{p:'#1E3A6E',s:'#3A6AB8',bg:'#EFF4FB',tx:'#1A2A3A',light:'#E6EEF8'};
+  if(v.includes('green')||v.includes('sage')||v.includes('dinner'))return{p:'#2D6A4F',s:'#52B788',bg:'#EEF7F2',tx:'#1A3A2A',light:'#E2F0E8'};
+  if(v.includes('gold')||selStyle==='luxury')return{p:'#8B6914',s:'#C4A44A',bg:'#FAF8F0',tx:'#2A1F0A',light:'#F5EDD8'};
+  if(v.includes('pink')||v.includes('blush')||t.includes('bridal')||t.includes('baby'))return{p:'#C4607A',s:'#E89AAA',bg:'#FDF5F7',tx:'#2A1A1F',light:'#FAE8ED'};
+  if(v.includes('purple')||v.includes('lavender'))return{p:'#6B3FA0',s:'#A07AC4',bg:'#F5F0FA',tx:'#1F1A2A',light:'#EDE5F5'};
+  if(v.includes('red'))return{p:'#C43030',s:'#E05050',bg:'#FDF2F2',tx:'#2A1010',light:'#FAE5E5'};
+  if(v.includes('orange')||v.includes('coral'))return{p:'#D4622A',s:'#E8956A',bg:'#FDF5F0',tx:'#2A1A0A',light:'#FAE8DC'};
+  return{p:'#C45C5C',s:'#E8856A',bg:'#FAF7F2',tx:'#2A1F1F',light:'#F5EAE5'};
+}
+
+function lighten(hex,a=0.85){if(!hex||!hex.startsWith('#'))return'#FAF7F2';const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return`rgb(${Math.round(r+(255-r)*a)},${Math.round(g+(255-g)*a)},${Math.round(b+(255-b)*a)})`;}
+
+function mkCanvas(){const c=document.createElement('canvas');c.width=W;c.height=H;return c;}
+
+// ── Load Image onto Canvas ────────────────────────────────
+function loadImgOnCanvas(ctx,src,x,y,w,h,radius=0,shadow=true){
+  return new Promise(resolve=>{
+    const img=new Image();
+    img.onload=()=>{
+      ctx.save();
+      if(shadow){ctx.shadowColor='rgba(0,0,0,0.22)';ctx.shadowBlur=70;ctx.shadowOffsetX=0;ctx.shadowOffsetY=25;}
+      if(radius>0){ctx.beginPath();ctx.roundRect(x,y,w,h,radius);ctx.clip();}
+      ctx.drawImage(img,x,y,w,h);
+      ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+      ctx.restore();
+      resolve();
+    };
+    img.onerror=()=>{
+      // Draw a clean placeholder
+      ctx.save();
+      ctx.fillStyle='#FFFFFF';
+      ctx.beginPath();ctx.roundRect(x,y,w,h,radius||0);ctx.fill();
+      ctx.fillStyle='#CCC';ctx.font=`italic ${w*0.1}px serif`;ctx.textAlign='center';
+      ctx.fillText('Design Preview',x+w/2,y+h/2);
+      ctx.restore();
+      resolve();
+    };
+    img.src=src;
+  });
+}
+
+// ── AI Background Generation ──────────────────────────────
+async function getAIBg(prompt,style){
+  if(!apiKey)return null;
+  const sm={
+    editorial:'editorial flat lay photography, natural linen texture, dried botanicals, eucalyptus, soft diffused light, cream and ivory tones, professional product photography, 85mm lens',
+    luxury:'luxury minimal flat lay, polished marble surface, white silk ribbon, gold accents, elegant white props, high-end lifestyle photography, clean shadows',
+    moody:'moody romantic photography, deep green velvet, candlelight glow, dark florals, rich textures, atmospheric shadows, editorial dark mood',
+    bright:'bright airy photography, crisp white background, fresh pastel flowers, soft natural sunlight streaming in, clean and joyful lifestyle',
+    boho:'boho earthy flat lay, pampas grass, terracotta ceramic props, woven rattan, dried wildflowers, warm golden light, organic natural feel',
+    modern:'modern bold photography, clean concrete surface, geometric props, strong directional shadows, contemporary minimal aesthetic, stark and striking'
+  };
+  const full=`${prompt}, ${sm[style]||sm.editorial}, no text, no words, no people, no faces, photorealistic, high quality, 4k, beautiful composition`;
+  try{
+    const res=await fetch('https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':`Bearer ${apiKey}`,'Accept':'application/json'},
+      body:JSON.stringify({text_prompts:[{text:full,weight:1},{text:'text, words, letters, people, faces, hands, watermark, logo, blurry',weight:-1}],cfg_scale:7.5,height:1024,width:1024,samples:1,steps:35})
+    });
+    if(!res.ok){console.warn('Stability AI error:',res.status);return null;}
+    const data=await res.json();
+    if(data.artifacts?.[0])return'data:image/png;base64,'+data.artifacts[0].base64;
+  }catch(e){console.warn('BG generation failed:',e);}
+  return null;
+}
+
+async function drawBg(ctx,bgUrl,pal){
+  if(bgUrl){
+    await loadImgOnCanvas(ctx,bgUrl,0,0,W,H,0,false);
+    // Subtle vignette
+    const vig=ctx.createRadialGradient(W/2,H/2,W*0.3,W/2,H/2,W*0.85);
+    vig.addColorStop(0,'rgba(0,0,0,0)');vig.addColorStop(1,'rgba(0,0,0,0.18)');
+    ctx.fillStyle=vig;ctx.fillRect(0,0,W,H);
+  }else{
+    // Rich gradient fallback
+    const g=ctx.createLinearGradient(0,0,W,H);
+    g.addColorStop(0,lighten(pal.p,0.88));g.addColorStop(0.5,lighten(pal.s,0.92));g.addColorStop(1,lighten(pal.p,0.82));
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    // Subtle texture dots
+    ctx.globalAlpha=0.025;
+    for(let i=0;i<4000;i++){ctx.fillStyle='#000';ctx.fillRect(Math.random()*W,Math.random()*H,2,2);}
+    ctx.globalAlpha=1;
+  }
+}
+
+// ── Canva Badge ───────────────────────────────────────────
+function drawCanvaBadge(ctx,cx,cy,r){
+  const g=ctx.createRadialGradient(cx,cy,0,cx,cy,r);
+  g.addColorStop(0,'#A855D4');g.addColorStop(1,'#2196F3');
+  ctx.save();
+  ctx.shadowColor='rgba(0,0,0,0.3)';ctx.shadowBlur=24;
+  ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+  ctx.shadowBlur=0;
+  ctx.fillStyle='white';
+  ctx.font=`italic bold ${r*0.52}px Georgia,serif`;ctx.textAlign='center';
+  ctx.fillText('Canva',cx,cy+r*0.18);
+  ctx.font=`400 ${r*0.22}px 'DM Sans',sans-serif`;
+  ctx.fillText('with free account',cx,cy+r*0.58);
+  ctx.restore();
+}
+
+// ── Wrapped Text ──────────────────────────────────────────
+function wrapText(ctx,text,x,y,maxW,lineH){
+  const words=text.split(' ');let line='',cy=y;
+  for(let n=0;n<words.length;n++){
+    const test=line+words[n]+' ';
+    if(ctx.measureText(test).width>maxW&&n>0){ctx.fillText(line.trim(),x,cy);line=words[n]+' ';cy+=lineH;}
+    else line=test;
+  }
+  ctx.fillText(line.trim(),x,cy);
+  return cy+lineH;
+}
+
+// ─────────────────────────────────────────────────────────
+// IMAGE 1: HERO SHOT — Fun, celebratory, scroll-stopping
+// ─────────────────────────────────────────────────────────
+async function makeHero(pal,info,bgUrl){
+  const c=mkCanvas();const ctx=c.getContext('2d');
+
+  await drawBg(ctx,bgUrl,pal);
+
+  // Top announcement strip
+  const stripH=70;
+  ctx.fillStyle='rgba(255,255,255,0.92)';
+  ctx.fillRect(0,0,W,stripH);
+  ctx.fillStyle=pal.p;
+  ctx.font=`600 ${W*0.021}px 'DM Sans',sans-serif`;
+  ctx.textAlign='center';
+  ctx.letterSpacing='3px';
+  ctx.fillText(`${info.type.toUpperCase()}  ·  EDITABLE CANVA TEMPLATE  ·  INSTANT DOWNLOAD`,W/2,46);
+  ctx.letterSpacing='0px';
+
+  // Main design card — large, slightly tilted left for energy
+  const cw=W*0.5,ch=cw*1.3;
+  const cx=(W-cw)/2,cy=stripH+60;
+
+  ctx.save();
+  ctx.translate(W/2,cy+ch/2);
+  ctx.rotate(-1.5*Math.PI/180);
+  ctx.translate(-W/2,-(cy+ch/2));
+  await loadImgOnCanvas(ctx,imgDataUrl,cx,cy,cw,ch,18);
+  ctx.restore();
+
+  // Canva badge — bottom right of card
+  drawCanvaBadge(ctx,cx+cw+10,cy+ch-30,W*0.078);
+
+  // Bottom section — white pill with big tagline
+  const pillY=cy+ch+50;
+  const pillH=180;
+  ctx.fillStyle='rgba(255,255,255,0.95)';
+  ctx.beginPath();ctx.roundRect(80,pillY,W-160,pillH,20);ctx.fill();
+
+  // Big fun tagline
+  ctx.fillStyle=pal.p;
+  ctx.font=`italic 700 ${W*0.058}px 'Playfair Display','Georgia',serif`;
+  ctx.textAlign='center';
+  ctx.fillText(info.title,W/2,pillY+80);
+
+  // Subtitle
+  ctx.fillStyle='#666';
+  ctx.font=`300 ${W*0.026}px 'DM Sans',sans-serif`;
+  ctx.fillText('Hand-crafted Canva template · Fully editable · Instant digital download',W/2,pillY+136);
+
+  // Shop name bottom right
+  ctx.fillStyle='white';ctx.globalAlpha=0.8;
+  ctx.font=`500 ${W*0.019}px 'DM Sans',sans-serif`;
+  ctx.textAlign='right';
+  ctx.fillText('LoveyTemplatesCo',W-60,H-48);
+  ctx.globalAlpha=1;
+
+  return c;
+}
+
+// ─────────────────────────────────────────────────────────
+// IMAGE 2: DESIGN CLOSEUP — Magazine quality, clean
+// ─────────────────────────────────────────────────────────
+async function makeCloseup(pal,info,bgUrl){
+  const c=mkCanvas();const ctx=c.getContext('2d');
+
+  await drawBg(ctx,bgUrl,pal);
+
+  // Design card — large, centered, slight tilt right
+  const cw=W*0.64,ch=cw*1.3;
+  const cx=(W-cw)/2,cy=(H-ch)/2;
+
+  ctx.save();
+  ctx.translate(W/2,H/2);
+  ctx.rotate(1.8*Math.PI/180);
+  ctx.translate(-W/2,-H/2);
+  await loadImgOnCanvas(ctx,imgDataUrl,cx,cy,cw,ch,20);
+  ctx.restore();
+
+  // Shop name
+  ctx.fillStyle='white';ctx.globalAlpha=0.75;
+  ctx.font=`500 ${W*0.02}px 'DM Sans',sans-serif`;
+  ctx.textAlign='center';
+  ctx.fillText('LoveyTemplatesCo',W/2,H-48);
+  ctx.globalAlpha=1;
+
+  return c;
+}
+
+// ─────────────────────────────────────────────────────────
+// IMAGE 3: WHAT'S INCLUDED — Big, bold, readable on phone
+// ─────────────────────────────────────────────────────────
+async function makeIncluded(pal,info){
+  const c=mkCanvas();const ctx=c.getContext('2d');
+
+  // Clean background with subtle color accent top
+  ctx.fillStyle=pal.bg;ctx.fillRect(0,0,W,H);
+
+  // Colorful top accent bar
+  ctx.fillStyle=pal.p;ctx.fillRect(0,0,W,16);
+
+  // Big decorative corner elements
+  ctx.globalAlpha=0.07;ctx.fillStyle=pal.p;
+  ctx.font=`${W*0.22}px serif`;ctx.textAlign='left';ctx.fillText('✦',−20,W*0.22);
+  ctx.textAlign='right';ctx.fillText('♥',W+20,H-40);
+  ctx.globalAlpha=1;
+
+  // Header
+  ctx.fillStyle=pal.p;
+  ctx.font=`italic 700 ${W*0.085}px 'Playfair Display','Georgia',serif`;
+  ctx.textAlign='center';
+  ctx.fillText("What's Included",W/2,200);
+
+  // Colorful underline
+  ctx.strokeStyle=pal.s;ctx.lineWidth=8;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(W/2-220,228);ctx.lineTo(W/2+220,228);ctx.stroke();
+
+  ctx.fillStyle='#666';
+  ctx.font=`300 ${W*0.03}px 'DM Sans',sans-serif`;
+  ctx.fillText(`Everything you need for the perfect ${info.type}`,W/2,295);
+
+  // Items — BIG and readable
+  const items=[
+    {t:'Editable Canva Template',d:'Open in Canva (free account works) and start editing instantly.'},
+    {t:'Fully Customizable Text',d:'Edit the name, date, time, venue, and every detail in seconds.'},
+    {t:'Color & Font Swaps',d:'Make it yours — swap any color or font you love in Canva.'},
+    {t:`${info.size} Print-Ready`,d:'Download as PDF, PNG, or JPG and print at home or a print shop.'},
+    {t:'Instant Digital Download',d:'Available immediately after purchase. No waiting, no shipping.'},
+    {t:'Lifetime Access',d:'Come back anytime to edit or download again — yours forever.'},
+  ];
+
+  const leftX=80, rightX=W*0.62, startY=360, itemH=130;
+
+  // Left column — 3 items
+  items.slice(0,3).forEach((item,i)=>{
+    const y=startY+i*itemH;
+    // Check circle
+    ctx.beginPath();ctx.arc(leftX+28,y+32,28,0,Math.PI*2);
+    ctx.fillStyle=pal.p;ctx.fill();
+    ctx.fillStyle='white';
+    ctx.font=`700 ${W*0.028}px sans-serif`;
+    ctx.textAlign='center';ctx.fillText('✓',leftX+28,y+42);
+    // Text
+    ctx.textAlign='left';
+    ctx.fillStyle=pal.tx;ctx.font=`600 ${W*0.036}px 'DM Sans',sans-serif`;
+    ctx.fillText(item.t,leftX+75,y+26);
+    ctx.fillStyle='#777';ctx.font=`300 ${W*0.027}px 'DM Sans',sans-serif`;
+    wrapText(ctx,item.d,leftX+75,y+66,W*0.48,38);
+  });
+
+  // Design card — right side
+  const cardW=W*0.3,cardH=cardW*1.3;
+  const cardX=rightX,cardY=startY-20;
+  await loadImgOnCanvas(ctx,imgDataUrl,cardX,cardY,cardW,cardH,14);
+
+  // Right column bottom — items 4,5,6 below card
+  items.slice(3).forEach((item,i)=>{
+    const y=startY+3*itemH+i*itemH+20;
+    ctx.beginPath();ctx.arc(leftX+28,y+32,28,0,Math.PI*2);
+    ctx.fillStyle=pal.p;ctx.fill();
+    ctx.fillStyle='white';
+    ctx.font=`700 ${W*0.028}px sans-serif`;
+    ctx.textAlign='center';ctx.fillText('✓',leftX+28,y+42);
+    ctx.textAlign='left';
+    ctx.fillStyle=pal.tx;ctx.font=`600 ${W*0.036}px 'DM Sans',sans-serif`;
+    ctx.fillText(item.t,leftX+75,y+26);
+    ctx.fillStyle='#777';ctx.font=`300 ${W*0.027}px 'DM Sans',sans-serif`;
+    wrapText(ctx,item.d,leftX+75,y+66,W*0.48,38);
+  });
+
+  // Bottom tag bar
+  const tags=['INSTANT DOWNLOAD','EDIT IN CANVA',`${info.size} PRINT-READY`,'PERSONAL USE'];
+  const tagH=90;
+  tags.forEach((tag,i)=>{
+    const tw=W/4;
+    ctx.fillStyle=i%2===0?pal.p:pal.s;
+    ctx.fillRect(i*tw,H-tagH,tw,tagH);
+    ctx.fillStyle='white';
+    ctx.font=`600 ${W*0.024}px 'DM Sans',sans-serif`;
+    ctx.textAlign='center';
+    ctx.fillText(tag,i*tw+tw/2,H-tagH/2+9);
+  });
+
+  ctx.fillStyle=pal.p;ctx.globalAlpha=0.4;
+  ctx.font=`500 ${W*0.018}px 'DM Sans',sans-serif`;
+  ctx.textAlign='center';
+  ctx.fillText('LoveyTemplatesCo',W/2,H-tagH-22);
+  ctx.globalAlpha=1;
+
+  return c;
+}
+
+// ─────────────────────────────────────────────────────────
+// IMAGE 4: MAKE IT YOURS — Fun, exciting, converts!
+// ─────────────────────────────────────────────────────────
+async function makeMakeItYours(pal,info){
+  const c=mkCanvas();const ctx=c.getContext('2d');
+
+  ctx.fillStyle=pal.bg;ctx.fillRect(0,0,W,H);
+
+  // Top accent
+  ctx.fillStyle=pal.p;ctx.fillRect(0,0,W,16);
+
+  // Big decorative background elements
+  ctx.globalAlpha=0.06;ctx.fillStyle=pal.p;
+  ctx.font=`${W*0.2}px serif`;
+  ctx.textAlign='left';ctx.fillText('✦',-20,200);
+  ctx.textAlign='right';ctx.fillText('♥',W+20,H-40);
+  ctx.globalAlpha=1;
+
+  // Header
+  ctx.fillStyle=pal.p;
+  ctx.font=`italic 700 ${W*0.085}px 'Playfair Display','Georgia',serif`;
+  ctx.textAlign='center';
+  ctx.fillText('Make It Yours',W/2,200);
+
+  ctx.strokeStyle=pal.s;ctx.lineWidth=8;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(W/2-230,228);ctx.lineTo(W/2+230,228);ctx.stroke();
+
+  ctx.fillStyle='#666';
+  ctx.font=`300 ${W*0.028}px 'DM Sans',sans-serif`;
+  ctx.fillText('Edit the name, date, time, and venue in seconds',W/2,290);
+
+  // Three cards
+  const ns=names.length>=3?names:['Ashley','Sophie','Maria'];
+  const dates=['May 25, 2026','June 14, 2026','August 2, 2026'];
+  const venues=['The Velvet Lounge','Cherry Bar Rooftop','Midnight Cocktail Co.'];
+
+  const cardW=W*0.28,cardH=cardW*1.3,gap=(W-3*cardW)/4;
+
+  for(let i=0;i<3;i++){
+    const cx=gap+i*(cardW+gap),cy=340;
+    await loadImgOnCanvas(ctx,imgDataUrl,cx,cy,cardW,cardH,14);
+
+    // Name label box — punchy and fun
+    const boxY=cy+cardH+20;
+    const boxH=150;
+    ctx.fillStyle=pal.p;
+    ctx.beginPath();ctx.roundRect(cx,boxY,cardW,boxH,12);ctx.fill();
+
+    ctx.fillStyle='white';
+    ctx.font=`italic 700 ${W*0.042}px 'Playfair Display','Georgia',serif`;
+    ctx.textAlign='center';
+    ctx.fillText(ns[i],cx+cardW/2,boxY+58);
+
+    ctx.font=`400 ${W*0.022}px 'DM Sans',sans-serif`;
+    ctx.globalAlpha=0.85;
+    ctx.fillText(dates[i],cx+cardW/2,boxY+95);
+    ctx.fillText(venues[i],cx+cardW/2,boxY+126);
+    ctx.globalAlpha=1;
+  }
+
+  // Bottom tagline
+  ctx.fillStyle=pal.p;
+  ctx.font=`italic 700 ${W*0.046}px 'Playfair Display','Georgia',serif`;
+  ctx.textAlign='center';
+  ctx.fillText('Yours, in under three minutes.',W/2,H-160);
+
+  ctx.fillStyle='#777';
+  ctx.font=`300 ${W*0.024}px 'DM Sans',sans-serif`;
+  ctx.fillText('Open the Canva link → swap your details → download → done!',W/2,H-106);
+
+  ctx.fillStyle=pal.p;ctx.globalAlpha=0.4;
+  ctx.font=`500 ${W*0.018}px 'DM Sans',sans-serif`;
+  ctx.fillText('LoveyTemplatesCo',W/2,H-52);
+  ctx.globalAlpha=1;
+
+  return c;
+}
+
+// ─────────────────────────────────────────────────────────
+// IMAGE 5: DESIGN DETAILS — Showcase the craft
+// ─────────────────────────────────────────────────────────
+async function makeDesignDetails(pal,info){
+  const c=mkCanvas();const ctx=c.getContext('2d');
+
+  ctx.fillStyle=pal.bg;ctx.fillRect(0,0,W,H);
+  ctx.fillStyle=pal.p;ctx.fillRect(0,0,W,16);
+
+  // Decorative bg
+  ctx.globalAlpha=0.06;ctx.fillStyle=pal.p;
+  ctx.font=`${W*0.2}px serif`;
+  ctx.textAlign='left';ctx.fillText('✦',-20,200);
+  ctx.textAlign='right';ctx.fillText('♥',W+20,H-40);
+  ctx.globalAlpha=1;
+
+  // Header
+  ctx.fillStyle=pal.p;
+  ctx.font=`italic 700 ${W*0.082}px 'Playfair Display','Georgia',serif`;
+  ctx.textAlign='center';
+  ctx.fillText('Design Details',W/2,200);
+
+  ctx.strokeStyle=pal.s;ctx.lineWidth=8;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(W/2-200,228);ctx.lineTo(W/2+200,228);ctx.stroke();
+
+  ctx.fillStyle='#666';
+  ctx.font=`300 ${W*0.028}px 'DM Sans',sans-serif`;
+  ctx.fillText('Hand-crafted and carefully composed',W/2,290);
+
+  // Center design card — large and prominent
+  const cardW=W*0.36,cardH=cardW*1.3;
+  const cardX=(W-cardW)/2,cardY=H/2-cardH/2+20;
+  await loadImgOnCanvas(ctx,imgDataUrl,cardX,cardY,cardW,cardH,16);
+
+  // Callout labels with clean lines and colored badges
+  const callouts=[
+    {label:'Typography',desc:'Elegant script lettering',pos:{x:160,y:H/2-140},anchor:{x:cardX+cardW*0.15,y:cardY+cardH*0.22},align:'right'},
+    {label:'Illustration',desc:'Hand-drawn artwork',pos:{x:W-160,y:H/2-140},anchor:{x:cardX+cardW*0.85,y:cardY+cardH*0.22},align:'left'},
+    {label:'Composition',desc:'Clean balanced layout',pos:{x:160,y:H/2+180},anchor:{x:cardX+cardW*0.15,y:cardY+cardH*0.75},align:'right'},
+    {label:'Details',desc:'Carefully crafted accents',pos:{x:W-160,y:H/2+180},anchor:{x:cardX+cardW*0.85,y:cardY+cardH*0.75},align:'left'},
+  ];
+
+  callouts.forEach(({label,desc,pos,anchor,align})=>{
+    // Dashed connecting line
+    ctx.strokeStyle=pal.p;ctx.lineWidth=3;ctx.globalAlpha=0.4;
+    ctx.setLineDash([10,7]);
+    ctx.beginPath();ctx.moveTo(pos.x,pos.y);ctx.lineTo(anchor.x,anchor.y);ctx.stroke();
+    ctx.setLineDash([]);ctx.globalAlpha=1;
+
+    // Dot at anchor
+    ctx.beginPath();ctx.arc(anchor.x,anchor.y,10,0,Math.PI*2);
+    ctx.fillStyle=pal.p;ctx.fill();
+
+    // Label badge
+    const labelW=280,labelH=80;
+    const lx=align==='right'?pos.x-labelW:pos.x;
+    ctx.fillStyle=pal.p;
+    ctx.beginPath();ctx.roundRect(lx,pos.y-labelH/2,labelW,labelH,10);ctx.fill();
+
+    ctx.fillStyle='white';
+    ctx.font=`600 ${W*0.03}px 'DM Sans',sans-serif`;
+    ctx.textAlign='center';
+    ctx.fillText(label,lx+labelW/2,pos.y-2);
+    ctx.font=`300 ${W*0.022}px 'DM Sans',sans-serif`;
+    ctx.globalAlpha=0.88;
+    ctx.fillText(desc,lx+labelW/2,pos.y+34);
+    ctx.globalAlpha=1;
+  });
+
+  ctx.fillStyle=pal.p;
+  ctx.font=`italic 700 ${W*0.042}px 'Playfair Display','Georgia',serif`;
+  ctx.textAlign='center';
+  ctx.fillText('Crafted with love.',W/2,H-120);
+
+  ctx.fillStyle=pal.p;ctx.globalAlpha=0.4;
+  ctx.font=`500 ${W*0.018}px 'DM Sans',sans-serif`;
+  ctx.fillText('LoveyTemplatesCo',W/2,H-60);
+  ctx.globalAlpha=1;
+
+  return c;
+}
+
+// ─────────────────────────────────────────────────────────
+// IMAGE 6: HOW IT WORKS — Clean, professional, 3 steps
+// ─────────────────────────────────────────────────────────
+async function makeHowItWorks(pal,info){
+  const c=mkCanvas();const ctx=c.getContext('2d');
+
+  ctx.fillStyle=pal.bg;ctx.fillRect(0,0,W,H);
+  ctx.fillStyle=pal.p;ctx.fillRect(0,0,W,16);
+
+  // Decorative bg
+  ctx.globalAlpha=0.06;ctx.fillStyle=pal.p;
+  ctx.font=`${W*0.2}px serif`;
+  ctx.textAlign='left';ctx.fillText('✦',-20,200);
+  ctx.textAlign='right';ctx.fillText('♥',W+20,H-40);
+  ctx.globalAlpha=1;
+
+  // Header
+  ctx.fillStyle=pal.p;
+  ctx.font=`italic 700 ${W*0.085}px 'Playfair Display','Georgia',serif`;
+  ctx.textAlign='center';
+  ctx.fillText('How It Works',W/2,210);
+
+  ctx.strokeStyle=pal.s;ctx.lineWidth=8;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(W/2-210,238);ctx.lineTo(W/2+210,238);ctx.stroke();
+
+  ctx.fillStyle='#666';
+  ctx.font=`300 ${W*0.028}px 'DM Sans',sans-serif`;
+  ctx.fillText('From purchase to printed in three easy steps',W/2,295);
+
+  const steps=[
+    {num:'01',title:'Purchase',lines:['After purchase find your PDF','guide in Etsy Purchases —','also emailed straight to you.']},
+    {num:'02',title:'Edit in Canva',lines:['Open the template link in','Canva (free account works)','and customize all text & colors.']},
+    {num:'03',title:'Save & Share',lines:['Download as PNG, JPG, or PDF.','Print at home, send to a','print shop, or share digitally.']},
+  ];
+
+  const stepW=W*0.28,gap=(W-3*stepW)/4;
+
+  steps.forEach((step,i)=>{
+    const sx=gap+i*(stepW+gap),sy=360;
+
+    // Step card background
+    ctx.fillStyle='white';
+    ctx.shadowColor='rgba(0,0,0,0.08)';ctx.shadowBlur=40;ctx.shadowOffsetY=10;
+    ctx.beginPath();ctx.roundRect(sx,sy,stepW,W*0.5,20);ctx.fill();
+    ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+
+    // Big step number
+    ctx.fillStyle=pal.light;
+    ctx.font=`700 ${W*0.12}px 'Playfair Display',serif`;
+    ctx.textAlign='center';
+    ctx.fillText(step.num,sx+stepW/2,sy+W*0.13);
+
+    // Step title
+    ctx.fillStyle=pal.p;
+    ctx.font=`italic 700 ${W*0.044}px 'Playfair Display','Georgia',serif`;
+    ctx.fillText(step.title,sx+stepW/2,sy+W*0.19);
+
+    // Divider line
+    ctx.strokeStyle=pal.s;ctx.lineWidth=4;ctx.globalAlpha=0.4;
+    ctx.beginPath();ctx.moveTo(sx+stepW*0.2,sy+W*0.215);ctx.lineTo(sx+stepW*0.8,sy+W*0.215);ctx.stroke();
+    ctx.globalAlpha=1;
+
+    // Description lines
+    ctx.fillStyle='#666';
+    ctx.font=`300 ${W*0.026}px 'DM Sans',sans-serif`;
+    step.lines.forEach((line,li)=>{
+      ctx.fillText(line,sx+stepW/2,sy+W*0.27+li*W*0.038);
+    });
+
+    // Arrow connector between steps
+    if(i<2){
+      const arrowX=sx+stepW+gap/2;
+      const arrowY=sy+W*0.19;
+      ctx.strokeStyle=pal.p;ctx.lineWidth=4;ctx.globalAlpha=0.25;
+      ctx.setLineDash([10,8]);
+      ctx.beginPath();ctx.moveTo(sx+stepW+20,arrowY);ctx.lineTo(arrowX+gap/2-20,arrowY);ctx.stroke();
+      ctx.setLineDash([]);ctx.globalAlpha=1;
+      // Arrowhead
+      ctx.fillStyle=pal.p;ctx.globalAlpha=0.4;
+      ctx.beginPath();ctx.moveTo(arrowX+gap/2-10,arrowY-18);ctx.lineTo(arrowX+gap/2+16,arrowY);ctx.lineTo(arrowX+gap/2-10,arrowY+18);ctx.fill();
+      ctx.globalAlpha=1;
+    }
+  });
+
+  // Canva badge
+  drawCanvaBadge(ctx,W-200,H-220,W*0.075);
+
+  // Bottom message
+  ctx.fillStyle=pal.p;
+  ctx.font=`italic 700 ${W*0.038}px 'Playfair Display','Georgia',serif`;
+  ctx.textAlign='center';
+  ctx.fillText('Questions? Message us on Etsy — we reply fast! 💌',W/2,H-118);
+
+  ctx.fillStyle=pal.p;ctx.globalAlpha=0.4;
+  ctx.font=`500 ${W*0.018}px 'DM Sans',sans-serif`;
+  ctx.fillText('LoveyTemplatesCo',W/2,H-58);
+  ctx.globalAlpha=1;
+
+  return c;
+}
+
+// ─────────────────────────────────────────────────────────
+// GENERATE ALL
+// ─────────────────────────────────────────────────────────
+async function generate(){
+  const title=document.getElementById('title').value.trim();
+  const type=document.getElementById('ttype').value;
+  const size=document.getElementById('dsize').value;
+  const vibe=document.getElementById('vibe').value;
+
+  if(!imgDataUrl){showErr('Please upload your design PNG first.');return;}
+  if(!title){showErr('Please enter a listing title.');return;}
+  hideErr();
+
+  document.getElementById('genBtn').disabled=true;
+  document.getElementById('progressBox').className='progress show';
+  document.getElementById('resultsBox').className='results';
+  genCanvases=[];
+
+  const info={title,type,size,vibe,style:selStyle};
+  const pal=getPalette(vibe,type);
+
+  const setStep=async(i,pct)=>{
+    document.getElementById('pbar').style.width=pct+'%';
+    document.getElementById('stepList').innerHTML=STEPS.map((s,j)=>`
+      <div class="step-item${j<i?' done':j===i?' active':''}">
+        <div class="step-dot"></div>${s}
+      </div>`).join('');
+    await sleep(180);
+  };
+
+  try{
+    await setStep(0,8);
+    await setStep(1,16);
+    const heroBg=await getAIBg(`flat lay scene for a ${type} ${vibe}`,selStyle);
+    const hero=await makeHero(pal,info,heroBg);
+    genCanvases.push({canvas:hero,label:'Hero Shot'});
+
+    await setStep(2,30);
+    const closeupBg=await getAIBg(`${selStyle} styled scene ${vibe} product photography`,selStyle);
+    const closeup=await makeCloseup(pal,info,closeupBg);
+    genCanvases.push({canvas:closeup,label:'Design Closeup'});
+
+    await setStep(3,46);
+    const inc=await makeIncluded(pal,info);
+    genCanvases.push({canvas:inc,label:"Whats Included"});
+
+    await setStep(4,60);
+    const miy=await makeMakeItYours(pal,info);
+    genCanvases.push({canvas:miy,label:'Make It Yours'});
+
+    await setStep(5,74);
+    const det=await makeDesignDetails(pal,info);
+    genCanvases.push({canvas:det,label:'Design Details'});
+
+    await setStep(6,88);
+    const how=await makeHowItWorks(pal,info);
+    genCanvases.push({canvas:how,label:'How It Works'});
+
+    await setStep(7,100);
+    await sleep(400);
+
+    showResults();
+  }catch(e){showErr('Something went wrong: '+e.message);console.error(e);}
+
+  document.getElementById('genBtn').disabled=false;
+  document.getElementById('progressBox').className='progress';
+}
+
+function showResults(){
+  const grid=document.getElementById('imgGrid');
+  grid.innerHTML='';
+  genCanvases.forEach(({canvas,label},i)=>{
+    const url=canvas.toDataURL('image/png');
+    const card=document.createElement('div');
+    card.className='img-card';
+    card.innerHTML=`<img src="${url}" alt="${label}" /><div class="img-label"><span>${i+1}. ${label}</span><button class="dl-btn" data-url="${url}" data-label="${label}">↓ Save</button></div>`;
+    grid.appendChild(card);
+  });
+  grid.querySelectorAll('.dl-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const a=document.createElement('a');
+      a.href=btn.dataset.url;
+      a.download=`LoveyTemplatesCo_${btn.dataset.label.replace(/\s+/g,'_')}.png`;
+      a.click();
+    });
+  });
+  document.getElementById('resultsBox').className='results show';
+  document.getElementById('resultsBox').scrollIntoView({behavior:'smooth'});
+}
+
+async function dlAll(){
+  for(const{canvas,label}of genCanvases){
+    const a=document.createElement('a');
+    a.href=canvas.toDataURL('image/png');
+    a.download=`LoveyTemplatesCo_${label.replace(/\s+/g,'_')}.png`;
+    a.click();
+    await sleep(350);
+  }
+}
+</script>
+</body>
+</html>
