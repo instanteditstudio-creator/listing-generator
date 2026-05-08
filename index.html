@@ -531,15 +531,17 @@ async function makeMakeItYours(pal,info){
     ctx.translate(cx+cw/2,cy+ch/2);ctx.rotate(tilts[i]*Math.PI/180);ctx.translate(-(cx+cw/2),-(cy+ch/2));
     await loadImg(ctx,imgData,cx,cy,cw,ch,16);
 
-    // Name pill — gradient, pill shaped (not boxy)
+    // Name pill — light background with dark text, not black
     var ry=cy+ch+26,rh=180,rx=cx;
-    var rg=ctx.createLinearGradient(rx,ry,rx+cw,ry+rh);
-    rg.addColorStop(0,pal.p);rg.addColorStop(1,pal.s);
-    ctx.fillStyle=rg;ctx.beginPath();ctx.roundRect(rx,ry,cw,rh,90);ctx.fill();
+    ctx.fillStyle=lighten(pal.p,0.75);
+    ctx.beginPath();ctx.roundRect(rx,ry,cw,rh,90);ctx.fill();
+    // Subtle border
+    ctx.strokeStyle=pal.p;ctx.lineWidth=3;ctx.globalAlpha=0.3;
+    ctx.beginPath();ctx.roundRect(rx,ry,cw,rh,90);ctx.stroke();ctx.globalAlpha=1;
 
-    ctx.fillStyle='white';ctx.font='italic 700 '+(W*0.05)+'px Georgia,serif';ctx.textAlign='center';
+    ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.05)+'px Georgia,serif';ctx.textAlign='center';
     ctx.fillText(ns[i],cx+cw/2,ry+78);
-    ctx.font='400 '+(W*0.025)+'px sans-serif';ctx.globalAlpha=0.88;
+    ctx.font='400 '+(W*0.025)+'px sans-serif';ctx.globalAlpha=0.75;
     ctx.fillText(dates[i],cx+cw/2,ry+118);ctx.fillText(venues[i],cx+cw/2,ry+158);ctx.globalAlpha=1;
     ctx.restore();
   }
@@ -567,47 +569,52 @@ async function makeDetails(pal,info){
   ctx.fillStyle='#777';ctx.font='300 '+(W*0.031)+'px sans-serif';ctx.fillText('Hand-crafted and carefully composed',W/2,302);
 
   // Design card — prominent center
-  var cw=W*0.38,ch=cw*1.3,cx=(W-cw)/2,cy=320;
+  var cw=W*0.36,ch=cw*1.3,cx=(W-cw)/2,cy=300;
   await loadImg(ctx,imgData,cx,cy,cw,ch,20);
 
-  // 4 clean horizontal badges below — simple, bold, readable
+  // 4 feature rows BELOW card — stacked cleanly, no overlapping
   var features=[
-    {title:'Elegant Typography',desc:'Script & serif lettering',color:pal.p},
-    {title:'Hand-Drawn Art',desc:'Illustrated elements',color:pal.s},
-    {title:'Clean Composition',desc:'Balanced layout',color:pal.p},
-    {title:'Fine Details',desc:'Thoughtful finishing',color:pal.s}
+    {title:'Elegant Typography',desc:'Script and serif lettering throughout',color:pal.p},
+    {title:'Hand-Drawn Illustration',desc:'Original illustrated elements',color:pal.s},
+    {title:'Balanced Composition',desc:'Clean and considered layout',color:pal.p},
+    {title:'Thoughtful Details',desc:'Carefully crafted finishing touches',color:pal.s}
   ];
 
-  var bw=(W-160)/4-20,bh=220;
-  var bStartX=80,bY=cy+ch+60;
+  // Two rows of two badges — much more breathing room
+  var bw=W*0.42,bh=170,gap=40;
+  var row1Y=cy+ch+60,row2Y=row1Y+bh+gap;
+  var col1X=60,col2X=W/2+20;
 
   features.forEach(function(f,i){
-    var bx=bStartX+i*(bw+20);
+    var bx=i%2===0?col1X:col2X;
+    var by=i<2?row1Y:row2Y;
 
-    // White card with left color accent
-    ctx.fillStyle='white';ctx.shadowColor='rgba(0,0,0,0.07)';ctx.shadowBlur=24;ctx.shadowOffsetY=6;
-    ctx.beginPath();ctx.roundRect(bx,bY,bw,bh,16);ctx.fill();
+    // Clean white card
+    ctx.fillStyle='white';
+    ctx.shadowColor='rgba(0,0,0,0.06)';ctx.shadowBlur=20;ctx.shadowOffsetY=5;
+    ctx.beginPath();ctx.roundRect(bx,by,bw,bh,16);ctx.fill();
     ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
 
-    // Left color bar
-    ctx.fillStyle=f.color;ctx.beginPath();ctx.roundRect(bx,bY,12,bh,8);ctx.fill();
+    // Left color accent bar
+    ctx.fillStyle=f.color;
+    ctx.beginPath();ctx.roundRect(bx,by,14,bh,8);ctx.fill();
 
-    // Big number
-    ctx.fillStyle=f.color;ctx.globalAlpha=0.15;
-    ctx.font='700 '+(W*0.1)+'px Georgia,serif';ctx.textAlign='center';
-    ctx.fillText(''+(i+1),bx+bw/2,bY+bh*0.52);ctx.globalAlpha=1;
+    // Title — large and clear
+    ctx.fillStyle='#1A1A1A';
+    ctx.font='700 '+(W*0.038)+'px sans-serif';
+    ctx.textAlign='left';
+    ctx.fillText(f.title,bx+50,by+60);
 
-    // Title
-    ctx.fillStyle='#1A1A1A';ctx.font='700 '+(W*0.032)+'px sans-serif';ctx.textAlign='center';
-    ctx.fillText(f.title,bx+bw/2,bY+bh*0.65);
-
-    // Desc
-    ctx.fillStyle='#999';ctx.font='300 italic '+(W*0.025)+'px sans-serif';
-    ctx.fillText(f.desc,bx+bw/2,bY+bh*0.82);
+    // Desc — smaller, clear gap below title
+    ctx.fillStyle='#999';
+    ctx.font='300 '+(W*0.028)+'px sans-serif';
+    ctx.fillText(f.desc,bx+50,by+112);
   });
 
-  ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.044)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText('Crafted with love.',W/2,H-96);
-  ctx.fillStyle=pal.p;ctx.globalAlpha=0.3;ctx.font='500 '+(W*0.017)+'px sans-serif';ctx.fillText('LoveyTemplatesCo',W/2,H-50);ctx.globalAlpha=1;
+  ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.044)+'px Georgia,serif';ctx.textAlign='center';
+  ctx.fillText('Crafted with love.',W/2,H-96);
+  ctx.fillStyle=pal.p;ctx.globalAlpha=0.3;ctx.font='500 '+(W*0.017)+'px sans-serif';
+  ctx.fillText('LoveyTemplatesCo',W/2,H-50);ctx.globalAlpha=1;
   return c;
 }
 
@@ -645,58 +652,55 @@ async function makeHowItWorks(pal,info){
     ctx.beginPath();ctx.arc(circX,circY,circR+36,0,Math.PI*2);
     ctx.fillStyle=lighten(step.color,0.78);ctx.fill();
 
-    // Main circle — solid color
-    ctx.shadowColor='rgba(0,0,0,0.14)';ctx.shadowBlur=36;ctx.shadowOffsetY=10;
-    ctx.beginPath();ctx.arc(circX,circY,circR,0,Math.PI*2);ctx.fillStyle=step.color;ctx.fill();
+    // Main circle — lighter so icons show clearly
+    ctx.shadowColor='rgba(0,0,0,0.12)';ctx.shadowBlur=36;ctx.shadowOffsetY=10;
+    ctx.beginPath();ctx.arc(circX,circY,circR,0,Math.PI*2);
+    ctx.fillStyle=lighten(step.color,0.25);ctx.fill();
     ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
 
-    // Step number inside top of circle
-    ctx.fillStyle='rgba(255,255,255,0.28)';ctx.font='700 '+(W*0.052)+'px sans-serif';ctx.textAlign='center';
+    // Step number — darker so readable on light circle
+    ctx.fillStyle=step.color;ctx.font='700 '+(W*0.052)+'px sans-serif';ctx.textAlign='center';
     ctx.fillText(''+(i+1),circX,circY-circR*0.32);
 
-    // LARGE clear icon
-    ctx.fillStyle='rgba(255,255,255,0.9)';ctx.textAlign='center';
+    // Icons — use dark color on light background
+    ctx.fillStyle=step.color;ctx.textAlign='center';
 
     if(i===0){
       // Present box — large and clear
-      var bw=circR*0.72,bh=circR*0.55,bx=circX-bw/2,by2=circY+circR*0.02;
-      // Box body
-      ctx.fillStyle='rgba(255,255,255,0.92)';ctx.beginPath();ctx.roundRect(bx,by2,bw,bh,8);ctx.fill();
-      // Lid
-      ctx.fillStyle='rgba(255,255,255,0.7)';ctx.beginPath();ctx.roundRect(bx-10,by2-bh*0.3,bw+20,bh*0.3,6);ctx.fill();
-      // Ribbon
-      ctx.fillStyle=step.color;ctx.fillRect(circX-10,by2-bh*0.3,20,bh+bh*0.3);
-      ctx.fillStyle=step.color;ctx.fillRect(bx-10,by2-bh*0.15,bw+20,14);
-      // Confetti dots bursting
-      var cpos=[[-circR*0.5,-circR*0.55],[circR*0.5,-circR*0.52],[0,-circR*0.65],[-circR*0.3,-circR*0.7],[circR*0.32,-circR*0.68]];
-      cpos.forEach(function(cp){ctx.fillStyle='rgba(255,255,255,0.85)';ctx.beginPath();ctx.arc(circX+cp[0],circY+cp[1],12,0,Math.PI*2);ctx.fill();});
+      var bw2=circR*0.72,bh2=circR*0.55,bx2=circX-bw2/2,by2=circY+circR*0.02;
+      ctx.fillStyle=lighten(step.color,0.6);ctx.beginPath();ctx.roundRect(bx2,by2,bw2,bh2,8);ctx.fill();
+      ctx.fillStyle=lighten(step.color,0.5);ctx.beginPath();ctx.roundRect(bx2-10,by2-bh2*0.3,bw2+20,bh2*0.3,6);ctx.fill();
+      ctx.fillStyle=step.color;ctx.fillRect(circX-10,by2-bh2*0.3,20,bh2+bh2*0.3);
+      ctx.fillStyle=step.color;ctx.fillRect(bx2-10,by2-bh2*0.15,bw2+20,12);
+      var cpos2=[[-circR*0.5,-circR*0.55],[circR*0.5,-circR*0.52],[0,-circR*0.65],[-circR*0.3,-circR*0.7],[circR*0.32,-circR*0.68]];
+      cpos2.forEach(function(cp){ctx.fillStyle=step.color;ctx.globalAlpha=0.5;ctx.beginPath();ctx.arc(circX+cp[0],circY+cp[1],10,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;});
 
     }else if(i===1){
-      // Big pencil
+      // Big pencil — dark colors visible on light background
       ctx.save();ctx.translate(circX,circY+circR*0.08);ctx.rotate(-0.42);
       var pw=circR*0.24,ph=circR*1.05;
-      ctx.fillStyle='rgba(255,235,150,0.95)';ctx.beginPath();ctx.roundRect(-pw/2,-ph/2,pw,ph*0.75,4);ctx.fill();
-      ctx.fillStyle='rgba(255,200,180,0.95)';ctx.fillRect(-pw/2,-ph/2,pw,ph*0.16);
-      ctx.fillStyle='rgba(255,255,255,0.9)';ctx.fillRect(-pw/2,-ph/2+ph*0.7,pw,ph*0.07);
-      ctx.fillStyle='rgba(50,35,20,0.9)';ctx.beginPath();ctx.moveTo(-pw/2,-ph/2+ph*0.77);ctx.lineTo(pw/2,-ph/2+ph*0.77);ctx.lineTo(0,-ph/2+ph);ctx.closePath();ctx.fill();
+      ctx.fillStyle=lighten(step.color,0.5);ctx.beginPath();ctx.roundRect(-pw/2,-ph/2,pw,ph*0.75,4);ctx.fill();
+      ctx.fillStyle=lighten(step.color,0.3);ctx.fillRect(-pw/2,-ph/2,pw,ph*0.16);
+      ctx.fillStyle=lighten(step.color,0.6);ctx.fillRect(-pw/2,-ph/2+ph*0.7,pw,ph*0.07);
+      ctx.fillStyle=step.color;ctx.beginPath();ctx.moveTo(-pw/2,-ph/2+ph*0.77);ctx.lineTo(pw/2,-ph/2+ph*0.77);ctx.lineTo(0,-ph/2+ph);ctx.closePath();ctx.fill();
       ctx.restore();
-      // Sparkles around pencil
       var spos=[[-circR*0.52,-circR*0.38],[circR*0.54,-circR*0.32],[-circR*0.42,circR*0.38],[circR*0.46,circR*0.36]];
-      ctx.fillStyle='rgba(255,255,255,0.75)';ctx.font=(W*0.042)+'px serif';ctx.textAlign='center';
-      spos.forEach(function(sp){ctx.fillText('*',circX+sp[0],circY+sp[1]);});
+      ctx.fillStyle=step.color;ctx.globalAlpha=0.4;ctx.font=(W*0.042)+'px serif';ctx.textAlign='center';
+      spos.forEach(function(sp){ctx.fillText('*',circX+sp[0],circY+sp[1]);});ctx.globalAlpha=1;
 
     }else{
       // Download arrow — large and obvious
       var aw=circR*0.42,ah=circR*1.0,ax=circX-aw*0.3,ay=circY-ah*0.45;
       ctx.fillStyle='rgba(255,255,255,0.92)';
       // Shaft
+      ctx.fillStyle=step.color;
       ctx.beginPath();ctx.roundRect(circX-aw*0.3,circY-circR*0.5,aw*0.6,circR*0.85,6);ctx.fill();
       // Arrow head
       ctx.beginPath();ctx.moveTo(circX-aw*0.65,circY+circR*0.26);ctx.lineTo(circX,circY+circR*0.58);ctx.lineTo(circX+aw*0.65,circY+circR*0.26);ctx.closePath();ctx.fill();
       // Stars
       var stpos=[[-circR*0.55,-circR*0.32],[circR*0.55,-circR*0.28],[0,-circR*0.55],[-circR*0.4,circR*0.5],[circR*0.42,circR*0.48]];
-      ctx.fillStyle='rgba(255,255,255,0.7)';ctx.font=(W*0.042)+'px serif';ctx.textAlign='center';
-      stpos.forEach(function(sp){ctx.fillText('*',circX+sp[0],circY+sp[1]);});
+      ctx.fillStyle=step.color;ctx.globalAlpha=0.4;ctx.font=(W*0.042)+'px serif';ctx.textAlign='center';
+      stpos.forEach(function(sp){ctx.fillText('*',circX+sp[0],circY+sp[1]);});ctx.globalAlpha=1;
     }
 
     // Title below circle
