@@ -11,7 +11,6 @@ body{background:#FAF7F2;font-family:'DM Sans',sans-serif;color:#1A1A1A;min-heigh
 header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;}
 .logo{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:#F2DDD5;}
 .logo b{color:#E8856A;font-style:normal;}
-.tagline{font-size:11px;color:#555;letter-spacing:.1em;text-transform:uppercase;}
 .nav-tabs{display:flex;gap:0;background:#F0E8E0;border-radius:12px;padding:4px;margin-bottom:24px;}
 .nav-tab{flex:1;padding:10px 16px;border:none;border-radius:9px;font-size:13px;font-weight:500;cursor:pointer;background:transparent;color:#888;font-family:'DM Sans',sans-serif;transition:all .2s;}
 .nav-tab.active{background:#fff;color:#C45C5C;box-shadow:0 1px 6px rgba(0,0,0,0.08);}
@@ -46,12 +45,12 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
 .name-pill span{flex:1;}
 .name-pill button{background:none;border:none;color:#AAA;cursor:pointer;font-size:14px;}
 .style-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-.style-btn{padding:11px 8px;border:1px solid #E8E0DA;border-radius:10px;text-align:center;font-size:12px;cursor:pointer;color:#888;background:#FAF7F2;font-family:'DM Sans',sans-serif;transition:all .15s;border:1px solid #E8E0DA;}
+.style-btn{padding:11px 8px;border:1px solid #E8E0DA;border-radius:10px;text-align:center;font-size:12px;cursor:pointer;color:#888;background:#FAF7F2;font-family:'DM Sans',sans-serif;transition:all .15s;}
 .style-btn.active{border-color:#C45C5C !important;background:#FDF5F3;color:#C45C5C;font-weight:600;}
 .si{font-size:18px;display:block;margin-bottom:3px;}
 .gen-btn{width:100%;padding:16px;background:#C45C5C;color:#fff;border:none;border-radius:14px;font-family:'Playfair Display',serif;font-size:20px;font-style:italic;cursor:pointer;margin-top:6px;transition:all .2s;}
-.gen-btn:hover{background:#B04848;transform:translateY(-1px);box-shadow:0 6px 20px rgba(196,92,92,.25);}
-.gen-btn:disabled{background:#AAA;cursor:not-allowed;transform:none;box-shadow:none;}
+.gen-btn:hover{background:#B04848;transform:translateY(-1px);}
+.gen-btn:disabled{background:#AAA;cursor:not-allowed;transform:none;}
 .err{background:#FDF0F0;border:1px solid #F0CACA;border-radius:10px;padding:12px 16px;font-size:13px;color:#C45C5C;margin-bottom:12px;display:none;}
 .err.show{display:block;}
 .progress{display:none;margin-top:16px;}
@@ -96,7 +95,7 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
 <body>
 <header>
   <div class="logo"><b>Lovey</b>TemplatesCo</div>
-  <div class="tagline">Listing Generator</div>
+  <div style="font-size:11px;color:#555;letter-spacing:.1em;text-transform:uppercase;">Listing Generator</div>
 </header>
 <div class="wrap">
   <div class="nav-tabs">
@@ -113,7 +112,7 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
     <div class="card">
       <h3><div class="num">1</div>Upload your design PNG</h3>
       <div class="upload-area" id="dropZone">
-        <div style="font-size:28px;margin-bottom:6px;">🖼</div>
+        <div style="font-size:28px;margin-bottom:6px;">&#128444;</div>
         <p>Export from Canva as PNG — your design appears exactly as created</p>
         <label for="fileIn" class="upload-btn">Choose PNG File</label>
         <input type="file" id="fileIn" accept="image/*" style="display:none;">
@@ -128,7 +127,7 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
     <div class="card">
       <h3><div class="num">2</div>Design details</h3>
       <div class="row2">
-        <div class="field"><label>LISTING TITLE</label><input type="text" id="listTitle" placeholder="e.g. Dinner Party Invitation"></div>
+        <div class="field"><label>LISTING TITLE</label><input type="text" id="listTitle" placeholder="e.g. Birthday Dinner Invitation"></div>
         <div class="field"><label>CANVA TEMPLATE LINK</label><input type="text" id="canvaLink" placeholder="https://www.canva.com/design/..."></div>
       </div>
       <div class="row2">
@@ -146,7 +145,7 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
           </select>
         </div>
       </div>
-      <div class="field"><label>VIBE AND KEYWORDS</label><input type="text" id="vibe" placeholder="e.g. green, elegant, cocktail, fun"></div>
+      <div class="field"><label>VIBE AND KEYWORDS</label><input type="text" id="vibe" placeholder="e.g. elegant, black and white, minimalist, dinner"></div>
     </div>
 
     <div class="card">
@@ -163,12 +162,12 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
       <h3><div class="num">4</div>Background scene style</h3>
       <p style="font-size:13px;color:#888;margin-bottom:12px;">AI generates a unique realistic photo scene for your hero and closeup images.</p>
       <div class="style-grid" id="styleGrid">
-        <button class="style-btn active" data-v="editorial"><span class="si">🌿</span>Editorial</button>
-        <button class="style-btn" data-v="luxury"><span class="si">✨</span>Luxury</button>
-        <button class="style-btn" data-v="moody"><span class="si">🕯</span>Moody</button>
-        <button class="style-btn" data-v="bright"><span class="si">☀</span>Bright</button>
-        <button class="style-btn" data-v="boho"><span class="si">🌸</span>Boho</button>
-        <button class="style-btn" data-v="modern"><span class="si">🖤</span>Modern</button>
+        <button class="style-btn active" data-v="editorial"><span class="si">&#127807;</span>Editorial</button>
+        <button class="style-btn" data-v="luxury"><span class="si">&#10024;</span>Luxury</button>
+        <button class="style-btn" data-v="moody"><span class="si">&#128336;</span>Moody</button>
+        <button class="style-btn" data-v="bright"><span class="si">&#9728;</span>Bright</button>
+        <button class="style-btn" data-v="boho"><span class="si">&#127800;</span>Boho</button>
+        <button class="style-btn" data-v="modern"><span class="si">&#9632;</span>Modern</button>
       </div>
     </div>
 
@@ -224,7 +223,7 @@ function showTab(tab){
 }
 
 function getGallery(){try{return JSON.parse(localStorage.getItem('ltco_gallery')||'{}');}catch(e){return {};}}
-function saveGallery(g){try{localStorage.setItem('ltco_gallery',JSON.stringify(g));}catch(e){alert('Storage full.');}}
+function saveGallery(g){try{localStorage.setItem('ltco_gallery',JSON.stringify(g));}catch(e){}}
 function starImage(title,label,dataUrl){
   var g=getGallery();
   if(!g[title])g[title]=[];
@@ -237,17 +236,22 @@ function starImage(title,label,dataUrl){
 function isStarred(title,label){var g=getGallery();return !!(g[title]&&g[title].some(function(i){return i.label===label;}));}
 function renderGallery(){
   var g=getGallery();var keys=Object.keys(g);var el=document.getElementById('galleryContent');
-  if(keys.length===0){el.innerHTML='<div class="gallery-empty"><div style="font-size:48px;">⭐</div><p style="font-size:14px;margin-top:8px;">No approved images yet.<br>Generate images and star the ones you love!</p><button onclick="showTab(\'generator\')" style="margin-top:16px;padding:10px 20px;background:#C45C5C;color:white;border:none;border-radius:10px;cursor:pointer;font-family:DM Sans,sans-serif;font-size:13px;font-weight:600;">Go Generate</button></div>';return;}
+  if(keys.length===0){
+    el.innerHTML='<div class="gallery-empty"><div style="font-size:48px;">&#11088;</div><p style="font-size:14px;margin-top:8px;">No approved images yet.<br>Generate images and star the ones you love!</p><button onclick="showTab(\'generator\')" style="margin-top:16px;padding:10px 20px;background:#C45C5C;color:white;border:none;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;">Go Generate</button></div>';
+    return;
+  }
   var html='';
   keys.forEach(function(title){
     var items=g[title];
-    html+='<div class="listing-group"><div class="listing-group-title">'+title+' ('+items.length+' approved)<span onclick="deleteListingGroup(\''+encodeURIComponent(title)+'\')">Delete</span></div><div class="gallery-grid">';
-    items.forEach(function(item){html+='<div class="gallery-item"><img src="'+item.url+'" alt="'+item.label+'"><div class="gallery-item-foot"><span>'+item.label+'</span><a href="'+item.url+'" download="'+title.replace(/\s/g,'_')+'_'+item.label.replace(/\s/g,'_')+'.png">Save</a></div></div>';});
+    html+='<div class="listing-group"><div class="listing-group-title">'+title+' ('+items.length+' approved)<span onclick="deleteGroup(\''+encodeURIComponent(title)+'\')">Delete</span></div><div class="gallery-grid">';
+    items.forEach(function(item){
+      html+='<div class="gallery-item"><img src="'+item.url+'" alt="'+item.label+'"><div class="gallery-item-foot"><span>'+item.label+'</span><a href="'+item.url+'" download="'+title.replace(/\s/g,'_')+'_'+item.label.replace(/\s/g,'_')+'.png">Save</a></div></div>';
+    });
     html+='</div></div>';
   });
   el.innerHTML=html;
 }
-function deleteListingGroup(encodedTitle){var title=decodeURIComponent(encodedTitle);if(!confirm('Delete all approved images for "'+title+'"?'))return;var g=getGallery();delete g[title];saveGallery(g);renderGallery();}
+function deleteGroup(enc){var title=decodeURIComponent(enc);if(!confirm('Delete approved images for "'+title+'"?'))return;var g=getGallery();delete g[title];saveGallery(g);renderGallery();}
 function clearAllGallery(){if(!confirm('Clear all approved images?'))return;localStorage.removeItem('ltco_gallery');renderGallery();}
 
 document.getElementById('fileIn').onchange=function(e){
@@ -266,16 +270,16 @@ dz.ondrop=function(e){
   if(f){var r=new FileReader();r.onload=function(ev){imgData=ev.target.result;document.getElementById('prevImg').src=ev.target.result;document.getElementById('prevName').textContent=f.name;document.getElementById('prevSize').textContent=(f.size/1024/1024).toFixed(1)+' MB';document.getElementById('prevBox').className='prev-box show';};r.readAsDataURL(f);}
 };
 
-var styleButtons=document.querySelectorAll('.style-btn');
-for(var si=0;si<styleButtons.length;si++){
+var sBtns=document.querySelectorAll('.style-btn');
+for(var si=0;si<sBtns.length;si++){
   (function(btn){
     btn.onclick=function(e){
-      e.preventDefault();
-      for(var i=0;i<styleButtons.length;i++)styleButtons[i].classList.remove('active');
+      e.preventDefault();e.stopPropagation();
+      for(var i=0;i<sBtns.length;i++)sBtns[i].classList.remove('active');
       btn.classList.add('active');
       selStyle=btn.getAttribute('data-v');
     };
-  })(styleButtons[si]);
+  })(sBtns[si]);
 }
 
 document.getElementById('addBtn').onclick=addName;
@@ -288,10 +292,11 @@ function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
 
 function getPalette(vibe){
   var v=(vibe||'').toLowerCase();
-  if(v.indexOf('black')>-1||selStyle==='modern')return{p:'#1A1A1A',s:'#444',bg:'#F5F5F0',lt:'#E0E0DC'};
+  if(selStyle==='moody')return{p:'#3D1A4A',s:'#8B3A8E',bg:'#F5F0F7',lt:'#E8D5EC'};
+  if(selStyle==='modern'||v.indexOf('black')>-1)return{p:'#1A1A1A',s:'#444',bg:'#F5F5F0',lt:'#E0E0DC'};
+  if(selStyle==='luxury'||v.indexOf('gold')>-1)return{p:'#8B6914',s:'#C4A44A',bg:'#FAF8F0',lt:'#EAD8A0'};
   if(v.indexOf('blue')>-1||v.indexOf('navy')>-1)return{p:'#1E3A6E',s:'#3A6AB8',bg:'#EFF4FB',lt:'#D0DFF5'};
   if(v.indexOf('green')>-1||v.indexOf('sage')>-1||v.indexOf('dinner')>-1)return{p:'#2D6A4F',s:'#52B788',bg:'#EEF7F2',lt:'#C8E8D8'};
-  if(v.indexOf('gold')>-1||selStyle==='luxury')return{p:'#8B6914',s:'#C4A44A',bg:'#FAF8F0',lt:'#EAD8A0'};
   if(v.indexOf('pink')>-1||v.indexOf('blush')>-1)return{p:'#C4607A',s:'#E89AAA',bg:'#FDF5F7',lt:'#F0CEDA'};
   if(v.indexOf('purple')>-1)return{p:'#6B3FA0',s:'#A07AC4',bg:'#F5F0FA',lt:'#DBC8F5'};
   if(v.indexOf('red')>-1)return{p:'#C43030',s:'#E05050',bg:'#FDF2F2',lt:'#F5C8C8'};
@@ -317,40 +322,36 @@ function loadImg(ctx,src,x,y,w,h,rad,shadow){
       ctx.restore();res();
     };
     img.onerror=function(){
-      ctx.save();ctx.fillStyle='#fff';
+      ctx.save();ctx.fillStyle='#FAFAFA';
       if(rad>0){ctx.beginPath();ctx.roundRect(x,y,w,h,rad);ctx.fill();}else ctx.fillRect(x,y,w,h);
-      ctx.fillStyle='#CCC';ctx.font='italic '+(w*0.08)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText('Your Design',x+w/2,y+h/2);
-      ctx.restore();res();
+      ctx.fillStyle='#CCC';ctx.font='italic '+(w*0.08)+'px Georgia,serif';ctx.textAlign='center';
+      ctx.fillText('Your Design',x+w/2,y+h/2);ctx.restore();res();
     };
     img.src=src;
   });
 }
 
-function drawGradBg(ctx,pal){
-  var g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,lighten(pal.p,0.9));g.addColorStop(1,lighten(pal.s,0.85));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-}
-
 async function getAIBg(prompt,style){
   if(!API_KEY)return null;
   var sm={
-    editorial:'editorial flat lay photography, natural linen texture, dried eucalyptus branches, soft diffused natural light, cream and ivory tones, professional product photography, 85mm lens bokeh',
-    luxury:'luxury minimal flat lay photography, polished white marble surface, white silk ribbon, delicate gold accents, elegant white flowers, high-end lifestyle photography, soft shadows',
-    moody:'moody romantic flat lay photography, deep burgundy velvet fabric, flickering candlelight, dark garden roses, rich jewel tones, dramatic shadows, editorial dark mood, atmospheric',
-    bright:'bright airy lifestyle photography, crisp white background, fresh pastel flowers, soft warm sunlight streaming through window, clean and joyful, light and fresh',
-    boho:'boho earthy flat lay photography, pampas grass, terracotta ceramic dish, woven rattan mat, dried wildflowers, warm golden afternoon light, organic natural textures',
-    modern:'modern bold flat lay photography, clean white concrete surface, geometric marble props, strong directional shadows, contemporary minimal aesthetic, stark and striking'
+    editorial:'editorial flat lay photography, natural linen texture, dried eucalyptus, soft diffused light, cream and ivory tones, professional product photography',
+    luxury:'luxury minimal flat lay, polished white marble, white silk ribbon, gold accents, elegant flowers, high-end lifestyle photography',
+    moody:'moody romantic flat lay, deep burgundy velvet, flickering candlelight, dark garden roses, rich jewel tones, dramatic atmospheric shadows',
+    bright:'bright airy photography, crisp white background, fresh pastel flowers, natural sunlight, clean joyful lifestyle',
+    boho:'boho earthy flat lay, pampas grass, terracotta ceramic, woven rattan, dried wildflowers, warm golden light',
+    modern:'modern bold flat lay, clean white concrete, geometric marble props, strong shadows, contemporary minimal'
   };
-  var full=prompt+', '+(sm[style]||sm.editorial)+', no text, no words, no letters, no people, no faces, photorealistic, high quality, 4k, beautiful composition';
+  var full=prompt+', '+(sm[style]||sm.editorial)+', no text, no words, no people, photorealistic, high quality, 4k';
   try{
     var res=await fetch('https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image',{
       method:'POST',
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+API_KEY,'Accept':'application/json'},
-      body:JSON.stringify({text_prompts:[{text:full,weight:1},{text:'text, words, letters, numbers, people, faces, hands, watermark, logo, ugly, blurry',weight:-1}],cfg_scale:8,height:1024,width:1024,samples:1,steps:40})
+      body:JSON.stringify({text_prompts:[{text:full,weight:1},{text:'text, words, people, faces, watermark, blurry',weight:-1}],cfg_scale:8,height:1024,width:1024,samples:1,steps:40})
     });
     if(!res.ok)return null;
     var data=await res.json();
     if(data.artifacts&&data.artifacts[0])return 'data:image/png;base64,'+data.artifacts[0].base64;
-  }catch(e){console.warn('AI bg failed:',e);}
+  }catch(e){console.warn('AI bg:',e);}
   return null;
 }
 
@@ -358,9 +359,11 @@ async function drawBg(ctx,bgUrl,pal){
   if(bgUrl){
     await loadImg(ctx,bgUrl,0,0,W,H,0,false);
     var vig=ctx.createRadialGradient(W/2,H/2,W*0.2,W/2,H/2,W*0.85);
-    vig.addColorStop(0,'rgba(0,0,0,0)');vig.addColorStop(1,'rgba(0,0,0,0.2)');
+    vig.addColorStop(0,'rgba(0,0,0,0)');vig.addColorStop(1,'rgba(0,0,0,0.18)');
     ctx.fillStyle=vig;ctx.fillRect(0,0,W,H);
-  }else{drawGradBg(ctx,pal);}
+  }else{
+    var g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,lighten(pal.p,0.9));g.addColorStop(1,lighten(pal.s,0.85));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  }
 }
 
 function canvaBadge(ctx,cx,cy,r){
@@ -372,367 +375,369 @@ function canvaBadge(ctx,cx,cy,r){
   ctx.font=(r*0.22)+'px sans-serif';ctx.fillText('free account',cx,cy+r*0.6);ctx.restore();
 }
 
-// ── IMAGE 1: HERO — Dramatic AI background, editorial feel ──
+// ── IMAGE 1: HERO — Fixed pill always contains all text ──
 async function makeHero(pal,info,bgUrl){
   var c=mkC();var ctx=c.getContext('2d');
   await drawBg(ctx,bgUrl,pal);
 
-  // Strong overlay gradient so design pops
+  // Dark gradient overlay at bottom so text always readable
   if(bgUrl){
-    var ov=ctx.createLinearGradient(0,0,0,H);
-    ov.addColorStop(0,'rgba(0,0,0,0.1)');ov.addColorStop(0.5,'rgba(0,0,0,0)');ov.addColorStop(1,'rgba(0,0,0,0.35)');
+    var ov=ctx.createLinearGradient(0,H*0.55,0,H);
+    ov.addColorStop(0,'rgba(0,0,0,0)');ov.addColorStop(1,'rgba(0,0,0,0.4)');
     ctx.fillStyle=ov;ctx.fillRect(0,0,W,H);
   }
 
-  // Top pill label
-  ctx.fillStyle='rgba(255,255,255,0.95)';ctx.beginPath();ctx.roundRect(W/2-520,44,1040,58,29);ctx.fill();
-  ctx.fillStyle=pal.p;ctx.font='600 '+(W*0.021)+'px sans-serif';ctx.textAlign='center';
-  ctx.fillText(info.type.toUpperCase()+' · EDITABLE CANVA TEMPLATE · INSTANT DOWNLOAD',W/2,81);
+  // Top strip
+  ctx.fillStyle='rgba(255,255,255,0.95)';ctx.fillRect(0,0,W,76);
+  ctx.fillStyle=pal.p;ctx.font='600 '+(W*0.019)+'px sans-serif';ctx.textAlign='center';
+  ctx.fillText(info.type.toUpperCase()+' · EDITABLE CANVA TEMPLATE · INSTANT DOWNLOAD',W/2,48);
 
-  // Design card — large, angled, dramatic shadow
-  var cw=W*0.5,ch=cw*1.3,cx=(W-cw)/2,cy=124;
-  ctx.save();ctx.translate(W/2,cy+ch/2);ctx.rotate(-2*Math.PI/180);ctx.translate(-W/2,-(cy+ch/2));
-  await loadImg(ctx,imgData,cx,cy,cw,ch,20);
-  ctx.restore();
+  // Design card — centered, clean angle
+  var cw=W*0.48,ch=cw*1.3,cx=(W-cw)/2,cy=100;
+  ctx.save();ctx.translate(W/2,cy+ch/2);ctx.rotate(-1.8*Math.PI/180);ctx.translate(-W/2,-(cy+ch/2));
+  await loadImg(ctx,imgData,cx,cy,cw,ch,20);ctx.restore();
 
-  // Canva badge — offset right
-  canvaBadge(ctx,cx+cw+20,cy+ch-60,W*0.06);
+  // Canva badge — positioned clear of design card
+  canvaBadge(ctx,W-160,cy+ch+60,W*0.055);
 
-  // Bottom section — frosted glass pill
-  var py=cy+ch+88,ph=196;
-  ctx.fillStyle='rgba(255,255,255,0.96)';
-  ctx.beginPath();ctx.roundRect(50,py,W-100,ph,22);ctx.fill();
+  // Bottom white section — TALL enough to always fit content
+  var pillY=cy+ch+130;
+  var pillH=220;// Fixed height — always enough room
+  ctx.fillStyle='rgba(255,255,255,0.97)';
+  ctx.beginPath();ctx.roundRect(40,pillY,W-80,pillH,24);ctx.fill();
 
-  // Big title
-  ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.062)+'px Georgia,serif';ctx.textAlign='center';
-  ctx.fillText(info.title,W/2,py+86);
+  // Title — sized to fit within pill
+  var titleSize=W*0.054;
+  ctx.fillStyle=pal.p;ctx.font='italic 700 '+titleSize+'px Georgia,serif';ctx.textAlign='center';
+  // Measure and shrink if needed
+  while(ctx.measureText(info.title).width>W-200&&titleSize>W*0.03){
+    titleSize-=W*0.003;ctx.font='italic 700 '+titleSize+'px Georgia,serif';
+  }
+  ctx.fillText(info.title,W/2,pillY+90);
 
   // Subtitle
-  ctx.fillStyle='#777';ctx.font='300 '+(W*0.027)+'px sans-serif';
-  ctx.fillText('Hand-crafted Canva template  ·  Fully editable  ·  Instant digital download',W/2,py+146);
+  ctx.fillStyle='#777';ctx.font='300 '+(W*0.024)+'px sans-serif';
+  ctx.fillText('Hand-crafted Canva template  ·  Fully editable  ·  Instant digital download',W/2,pillY+148);
 
   // Shop name
-  ctx.fillStyle='white';ctx.globalAlpha=0.85;ctx.font='600 '+(W*0.019)+'px sans-serif';ctx.textAlign='right';
-  ctx.fillText('LoveyTemplatesCo',W-54,H-46);ctx.globalAlpha=1;
+  ctx.fillStyle='#AAA';ctx.globalAlpha=0.8;ctx.font='500 '+(W*0.017)+'px sans-serif';ctx.textAlign='right';
+  ctx.fillText('LoveyTemplatesCo',W-55,pillY+pillH-24);ctx.globalAlpha=1;
   return c;
 }
 
-// ── IMAGE 2: CLOSEUP — Magazine quality, large ──────────
+// ── IMAGE 2: CLOSEUP ─────────────────────────────────────
 async function makeCloseup(pal,info,bgUrl){
   var c=mkC();var ctx=c.getContext('2d');
   await drawBg(ctx,bgUrl,pal);
-  if(bgUrl){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,W,H);}
-  var cw=W*0.66,ch=cw*1.3,cx=(W-cw)/2,cy=(H-ch)/2;
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(1.8*Math.PI/180);ctx.translate(-W/2,-H/2);
+  var cw=W*0.64,ch=cw*1.3,cx=(W-cw)/2,cy=(H-ch)/2;
+  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(1.5*Math.PI/180);ctx.translate(-W/2,-H/2);
   await loadImg(ctx,imgData,cx,cy,cw,ch,22);ctx.restore();
-  ctx.fillStyle='white';ctx.globalAlpha=0.8;ctx.font='600 '+(W*0.02)+'px sans-serif';ctx.textAlign='center';
-  ctx.fillText('LoveyTemplatesCo',W/2,H-46);ctx.globalAlpha=1;
+  // Shop name subtle
+  ctx.fillStyle='white';ctx.globalAlpha=0.7;ctx.font='600 '+(W*0.019)+'px sans-serif';ctx.textAlign='center';
+  ctx.fillText('LoveyTemplatesCo',W/2,H-48);ctx.globalAlpha=1;
   return c;
 }
 
-// ── IMAGE 3: WHATS INCLUDED — Airy, generous whitespace ──
+// ── IMAGE 3: WHATS INCLUDED — Clean, NO mini card competing ──
 async function makeIncluded(pal,info){
   var c=mkC();var ctx=c.getContext('2d');
   ctx.fillStyle=pal.bg;ctx.fillRect(0,0,W,H);
+  ctx.fillStyle=pal.p;ctx.fillRect(0,0,W,20);
 
-  // Top color bar
-  ctx.fillStyle=pal.p;ctx.fillRect(0,0,W,18);
-
-  // Large decorative background element
-  ctx.save();ctx.globalAlpha=0.04;ctx.fillStyle=pal.p;
-  ctx.font=(W*0.6)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText('v',W/2+W*0.3,H*0.7);ctx.restore();
-
-  // Header — big and beautiful
-  ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.092)+'px Georgia,serif';ctx.textAlign='center';
+  // Big airy header
+  ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.1)+'px Georgia,serif';ctx.textAlign='center';
   ctx.fillText("What's Included",W/2,196);
   ctx.strokeStyle=pal.s;ctx.lineWidth=12;ctx.lineCap='round';
-  ctx.beginPath();ctx.moveTo(W/2-280,232);ctx.lineTo(W/2+280,232);ctx.stroke();
-  ctx.fillStyle='#777';ctx.font='300 '+(W*0.03)+'px sans-serif';
-  ctx.fillText('Everything you need for the perfect '+info.type,W/2,296);
+  ctx.beginPath();ctx.moveTo(W/2-300,236);ctx.lineTo(W/2+300,236);ctx.stroke();
+  ctx.fillStyle='#777';ctx.font='300 '+(W*0.032)+'px sans-serif';
+  ctx.fillText('Everything you need for the perfect '+info.type,W/2,302);
 
-  // Floating design card — right side, angled slightly
-  var mw=W*0.27,mh=mw*1.3,mx=W-mw-60,my=330;
-  ctx.save();ctx.translate(mx+mw/2,my+mh/2);ctx.rotate(3*Math.PI/180);ctx.translate(-(mx+mw/2),-(my+mh/2));
-  await loadImg(ctx,imgData,mx,my,mw,mh,16);ctx.restore();
-
-  // Items — generous spacing, clean typography
+  // SIX items in a clean 2-column grid — no competing card
   var items=[
-    ['Editable Canva Template','Open in Canva (free account) and edit instantly.'],
-    ['Fully Customizable Text','Edit name, date, time and venue in seconds.'],
-    ['Color and Font Swaps','Swap any color or font you love.'],
-    ['Print-Ready '+info.size,'Download as PDF, PNG or JPG. Print anywhere.'],
-    ['Instant Digital Download','Available immediately after purchase.'],
-    ['Lifetime Access','Come back anytime to edit or download again.']
+    {icon:'E',title:'Editable Canva Template',desc:'Open in Canva (free account) and edit instantly.'},
+    {icon:'T',title:'Fully Customizable Text',desc:'Edit name, date, time and venue in seconds.'},
+    {icon:'C',title:'Color and Font Swaps',desc:'Swap any color or font you love in Canva.'},
+    {icon:'P',title:'Print-Ready '+info.size,desc:'Download as PDF, PNG or JPG. Print anywhere.'},
+    {icon:'D',title:'Instant Digital Download',desc:'Available immediately after purchase.'},
+    {icon:'L',title:'Lifetime Access',desc:'Come back anytime to edit or download again.'}
   ];
 
-  var lx=52,sy=324,ih=156;
-  items.forEach(function(item,i){
-    var y=sy+i*ih;
-    // Filled circle with check
-    ctx.beginPath();ctx.arc(lx+38,y+46,38,0,Math.PI*2);
-    ctx.fillStyle=i%2===0?pal.p:pal.s;ctx.fill();
-    ctx.fillStyle='white';ctx.font='700 '+(W*0.034)+'px sans-serif';ctx.textAlign='center';ctx.fillText('v',lx+38,y+58);
-    // Item title
-    ctx.textAlign='left';ctx.fillStyle='#1A1A1A';ctx.font='700 '+(W*0.038)+'px sans-serif';ctx.fillText(item[0],lx+96,y+36);
-    // Description
-    ctx.fillStyle='#888';ctx.font='300 '+(W*0.028)+'px sans-serif';ctx.fillText(item[1],lx+96,y+80);
-    // Subtle divider
-    if(i<items.length-1){ctx.strokeStyle='#E8E0DA';ctx.lineWidth=2;ctx.globalAlpha=0.7;ctx.beginPath();ctx.moveTo(lx,y+ih-12);ctx.lineTo(mx-40,y+ih-12);ctx.stroke();ctx.globalAlpha=1;}
+  var col1=[0,1,2],col2=[3,4,5];
+  var colW=W*0.44,colX1=60,colX2=W/2+30,startY=360,itemH=180;
+
+  [col1,col2].forEach(function(col,ci){
+    var colX=ci===0?colX1:colX2;
+    col.forEach(function(idx,ii){
+      var item=items[idx];
+      var iy=startY+ii*itemH;
+
+      // Circle with letter
+      ctx.beginPath();ctx.arc(colX+44,iy+44,44,0,Math.PI*2);
+      ctx.fillStyle=idx%2===0?pal.p:pal.s;ctx.fill();
+      ctx.fillStyle='white';ctx.font='700 '+(W*0.036)+'px sans-serif';ctx.textAlign='center';
+      ctx.fillText(item.icon,colX+44,iy+58);
+
+      // Title
+      ctx.textAlign='left';ctx.fillStyle='#1A1A1A';
+      ctx.font='700 '+(W*0.034)+'px sans-serif';
+      ctx.fillText(item.title,colX+106,iy+34);
+
+      // Description
+      ctx.fillStyle='#888';ctx.font='300 '+(W*0.026)+'px sans-serif';
+      ctx.fillText(item.desc,colX+106,iy+76);
+
+      // Subtle line
+      if(ii<2){ctx.strokeStyle='#E8E0DA';ctx.lineWidth=2;ctx.globalAlpha=0.6;ctx.beginPath();ctx.moveTo(colX,iy+itemH-14);ctx.lineTo(colX+colW,iy+itemH-14);ctx.stroke();ctx.globalAlpha=1;}
+    });
   });
 
-  // Bottom tag bar
-  var tags=['INSTANT DOWNLOAD','EDIT IN CANVA',info.size+' READY','PERSONAL USE'],th=100;
+  // Bottom gradient tag bar
+  var tags=['INSTANT DOWNLOAD','EDIT IN CANVA',info.size+' READY','PERSONAL USE'],th=108;
   tags.forEach(function(tag,i){
     var tw=W/4;
-    var grad=ctx.createLinearGradient(i*tw,H-th,i*tw+tw,H);
-    grad.addColorStop(0,i%2===0?pal.p:pal.s);grad.addColorStop(1,i%2===0?pal.s:pal.p);
-    ctx.fillStyle=grad;ctx.fillRect(i*tw,H-th,tw,th);
-    ctx.fillStyle='white';ctx.font='700 '+(W*0.023)+'px sans-serif';ctx.textAlign='center';ctx.fillText(tag,i*tw+tw/2,H-th/2+10);
+    var tg=ctx.createLinearGradient(i*tw,H-th,(i+1)*tw,H);
+    tg.addColorStop(0,i%2===0?pal.p:pal.s);tg.addColorStop(1,i%2===0?pal.s:pal.p);
+    ctx.fillStyle=tg;ctx.fillRect(i*tw,H-th,tw,th);
+    ctx.fillStyle='white';ctx.font='700 '+(W*0.024)+'px sans-serif';ctx.textAlign='center';
+    ctx.fillText(tag,i*tw+tw/2,H-th/2+12);
   });
-  ctx.fillStyle=pal.p;ctx.globalAlpha=0.35;ctx.font='500 '+(W*0.017)+'px sans-serif';ctx.textAlign='center';
-  ctx.fillText('LoveyTemplatesCo',W/2,H-th-24);ctx.globalAlpha=1;
+  ctx.fillStyle=pal.p;ctx.globalAlpha=0.3;ctx.font='500 '+(W*0.017)+'px sans-serif';ctx.textAlign='center';
+  ctx.fillText('LoveyTemplatesCo',W/2,H-th-22);ctx.globalAlpha=1;
   return c;
 }
 
-// ── IMAGE 4: MAKE IT YOURS — Flowing, organic, fun ───────
+// ── IMAGE 4: MAKE IT YOURS — Bigger cards, organic, flowing ──
 async function makeMakeItYours(pal,info){
   var c=mkC();var ctx=c.getContext('2d');
   ctx.fillStyle=pal.bg;ctx.fillRect(0,0,W,H);
-  ctx.fillStyle=pal.p;ctx.fillRect(0,0,W,18);
+  ctx.fillStyle=pal.p;ctx.fillRect(0,0,W,20);
 
-  // Organic background shape
-  ctx.save();ctx.globalAlpha=0.06;ctx.fillStyle=pal.p;
-  ctx.beginPath();ctx.ellipse(W*0.85,H*0.3,W*0.35,W*0.35,0.3,0,Math.PI*2);ctx.fill();
-  ctx.beginPath();ctx.ellipse(W*0.15,H*0.75,W*0.28,W*0.28,-0.2,0,Math.PI*2);ctx.fill();
+  // Organic background blobs
+  ctx.save();ctx.globalAlpha=0.05;ctx.fillStyle=pal.p;
+  ctx.beginPath();ctx.ellipse(W*0.12,H*0.35,W*0.22,W*0.22,0.3,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.ellipse(W*0.9,H*0.7,W*0.18,W*0.18,-0.2,0,Math.PI*2);ctx.fill();
   ctx.restore();
 
-  ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.092)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText('Make It Yours',W/2,196);
-  ctx.strokeStyle=pal.s;ctx.lineWidth=12;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(W/2-300,232);ctx.lineTo(W/2+300,232);ctx.stroke();
-  ctx.fillStyle='#777';ctx.font='300 '+(W*0.029)+'px sans-serif';ctx.fillText('Edit the name, date, time, and venue in seconds',W/2,294);
+  ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.1)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText('Make It Yours',W/2,196);
+  ctx.strokeStyle=pal.s;ctx.lineWidth=12;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(W/2-320,236);ctx.lineTo(W/2+320,236);ctx.stroke();
+  ctx.fillStyle='#777';ctx.font='300 '+(W*0.031)+'px sans-serif';ctx.fillText('Edit the name, date, time, and venue in seconds',W/2,302);
 
   var ns=names.length>=3?names:['Ashley','Sophie','Maria'];
   var dates=['May 25, 2026','June 14, 2026','August 2, 2026'];
   var venues=['The Velvet Lounge','Cherry Bar Rooftop','Midnight Cocktail Co.'];
 
-  // Cards at slightly different heights and tilts — organic feel
-  var cardW=W*0.27,cardH=cardW*1.3;
-  var positions=[
-    {x:(W-3*cardW-2*60)/2,y:340,rot:-2.5},
-    {x:(W-3*cardW-2*60)/2+cardW+60,y:296,rot:0},
-    {x:(W-3*cardW-2*60)/2+2*(cardW+60),y:348,rot:2}
-  ];
+  // BIGGER cards, more breathing room, organic tilts
+  var cw=W*0.28,ch=cw*1.35;
+  var gap=(W-3*cw)/4;
+  var tilts=[-2.5,0,2.2];
+  var offsets=[20,0,28];// vertical offsets for organic feel
 
   for(var i=0;i<3;i++){
-    var pos=positions[i];
-    ctx.save();ctx.translate(pos.x+cardW/2,pos.y+cardH/2);ctx.rotate(pos.rot*Math.PI/180);ctx.translate(-(pos.x+cardW/2),-(pos.y+cardH/2));
-    await loadImg(ctx,imgData,pos.x,pos.y,cardW,cardH,16);
+    var cx=gap+i*(cw+gap);
+    var cy=310+offsets[i];
+    ctx.save();
+    ctx.translate(cx+cw/2,cy+ch/2);ctx.rotate(tilts[i]*Math.PI/180);ctx.translate(-(cx+cw/2),-(cy+ch/2));
+    await loadImg(ctx,imgData,cx,cy,cw,ch,16);
 
-    // Name ribbon — organic pill shape, not a box
-    var ry=pos.y+cardH+20,rh=168;
-    var rgrad=ctx.createLinearGradient(pos.x,ry,pos.x+cardW,ry+rh);
-    rgrad.addColorStop(0,pal.p);rgrad.addColorStop(1,pal.s);
-    ctx.fillStyle=rgrad;ctx.beginPath();ctx.roundRect(pos.x,ry,cardW,rh,cardW/2);ctx.fill();
+    // Name pill — gradient, pill shaped (not boxy)
+    var ry=cy+ch+26,rh=180,rx=cx;
+    var rg=ctx.createLinearGradient(rx,ry,rx+cw,ry+rh);
+    rg.addColorStop(0,pal.p);rg.addColorStop(1,pal.s);
+    ctx.fillStyle=rg;ctx.beginPath();ctx.roundRect(rx,ry,cw,rh,90);ctx.fill();
 
-    ctx.fillStyle='white';ctx.font='italic 700 '+(W*0.049)+'px Georgia,serif';ctx.textAlign='center';
-    ctx.fillText(ns[i],pos.x+cardW/2,ry+78);
-    ctx.font='400 '+(W*0.024)+'px sans-serif';ctx.globalAlpha=0.9;
-    ctx.fillText(dates[i],pos.x+cardW/2,ry+116);ctx.fillText(venues[i],pos.x+cardW/2,ry+152);ctx.globalAlpha=1;
+    ctx.fillStyle='white';ctx.font='italic 700 '+(W*0.05)+'px Georgia,serif';ctx.textAlign='center';
+    ctx.fillText(ns[i],cx+cw/2,ry+78);
+    ctx.font='400 '+(W*0.025)+'px sans-serif';ctx.globalAlpha=0.88;
+    ctx.fillText(dates[i],cx+cw/2,ry+118);ctx.fillText(venues[i],cx+cw/2,ry+158);ctx.globalAlpha=1;
     ctx.restore();
   }
 
-  ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.048)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText('Yours, in under three minutes.',W/2,H-152);
-  ctx.fillStyle='#888';ctx.font='300 '+(W*0.026)+'px sans-serif';ctx.fillText('Open the Canva link, swap your details, download, done!',W/2,H-100);
-  ctx.fillStyle=pal.p;ctx.globalAlpha=0.35;ctx.font='500 '+(W*0.018)+'px sans-serif';ctx.fillText('LoveyTemplatesCo',W/2,H-50);ctx.globalAlpha=1;
+  ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.05)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText('Yours, in under three minutes.',W/2,H-155);
+  ctx.fillStyle='#888';ctx.font='300 '+(W*0.026)+'px sans-serif';ctx.fillText('Open the Canva link, swap your details, download, done!',W/2,H-103);
+  ctx.fillStyle=pal.p;ctx.globalAlpha=0.3;ctx.font='500 '+(W*0.017)+'px sans-serif';ctx.fillText('LoveyTemplatesCo',W/2,H-52);ctx.globalAlpha=1;
   return c;
 }
 
-// ── IMAGE 5: DESIGN DETAILS — Arrow callouts, flowing ────
+// ── IMAGE 5: DESIGN DETAILS — Large badges below card, nothing cut off ──
 async function makeDetails(pal,info){
   var c=mkC();var ctx=c.getContext('2d');
   ctx.fillStyle=pal.bg;ctx.fillRect(0,0,W,H);
-  ctx.fillStyle=pal.p;ctx.fillRect(0,0,W,18);
+  ctx.fillStyle=pal.p;ctx.fillRect(0,0,W,20);
 
-  // Background organic shapes
-  ctx.save();ctx.globalAlpha=0.05;ctx.fillStyle=pal.s;
-  ctx.beginPath();ctx.ellipse(W*0.1,H*0.2,W*0.2,W*0.2,0,0,Math.PI*2);ctx.fill();
-  ctx.beginPath();ctx.ellipse(W*0.9,H*0.8,W*0.18,W*0.18,0,0,Math.PI*2);ctx.fill();
+  // Organic background
+  ctx.save();ctx.globalAlpha=0.04;ctx.fillStyle=pal.s;
+  ctx.beginPath();ctx.ellipse(W*0.08,H*0.18,W*0.18,W*0.18,0,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.ellipse(W*0.92,H*0.82,W*0.16,W*0.16,0,0,Math.PI*2);ctx.fill();
   ctx.restore();
 
-  ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.092)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText('Design Details',W/2,196);
-  ctx.strokeStyle=pal.s;ctx.lineWidth=12;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(W/2-240,232);ctx.lineTo(W/2+240,232);ctx.stroke();
-  ctx.fillStyle='#777';ctx.font='300 '+(W*0.029)+'px sans-serif';ctx.fillText('Hand-crafted and carefully composed',W/2,292);
+  ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.1)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText('Design Details',W/2,196);
+  ctx.strokeStyle=pal.s;ctx.lineWidth=12;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(W/2-260,236);ctx.lineTo(W/2+260,236);ctx.stroke();
+  ctx.fillStyle='#777';ctx.font='300 '+(W*0.031)+'px sans-serif';ctx.fillText('Hand-crafted and carefully composed',W/2,302);
 
-  // Center card — large and prominent
-  var cw=W*0.36,ch=cw*1.3,cx=(W-cw)/2,cy=340;
-  await loadImg(ctx,imgData,cx,cy,cw,ch,18);
+  // Design card — CENTERED and prominent
+  var cw=W*0.4,ch=cw*1.3,cx=(W-cw)/2,cy=340;
+  await loadImg(ctx,imgData,cx,cy,cw,ch,20);
 
-  // Arrow callouts — flowing lines pointing TO design elements
-  var callouts=[
-    {label:'Elegant Typography',desc:'Script & serif lettering',x:W*0.14,y:H*0.41,tx:cx+cw*0.2,ty:cy+ch*0.18},
-    {label:'Hand-Drawn Art',desc:'Illustrated details',x:W*0.86,y:H*0.38,tx:cx+cw*0.8,ty:cy+ch*0.18},
-    {label:'Perfect Composition',desc:'Balanced layout',x:W*0.12,y:H*0.66,tx:cx+cw*0.15,ty:cy+ch*0.72},
-    {label:'Crafted Accents',desc:'Thoughtful finishing',x:W*0.88,y:H*0.68,tx:cx+cw*0.85,ty:cy+ch*0.72}
+  // 4 feature badges in a ROW below card — all within canvas bounds
+  var features=[
+    {letter:'T',title:'Typography',desc:'Elegant lettering'},
+    {letter:'I',title:'Illustration',desc:'Hand-drawn art'},
+    {letter:'C',title:'Composition',desc:'Balanced layout'},
+    {letter:'D',title:'Details',desc:'Crafted accents'}
   ];
 
-  callouts.forEach(function(co){
-    // Curved flowing line
-    ctx.strokeStyle=pal.p;ctx.lineWidth=4;ctx.globalAlpha=0.5;
-    ctx.setLineDash([14,8]);
-    ctx.beginPath();
-    var cpx=(co.x+co.tx)/2+(co.y<H/2?-80:80);
-    var cpy=(co.y+co.ty)/2;
-    ctx.moveTo(co.x,co.y);ctx.quadraticCurveTo(cpx,cpy,co.tx,co.ty);ctx.stroke();
-    ctx.setLineDash([]);ctx.globalAlpha=1;
+  var bw=W*0.19,bh=240;
+  var totalBW=4*bw+3*40;
+  var bStartX=(W-totalBW)/2;
+  var bY=cy+ch+70;
 
-    // Arrow dot at design
-    ctx.beginPath();ctx.arc(co.tx,co.ty,14,0,Math.PI*2);ctx.fillStyle=pal.s;ctx.fill();
-    ctx.beginPath();ctx.arc(co.tx,co.ty,8,0,Math.PI*2);ctx.fillStyle='white';ctx.fill();
+  features.forEach(function(f,i){
+    var bx=bStartX+i*(bw+40);
 
-    // Label — floating pill, no rigid box
-    var lw=360,lh=100;
-    var lx=co.x<W/2?co.x-lw:co.x;
-    var ly=co.y-lh/2;
-    // Soft shadow
-    ctx.shadowColor='rgba(0,0,0,0.1)';ctx.shadowBlur=20;ctx.shadowOffsetY=4;
-    ctx.fillStyle='white';ctx.beginPath();ctx.roundRect(lx,ly,lw,lh,lh/2);ctx.fill();
+    // Badge card — soft shadow
+    ctx.fillStyle='white';ctx.shadowColor='rgba(0,0,0,0.08)';ctx.shadowBlur=30;ctx.shadowOffsetY=8;
+    ctx.beginPath();ctx.roundRect(bx,bY,bw,bh,20);ctx.fill();
     ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
 
-    // Label text
-    ctx.fillStyle=pal.p;ctx.font='700 '+(W*0.03)+'px sans-serif';ctx.textAlign='center';
-    ctx.fillText(co.label,lx+lw/2,ly+36);
-    ctx.fillStyle='#888';ctx.font='300 italic '+(W*0.023)+'px sans-serif';
-    ctx.fillText(co.desc,lx+lw/2,ly+72);
+    // Colored top accent
+    ctx.fillStyle=i%2===0?pal.p:pal.s;
+    ctx.beginPath();ctx.roundRect(bx,bY,bw,8,4);ctx.fill();
+
+    // Big letter in circle
+    ctx.beginPath();ctx.arc(bx+bw/2,bY+88,52,0,Math.PI*2);
+    ctx.fillStyle=i%2===0?pal.p:pal.s;ctx.globalAlpha=0.12;ctx.fill();ctx.globalAlpha=1;
+    ctx.fillStyle=i%2===0?pal.p:pal.s;ctx.font='700 '+(W*0.055)+'px Georgia,serif';ctx.textAlign='center';
+    ctx.fillText(f.letter,bx+bw/2,bY+106);
+
+    // Label
+    ctx.fillStyle='#1A1A1A';ctx.font='700 '+(W*0.028)+'px sans-serif';ctx.fillText(f.title,bx+bw/2,bY+164);
+    ctx.fillStyle='#888';ctx.font='300 italic '+(W*0.022)+'px sans-serif';ctx.fillText(f.desc,bx+bw/2,bY+200);
   });
 
   ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.044)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText('Crafted with love.',W/2,H-96);
-  ctx.fillStyle=pal.p;ctx.globalAlpha=0.35;ctx.font='500 '+(W*0.018)+'px sans-serif';ctx.fillText('LoveyTemplatesCo',W/2,H-50);ctx.globalAlpha=1;
+  ctx.fillStyle=pal.p;ctx.globalAlpha=0.3;ctx.font='500 '+(W*0.017)+'px sans-serif';ctx.fillText('LoveyTemplatesCo',W/2,H-50);ctx.globalAlpha=1;
   return c;
 }
 
-// ── IMAGE 6: HOW IT WORKS — Big circles, present box, fun ─
+// ── IMAGE 6: HOW IT WORKS — BIG circles, bold icons, readable ──
 async function makeHowItWorks(pal,info){
   var c=mkC();var ctx=c.getContext('2d');
   ctx.fillStyle=pal.bg;ctx.fillRect(0,0,W,H);
-  ctx.fillStyle=pal.p;ctx.fillRect(0,0,W,18);
+  ctx.fillStyle=pal.p;ctx.fillRect(0,0,W,20);
 
-  // Scattered confetti background dots
-  var confColors=[pal.p,pal.s,lighten(pal.p,0.5),lighten(pal.s,0.4)];
-  for(var ci=0;ci<40;ci++){
-    ctx.save();ctx.globalAlpha=0.08+Math.random()*0.08;
-    ctx.fillStyle=confColors[ci%4];
-    var cx2=Math.random()*W,cy2=Math.random()*H,cr=8+Math.random()*18;
-    ctx.beginPath();ctx.arc(cx2,cy2,cr,0,Math.PI*2);ctx.fill();ctx.restore();
+  // Subtle scattered dots background
+  for(var di=0;di<30;di++){
+    ctx.save();ctx.globalAlpha=0.06;ctx.fillStyle=di%2===0?pal.p:pal.s;
+    ctx.beginPath();ctx.arc(Math.random()*W,Math.random()*H,6+Math.random()*14,0,Math.PI*2);ctx.fill();ctx.restore();
   }
 
-  ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.092)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText('How It Works',W/2,206);
-  ctx.strokeStyle=pal.s;ctx.lineWidth=12;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(W/2-260,242);ctx.lineTo(W/2+260,242);ctx.stroke();
-  ctx.fillStyle='#777';ctx.font='300 '+(W*0.028)+'px sans-serif';ctx.fillText('From purchase to printed in three easy steps',W/2,302);
+  ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.1)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText('How It Works',W/2,206);
+  ctx.strokeStyle=pal.s;ctx.lineWidth=12;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(W/2-270,246);ctx.lineTo(W/2+270,246);ctx.stroke();
+  ctx.fillStyle='#777';ctx.font='300 '+(W*0.031)+'px sans-serif';ctx.fillText('From purchase to printed in three easy steps',W/2,310);
 
-  var sw=W*0.26,gap=(W-3*sw)/4,sy=370;
-  var stepColors=[pal.p,pal.s,lighten(pal.p,0.15)];
+  var steps=[
+    {title:'Purchase',sub:'on Etsy',color:pal.p,light:lighten(pal.p,0.15)},
+    {title:'Edit',sub:'in Canva',color:pal.s,light:lighten(pal.s,0.15)},
+    {title:'Download',sub:'and share',color:pal.p,light:lighten(pal.p,0.2)}
+  ];
+
+  var sw=W*0.26,gap=(W-3*sw)/4,sy=365;
 
   for(var i=0;i<3;i++){
     var sx=gap+i*(sw+gap);
-    var sColor=stepColors[i];
+    var step=steps[i];
+    var circR=sw*0.42;
+    var circX=sx+sw/2,circY=sy+sw*0.48;
 
-    // Big circle — organic feel
-    var circR=sw*0.44;
-    var circX=sx+sw/2,circY=sy+sw*0.5;
+    // Outer soft ring
+    ctx.beginPath();ctx.arc(circX,circY,circR+36,0,Math.PI*2);
+    ctx.fillStyle=lighten(step.color,0.78);ctx.fill();
 
-    // Outer glow ring
-    ctx.beginPath();ctx.arc(circX,circY,circR+30,0,Math.PI*2);
-    ctx.fillStyle=lighten(sColor,0.7);ctx.fill();
-
-    // Main circle
-    var cgrad=ctx.createRadialGradient(circX-circR*0.2,circY-circR*0.2,0,circX,circY,circR);
-    cgrad.addColorStop(0,lighten(sColor,0.15));cgrad.addColorStop(1,sColor);
-    ctx.shadowColor='rgba(0,0,0,0.18)';ctx.shadowBlur=40;ctx.shadowOffsetY=12;
-    ctx.beginPath();ctx.arc(circX,circY,circR,0,Math.PI*2);ctx.fillStyle=cgrad;ctx.fill();
+    // Main circle — solid color
+    ctx.shadowColor='rgba(0,0,0,0.14)';ctx.shadowBlur=36;ctx.shadowOffsetY=10;
+    ctx.beginPath();ctx.arc(circX,circY,circR,0,Math.PI*2);ctx.fillStyle=step.color;ctx.fill();
     ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
 
-    // Step number — inside circle top
-    ctx.fillStyle='rgba(255,255,255,0.3)';ctx.font='700 '+(W*0.06)+'px sans-serif';ctx.textAlign='center';
-    ctx.fillText(''+(i+1),circX,circY-circR*0.35);
+    // Step number inside top of circle
+    ctx.fillStyle='rgba(255,255,255,0.28)';ctx.font='700 '+(W*0.052)+'px sans-serif';ctx.textAlign='center';
+    ctx.fillText(''+(i+1),circX,circY-circR*0.32);
 
-    // Icon illustration inside circle
+    // LARGE clear icon
+    ctx.fillStyle='rgba(255,255,255,0.9)';ctx.textAlign='center';
+
     if(i===0){
-      // Present box with confetti
-      var bw=circR*0.7,bh=circR*0.6,bx=circX-bw/2,by=circY-bh*0.2;
+      // Present box — large and clear
+      var bw=circR*0.72,bh=circR*0.55,bx=circX-bw/2,by2=circY+circR*0.02;
       // Box body
-      ctx.fillStyle='rgba(255,255,255,0.92)';ctx.beginPath();ctx.roundRect(bx,by,bw,bh,8);ctx.fill();
-      // Box lid
-      ctx.fillStyle='rgba(255,255,255,0.7)';ctx.beginPath();ctx.roundRect(bx-8,by-bh*0.28,bw+16,bh*0.28,4);ctx.fill();
-      // Ribbon vertical
-      ctx.fillStyle=sColor;ctx.fillRect(circX-8,by-bh*0.28,16,bh+bh*0.28);
-      // Ribbon horizontal on lid
-      ctx.fillStyle=sColor;ctx.fillRect(bx-8,by-bh*0.14,bw+16,12);
-      // Confetti bursting
-      var confPos=[[-circR*0.55,-circR*0.62],[circR*0.55,-circR*0.58],[-circR*0.35,-circR*0.75],[circR*0.35,-circR*0.7],[0,-circR*0.8]];
-      confPos.forEach(function(cp){
-        ctx.fillStyle='rgba(255,255,255,0.9)';ctx.beginPath();ctx.arc(circX+cp[0],circY+cp[1],10,0,Math.PI*2);ctx.fill();
-      });
-      // Stars around
-      ctx.fillStyle='rgba(255,255,255,0.75)';ctx.font=(W*0.04)+'px sans-serif';ctx.textAlign='center';
-      ctx.fillText('*',circX-circR*0.65,circY-circR*0.3);ctx.fillText('*',circX+circR*0.65,circY-circR*0.25);
+      ctx.fillStyle='rgba(255,255,255,0.92)';ctx.beginPath();ctx.roundRect(bx,by2,bw,bh,8);ctx.fill();
+      // Lid
+      ctx.fillStyle='rgba(255,255,255,0.7)';ctx.beginPath();ctx.roundRect(bx-10,by2-bh*0.3,bw+20,bh*0.3,6);ctx.fill();
+      // Ribbon
+      ctx.fillStyle=step.color;ctx.fillRect(circX-10,by2-bh*0.3,20,bh+bh*0.3);
+      ctx.fillStyle=step.color;ctx.fillRect(bx-10,by2-bh*0.15,bw+20,14);
+      // Confetti dots bursting
+      var cpos=[[-circR*0.5,-circR*0.55],[circR*0.5,-circR*0.52],[0,-circR*0.65],[-circR*0.3,-circR*0.7],[circR*0.32,-circR*0.68]];
+      cpos.forEach(function(cp){ctx.fillStyle='rgba(255,255,255,0.85)';ctx.beginPath();ctx.arc(circX+cp[0],circY+cp[1],12,0,Math.PI*2);ctx.fill();});
 
     }else if(i===1){
-      // Pencil with sparkles
-      ctx.save();ctx.translate(circX,circY+circR*0.05);ctx.rotate(-0.45);
-      var pw=circR*0.22,ph=circR*1.1;
-      // Eraser
-      ctx.fillStyle='rgba(255,200,200,0.9)';ctx.beginPath();ctx.roundRect(-pw/2,-ph/2,pw,ph*0.15,4);ctx.fill();
-      // Body
-      ctx.fillStyle='rgba(255,255,255,0.9)';ctx.beginPath();ctx.roundRect(-pw/2,-ph/2+ph*0.15,pw,ph*0.7,2);ctx.fill();
-      // Tip
-      ctx.fillStyle='rgba(255,230,150,0.9)';ctx.beginPath();ctx.roundRect(-pw/2,-ph/2+ph*0.85,pw,ph*0.08,1);ctx.fill();
-      // Point
-      ctx.fillStyle='rgba(60,40,20,0.8)';ctx.beginPath();ctx.moveTo(-pw/2,-ph/2+ph*0.93);ctx.lineTo(pw/2,-ph/2+ph*0.93);ctx.lineTo(0,-ph/2+ph);ctx.closePath();ctx.fill();
+      // Big pencil
+      ctx.save();ctx.translate(circX,circY+circR*0.08);ctx.rotate(-0.42);
+      var pw=circR*0.24,ph=circR*1.05;
+      ctx.fillStyle='rgba(255,235,150,0.95)';ctx.beginPath();ctx.roundRect(-pw/2,-ph/2,pw,ph*0.75,4);ctx.fill();
+      ctx.fillStyle='rgba(255,200,180,0.95)';ctx.fillRect(-pw/2,-ph/2,pw,ph*0.16);
+      ctx.fillStyle='rgba(255,255,255,0.9)';ctx.fillRect(-pw/2,-ph/2+ph*0.7,pw,ph*0.07);
+      ctx.fillStyle='rgba(50,35,20,0.9)';ctx.beginPath();ctx.moveTo(-pw/2,-ph/2+ph*0.77);ctx.lineTo(pw/2,-ph/2+ph*0.77);ctx.lineTo(0,-ph/2+ph);ctx.closePath();ctx.fill();
       ctx.restore();
-      // Sparkles
-      var spkPos=[[-circR*0.5,-circR*0.4],[circR*0.55,-circR*0.35],[-circR*0.4,circR*0.4],[circR*0.45,circR*0.38]];
-      ctx.fillStyle='rgba(255,255,255,0.8)';ctx.font=(W*0.04)+'px sans-serif';ctx.textAlign='center';
-      spkPos.forEach(function(sp){ctx.fillText('*',circX+sp[0],circY+sp[1]);});
+      // Sparkles around pencil
+      var spos=[[-circR*0.52,-circR*0.38],[circR*0.54,-circR*0.32],[-circR*0.42,circR*0.38],[circR*0.46,circR*0.36]];
+      ctx.fillStyle='rgba(255,255,255,0.75)';ctx.font=(W*0.042)+'px serif';ctx.textAlign='center';
+      spos.forEach(function(sp){ctx.fillText('*',circX+sp[0],circY+sp[1]);});
 
     }else{
-      // Download arrow with celebration
-      var arR=circR*0.38;
-      // Arrow shaft
-      ctx.fillStyle='rgba(255,255,255,0.9)';ctx.beginPath();ctx.roundRect(circX-arR*0.25,circY-arR*0.6,arR*0.5,arR*1.1,arR*0.12);ctx.fill();
+      // Download arrow — large and obvious
+      var aw=circR*0.42,ah=circR*1.0,ax=circX-aw*0.3,ay=circY-ah*0.45;
+      ctx.fillStyle='rgba(255,255,255,0.92)';
+      // Shaft
+      ctx.beginPath();ctx.roundRect(circX-aw*0.3,circY-circR*0.5,aw*0.6,circR*0.85,6);ctx.fill();
       // Arrow head
-      ctx.beginPath();ctx.moveTo(circX-arR*0.6,circY+arR*0.4);ctx.lineTo(circX,circY+arR);ctx.lineTo(circX+arR*0.6,circY+arR*0.4);ctx.closePath();ctx.fill();
-      // Celebration stars
-      var celPos=[[-circR*0.58,-circR*0.3],[circR*0.58,-circR*0.28],[-circR*0.45,circR*0.5],[circR*0.48,circR*0.48],[0,-circR*0.55]];
-      ctx.fillStyle='rgba(255,255,255,0.75)';ctx.font=(W*0.04)+'px sans-serif';ctx.textAlign='center';
-      celPos.forEach(function(cp){ctx.fillText('*',circX+cp[0],circY+cp[1]);});
+      ctx.beginPath();ctx.moveTo(circX-aw*0.65,circY+circR*0.26);ctx.lineTo(circX,circY+circR*0.58);ctx.lineTo(circX+aw*0.65,circY+circR*0.26);ctx.closePath();ctx.fill();
+      // Stars
+      var stpos=[[-circR*0.55,-circR*0.32],[circR*0.55,-circR*0.28],[0,-circR*0.55],[-circR*0.4,circR*0.5],[circR*0.42,circR*0.48]];
+      ctx.fillStyle='rgba(255,255,255,0.7)';ctx.font=(W*0.042)+'px serif';ctx.textAlign='center';
+      stpos.forEach(function(sp){ctx.fillText('*',circX+sp[0],circY+sp[1]);});
     }
 
-    // Step title below circle
-    var titleY=sy+sw*1.08;
-    ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.046)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText(i===0?'Purchase':i===1?'Edit':'Download',sx+sw/2,titleY);
-    ctx.fillStyle=pal.s;ctx.font='400 '+(W*0.027)+'px sans-serif';ctx.fillText(i===0?'on Etsy':i===1?'in Canva':'and share',sx+sw/2,titleY+50);
+    // Title below circle
+    var titleY=sy+sw*1.06;
+    ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.048)+'px Georgia,serif';ctx.textAlign='center';
+    ctx.fillText(step.title,sx+sw/2,titleY);
+    ctx.fillStyle=pal.s;ctx.font='400 '+(W*0.028)+'px sans-serif';
+    ctx.fillText(step.sub,sx+sw/2,titleY+52);
 
-    // Description below title
-    var dlines=i===0?['Find your PDF in Etsy','Purchases — also','emailed to you.']:i===1?['Open the Canva link,','customize all text','and colors.']:['Download PNG, PDF','or JPG and print or','share digitally.'];
+    // Description — 3 short lines
+    var descs=[
+      ['Find your PDF guide in','Etsy Purchases — also','emailed straight to you.'],
+      ['Open the Canva link,','customize all text','and colors. Free account.'],
+      ['Download PNG, JPG or PDF.','Print at home or a shop,','or share digitally.']
+    ];
     ctx.fillStyle='#666';ctx.font='300 '+(W*0.024)+'px sans-serif';
-    dlines.forEach(function(dl,di){ctx.fillText(dl,sx+sw/2,titleY+110+di*W*0.034);});
+    descs[i].forEach(function(dl,di){ctx.fillText(dl,sx+sw/2,titleY+112+di*W*0.034);});
 
-    // Fun curved arrow between steps
+    // Arrow between steps
     if(i<2){
-      var arStartX=sx+sw+gap/2-40;
-      var arMidY=sy+sw*0.5;
-      ctx.strokeStyle=pal.p;ctx.lineWidth=6;ctx.globalAlpha=0.22;ctx.setLineDash([14,10]);
-      ctx.beginPath();ctx.moveTo(sx+sw+20,arMidY);ctx.lineTo(sx+sw+gap-20,arMidY);ctx.stroke();
+      var arY=sy+sw*0.48;
+      ctx.strokeStyle=pal.p;ctx.lineWidth=5;ctx.globalAlpha=0.2;ctx.setLineDash([14,10]);
+      ctx.beginPath();ctx.moveTo(sx+sw+20,arY);ctx.lineTo(sx+sw+gap-20,arY);ctx.stroke();
       ctx.setLineDash([]);ctx.globalAlpha=1;
-      // Arrowhead
-      ctx.fillStyle=pal.p;ctx.globalAlpha=0.3;
-      ctx.beginPath();ctx.moveTo(sx+sw+gap-10,arMidY-20);ctx.lineTo(sx+sw+gap+22,arMidY);ctx.lineTo(sx+sw+gap-10,arMidY+20);ctx.fill();ctx.globalAlpha=1;
+      ctx.fillStyle=pal.p;ctx.globalAlpha=0.28;
+      ctx.beginPath();ctx.moveTo(sx+sw+gap-8,arY-18);ctx.lineTo(sx+sw+gap+20,arY);ctx.lineTo(sx+sw+gap-8,arY+18);ctx.fill();ctx.globalAlpha=1;
     }
   }
 
   ctx.fillStyle=pal.p;ctx.font='italic 700 '+(W*0.038)+'px Georgia,serif';ctx.textAlign='center';
   ctx.fillText('Questions? Message us on Etsy — we reply fast!',W/2,H-96);
-  ctx.fillStyle=pal.p;ctx.globalAlpha=0.35;ctx.font='500 '+(W*0.018)+'px sans-serif';
-  ctx.fillText('LoveyTemplatesCo',W/2,H-50);ctx.globalAlpha=1;
+  ctx.fillStyle=pal.p;ctx.globalAlpha=0.3;ctx.font='500 '+(W*0.017)+'px sans-serif';
+  ctx.fillText('LoveyTemplatesCo',W/2,H-52);ctx.globalAlpha=1;
   return c;
 }
 
@@ -751,10 +756,11 @@ function generateBuyerPDF(info){
   doc.setFontSize(17);doc.setFont('helvetica','bold');doc.setTextColor(45,106,79);doc.text(info.title,pw/2,my+18,{align:'center'});
   doc.setFontSize(13);doc.setFont('helvetica','bold');doc.setTextColor(196,92,92);doc.text('YOUR CANVA TEMPLATE LINK',pw/2,my+34,{align:'center'});
   doc.setFillColor(253,245,243);doc.setDrawColor(196,92,92);doc.setLineWidth(1);doc.roundedRect(20,my+38,pw-40,24,3,3,'FD');
-  doc.setFontSize(10);doc.setFont('helvetica','normal');doc.setTextColor(30,58,110);doc.textWithLink(info.canvaLink||'Your Canva link will appear here',pw/2,my+53,{align:'center',url:info.canvaLink||'#'});
+  doc.setFontSize(10);doc.setFont('helvetica','normal');doc.setTextColor(30,58,110);
+  doc.textWithLink(info.canvaLink||'Your Canva link will appear here',pw/2,my+53,{align:'center',url:info.canvaLink||'#'});
   var sy2=my+74;
   doc.setFontSize(13);doc.setFont('helvetica','bold');doc.setTextColor(196,92,92);doc.text('HOW TO ACCESS YOUR TEMPLATE',pw/2,sy2,{align:'center'});
-  var steps=[{num:'1',title:'Purchase confirmed',desc:'You have already completed this step! Check your email for your Etsy purchase confirmation.'},{num:'2',title:'Click the Canva link above',desc:'Click the link above. If you do not have a Canva account, sign up free at canva.com.'},{num:'3',title:'Edit your template',desc:'Click "Use template for free" in Canva. Customize your name, date, time, venue and any details.'},{num:'4',title:'Download and share',desc:'Click Share in Canva and download as PDF Print, PNG, or JPG to print or share digitally.'}];
+  var steps=[{num:'1',title:'Purchase confirmed',desc:'You have already completed this step! Check your email for your Etsy purchase confirmation.'},{num:'2',title:'Click the Canva link above',desc:'Click the link. If you do not have a Canva account, sign up free at canva.com - it takes 30 seconds.'},{num:'3',title:'Edit your template',desc:'Click "Use template for free" in Canva. Customize your name, date, time, venue and any other details.'},{num:'4',title:'Download and share',desc:'Click Share in Canva and download as PDF Print, PNG, or JPG to print or share digitally.'}];
   var stY=sy2+12;
   steps.forEach(function(s){
     doc.setFillColor(196,92,92);doc.circle(27,stY+4,5,'F');
@@ -795,16 +801,16 @@ document.getElementById('genBtn').onclick=async function(){
 
   try{
     await step(0,8);await step(1,14);
-    var heroBg=await getAIBg('beautiful flat lay photography scene for a '+type+' invitation '+vibe,selStyle);
+    var heroBg=await getAIBg('beautiful styled flat lay photography for a '+type+' '+vibe,selStyle);
     var hero=await makeHero(pal,info,heroBg);genCanvases.push({c:hero,label:'Hero Shot'});
     await step(2,26);
-    var closeupBg=await getAIBg('elegant '+selStyle+' styled photography backdrop '+vibe+' product scene',selStyle);
+    var closeupBg=await getAIBg('elegant '+selStyle+' styled product photography scene '+vibe,selStyle);
     var closeup=await makeCloseup(pal,info,closeupBg);genCanvases.push({c:closeup,label:'Design Closeup'});
     await step(3,40);var inc=await makeIncluded(pal,info);genCanvases.push({c:inc,label:'Whats Included'});
     await step(4,54);var miy=await makeMakeItYours(pal,info);genCanvases.push({c:miy,label:'Make It Yours'});
-    await step(5,66);var det=await makeDetails(pal,info);genCanvases.push({c:det,label:'Design Details'});
-    await step(6,78);var how=await makeHowItWorks(pal,info);genCanvases.push({c:how,label:'How It Works'});
-    await step(7,90);pdfDoc=generateBuyerPDF(info);
+    await step(5,68);var det=await makeDetails(pal,info);genCanvases.push({c:det,label:'Design Details'});
+    await step(6,82);var how=await makeHowItWorks(pal,info);genCanvases.push({c:how,label:'How It Works'});
+    await step(7,92);pdfDoc=generateBuyerPDF(info);
     await step(8,100);await sleep(300);
     showResults();
   }catch(e){showErr('Error: '+e.message);console.error(e);}
@@ -823,12 +829,8 @@ function showResults(){
     foot.innerHTML='<span>'+(i+1)+'. '+item.label+'</span>';
     var starBtn=document.createElement('button');starBtn.className='star-btn';
     starBtn.textContent=isStarred(currentTitle,item.label)?'⭐':'☆';
-    starBtn.title='Save to gallery';
     (function(btn,lbl,u){
-      btn.onclick=function(){
-        var added=starImage(currentTitle,lbl,u);
-        btn.textContent=added?'⭐':'☆';
-      };
+      btn.onclick=function(){var added=starImage(currentTitle,lbl,u);btn.textContent=added?'⭐':'☆';};
     })(starBtn,item.label,url);
     var saveA=document.createElement('a');saveA.href=url;saveA.download='LoveyTemplatesCo_'+item.label.replace(/\s/g,'_')+'.png';saveA.className='save-lnk';saveA.textContent='Save';
     foot.appendChild(starBtn);foot.appendChild(saveA);card.appendChild(a);card.appendChild(foot);grid.appendChild(card);
