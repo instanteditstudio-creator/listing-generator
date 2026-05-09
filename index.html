@@ -32,18 +32,12 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
 .prev-info{flex:1;}
 .pn{font-size:13px;font-weight:500;}
 .ps{font-size:11px;color:#888;margin-top:2px;}
-.clear-btn{background:none;border:none;color:#AAA;cursor:pointer;font-size:18px;line-height:1;padding:4px;}
+.clear-btn{background:none;border:none;color:#AAA;cursor:pointer;font-size:18px;padding:4px;}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
 .field label{display:block;font-size:12px;color:#888;margin-bottom:4px;font-weight:500;}
-.field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1px solid #E8E0DA;border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;background:#FAF7F2;color:#1A1A1A;outline:none;}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:#C45C5C;background:#fff;}
+.field input,.field select{width:100%;padding:10px 12px;border:1px solid #E8E0DA;border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;background:#FAF7F2;color:#1A1A1A;outline:none;}
+.field input:focus,.field select:focus{border-color:#C45C5C;background:#fff;}
 .vibe-hint{font-size:11px;color:#C45C5C;margin-top:5px;line-height:1.5;}
-.names-row{display:flex;gap:8px;margin-bottom:8px;}
-.names-row input{flex:1;}
-.add-btn{padding:10px 16px;background:#FAF7F2;border:1px solid #E8E0DA;border-radius:10px;color:#C45C5C;font-weight:600;font-size:13px;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif;}
-.name-pill{display:flex;align-items:center;gap:8px;background:#FDF5F3;border:1px solid #F0DDD8;border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:6px;}
-.name-pill span{flex:1;}
-.name-pill button{background:none;border:none;color:#AAA;cursor:pointer;font-size:14px;}
 .style-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
 .style-btn{padding:11px 8px;border:1px solid #E8E0DA;border-radius:10px;text-align:center;font-size:12px;cursor:pointer;color:#888;background:#FAF7F2;font-family:'DM Sans',sans-serif;transition:all .15s;}
 .style-btn.active{border-color:#C45C5C !important;background:#FDF5F3;color:#C45C5C;font-weight:600;}
@@ -75,9 +69,7 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
 .star-btn{background:none;border:none;cursor:pointer;font-size:18px;padding:2px 4px;line-height:1;}
 .save-lnk{background:#C45C5C;color:#fff;border:none;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;display:inline-block;}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap;}
-.dl-all{flex:1;padding:14px;background:#1A1A1A;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;min-width:160px;}
-.pdf-btn{flex:1;padding:14px;background:#C45C5C;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;min-width:160px;}
-.etsy-btn{flex:1;padding:14px;background:#F56400;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;min-width:160px;}
+.action-btn{flex:1;padding:14px;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;min-width:140px;}
 .etsy-output{display:none;margin-top:20px;}
 .etsy-output.show{display:block;}
 .etsy-section{background:#fff;border:1px solid #E8E0DA;border-radius:12px;padding:20px;margin-bottom:12px;}
@@ -88,7 +80,7 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
 @keyframes sp{to{transform:rotate(360deg)}}
 .gallery-empty{text-align:center;padding:60px 20px;color:#888;}
 .listing-group{margin-bottom:28px;}
-.listing-group-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1A1A1A;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid #E8E0DA;display:flex;justify-content:space-between;align-items:center;}
+.listing-group-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid #E8E0DA;display:flex;justify-content:space-between;align-items:center;}
 .listing-group-title span{font-size:12px;color:#AAA;font-family:'DM Sans',sans-serif;font-weight:400;cursor:pointer;}
 .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
 .gallery-item{border:1px solid #E8E0DA;border-radius:10px;overflow:hidden;background:#fff;}
@@ -109,18 +101,16 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
     <button class="nav-tab active" id="tab-gen-btn" onclick="showTab('generator')">Generate Images</button>
     <button class="nav-tab" id="tab-gal-btn" onclick="showTab('gallery')">My Approved Images</button>
   </div>
-
   <div id="tab-generator">
     <div class="hero-txt">
       <h1>Turn Your Design Into<br><em>6 Images That Sell</em></h1>
       <p>Upload your PNG and get 6 clean professional listing images, your buyer PDF, and ready-to-paste Etsy listing text.</p>
     </div>
-
     <div class="card">
       <h3><div class="num">1</div>Upload your design PNG</h3>
       <div class="upload-area" id="dropZone">
         <div style="font-size:28px;margin-bottom:6px;">&#128444;</div>
-        <p>Export from Canva as PNG — your design appears exactly as created</p>
+        <p>Export from Canva as PNG</p>
         <label for="fileIn" class="upload-btn">Choose PNG File</label>
         <input type="file" id="fileIn" accept="image/*" style="display:none;">
       </div>
@@ -130,7 +120,6 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
         <button class="clear-btn" id="clearBtn">x</button>
       </div>
     </div>
-
     <div class="card">
       <h3><div class="num">2</div>Design details</h3>
       <div class="row2">
@@ -139,29 +128,21 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
       </div>
       <div class="row2">
         <div class="field"><label>TEMPLATE TYPE</label>
-          <select id="tType">
-            <option>Invitation</option><option>Birthday Invitation</option><option>Bridal / Bachelorette</option>
-            <option>Baby Shower</option><option>Itinerary / Planner</option><option>Menu / Food</option>
-            <option>Party Sign</option><option>Greeting Card</option><option>Other Template</option>
-          </select>
+          <select id="tType"><option>Invitation</option><option>Birthday Invitation</option><option>Bridal / Bachelorette</option><option>Baby Shower</option><option>Itinerary / Planner</option><option>Menu / Food</option><option>Party Sign</option><option>Greeting Card</option><option>Other Template</option></select>
         </div>
         <div class="field"><label>DESIGN SIZE</label>
-          <select id="dSize">
-            <option>5x7 inches</option><option>4x6 inches</option><option>5x5 inches</option>
-            <option>A4 / Letter</option><option>Half Sheet</option>
-          </select>
+          <select id="dSize"><option>5x7 inches</option><option>4x6 inches</option><option>5x5 inches</option><option>A4 / Letter</option><option>Half Sheet</option></select>
         </div>
       </div>
       <div class="field">
-        <label>AI BACKGROUND KEYWORDS</label>
-        <input type="text" id="vibe" placeholder="e.g. wildflowers, white linen, soft light, botanical, feminine">
-        <div class="vibe-hint">&#10024; Include props, colors and mood — e.g. "cherries, wine glass, pink, romantic" or "pampas grass, boho, warm tones"</div>
+        <label>AI SCENE KEYWORDS</label>
+        <input type="text" id="vibe" placeholder="e.g. wildflowers, white linen, soft light, feminine, botanical">
+        <div class="vibe-hint">&#10024; Props: wine glass, cherries, candles, pampas &nbsp;|&nbsp; Colors: blush, gold, sage, cream &nbsp;|&nbsp; Mood: romantic, elegant, boho</div>
       </div>
     </div>
-
     <div class="card">
       <h3><div class="num">3</div>Background scene style</h3>
-      <p style="font-size:13px;color:#888;margin-bottom:12px;">Used for all 3 photo scenes. Each scene gets a different angle — flat lay, hand holding, layered fabric.</p>
+      <p style="font-size:13px;color:#888;margin-bottom:12px;">All images use AI-generated real photo scenes matching your style.</p>
       <div class="style-grid" id="styleGrid">
         <button class="style-btn active" data-v="editorial"><span class="si">&#127807;</span>Editorial</button>
         <button class="style-btn" data-v="luxury"><span class="si">&#10024;</span>Luxury</button>
@@ -171,10 +152,8 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
         <button class="style-btn" data-v="modern"><span class="si">&#9632;</span>Modern</button>
       </div>
     </div>
-
     <div class="err" id="errBox"></div>
     <button class="gen-btn" id="genBtn">Generate My 6 Images + Buyer PDF + Etsy Listing</button>
-
     <div class="progress" id="progressBox">
       <div class="card">
         <h3><span class="spin"></span>Generating everything...</h3>
@@ -182,48 +161,37 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
         <div id="stepList"></div>
       </div>
     </div>
-
     <div class="results" id="resultsBox">
-      <div class="results-hdr">
-        <h2>Everything Is Ready</h2>
-        <p>6 listing images + buyer PDF + Etsy listing text</p>
-      </div>
+      <div class="results-hdr"><h2>Everything Is Ready</h2><p>6 listing images + buyer PDF + Etsy listing text</p></div>
       <div class="img-grid" id="imgGrid"></div>
       <div class="btn-row">
-        <button class="dl-all" id="dlAllBtn">&#8659; Download All 6 Images</button>
-        <button class="pdf-btn" id="dlPdfBtn">&#8659; Download Buyer PDF</button>
-        <button class="etsy-btn" id="showEtsyBtn">&#128203; View Etsy Listing Text</button>
+        <button class="action-btn" style="background:#1A1A1A;" id="dlAllBtn">&#8659; Download All 6</button>
+        <button class="action-btn" style="background:#C45C5C;" id="dlPdfBtn">&#8659; Buyer PDF</button>
+        <button class="action-btn" style="background:#F56400;" id="showEtsyBtn">&#128203; Etsy Listing Text</button>
       </div>
       <div class="etsy-output" id="etsyOutput">
         <div class="etsy-section"><h4>Etsy Listing Title</h4><div class="etsy-text" id="etsyTitle"></div><button class="copy-btn" onclick="copyText('etsyTitle')">Copy Title</button></div>
         <div class="etsy-section"><h4>Listing Description</h4><div class="etsy-text" id="etsyDesc"></div><button class="copy-btn" onclick="copyText('etsyDesc')">Copy Description</button></div>
-        <div class="etsy-section"><h4>Tags — paste one per tag field in Etsy</h4><div class="etsy-text" id="etsyTags"></div><button class="copy-btn" onclick="copyText('etsyTags')">Copy Tags</button></div>
+        <div class="etsy-section"><h4>Tags</h4><div class="etsy-text" id="etsyTags"></div><button class="copy-btn" onclick="copyText('etsyTags')">Copy Tags</button></div>
         <div class="etsy-section"><h4>Category &amp; Pricing</h4><div class="etsy-text" id="etsyAttrs"></div></div>
       </div>
     </div>
   </div>
-
   <div id="tab-gallery" style="display:none;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-      <div>
-        <h2 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;">My Approved Images</h2>
-        <p style="font-size:13px;color:#888;margin-top:4px;">Your permanent shop library — organized by listing</p>
-      </div>
+      <div><h2 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;">My Approved Images</h2><p style="font-size:13px;color:#888;margin-top:4px;">Your permanent shop library</p></div>
       <button onclick="clearAllGallery()" style="font-size:12px;color:#AAA;background:none;border:none;cursor:pointer;">Clear all</button>
     </div>
     <div id="galleryContent"></div>
   </div>
 </div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 var W=2000,H=2000;
-var imgData=null,names=[],selStyle='editorial',genCanvases=[],pdfDoc=null,currentTitle='';
+var imgData=null,selStyle='editorial',genCanvases=[],pdfDoc=null,currentTitle='';
 var etsyData={title:'',desc:'',tags:'',attrs:''};
 var API_KEY='sk-m34tZlTCDrzuhf3nagf1qGmuR2sc6AXMDVyipfW39ZAdtth7';
-var STEPS=['Analyzing your design','Generating Scene 1 — flat lay','Generating Scene 2 — hand holding','Generating Scene 3 — styled fabric','Building Edit on Canva image','Building Print & Digital image','Building Whats Included','Generating buyer PDF','Writing Etsy listing','Done!'];
-
-// Beige palette
+var STEPS=['Analyzing design','Generating Scene 1','Generating Scene 2','Generating Scene 3','Generating Edit on Canva scene','Generating Print and Digital scene','Building Whats Included','Generating buyer PDF','Writing Etsy listing','Done!'];
 var B={bg:'#F5F0E8',bg2:'#EDE6D6',text:'#2A1A0A',text2:'#6B5A4A',accent:'#C4A882',line:'#D4C4A8',dark:'#3A2A1A'};
 
 function showTab(t){
@@ -257,14 +225,12 @@ function renderGallery(){
 function deleteGroup(enc){var t=decodeURIComponent(enc);if(!confirm('Delete "'+t+'"?'))return;var g=getGallery();delete g[t];saveGallery(g);renderGallery();}
 function clearAllGallery(){if(!confirm('Clear all?'))return;localStorage.removeItem('ltco_gallery');renderGallery();}
 function copyText(id){
-  var text=document.getElementById(id).textContent;
-  navigator.clipboard.writeText(text).then(function(){
+  navigator.clipboard.writeText(document.getElementById(id).textContent).then(function(){
     var btn=document.getElementById(id).parentNode.querySelector('.copy-btn');
     var orig=btn.textContent;btn.textContent='Copied!';btn.style.background='#2D6A4F';
     setTimeout(function(){btn.textContent=orig;btn.style.background='#1A1A1A';},2000);
   });
 }
-
 document.getElementById('fileIn').onchange=function(e){
   var f=e.target.files[0];if(!f)return;
   var r=new FileReader();
@@ -275,57 +241,35 @@ document.getElementById('clearBtn').onclick=function(){imgData=null;document.get
 var dz=document.getElementById('dropZone');
 dz.ondragover=function(e){e.preventDefault();dz.classList.add('hover');};
 dz.ondragleave=function(){dz.classList.remove('hover');};
-dz.ondrop=function(e){
-  e.preventDefault();dz.classList.remove('hover');
-  var f=e.dataTransfer.files[0];
-  if(f){var r=new FileReader();r.onload=function(ev){imgData=ev.target.result;document.getElementById('prevImg').src=ev.target.result;document.getElementById('prevName').textContent=f.name;document.getElementById('prevSize').textContent=(f.size/1024/1024).toFixed(1)+' MB';document.getElementById('prevBox').className='prev-box show';};r.readAsDataURL(f);}
-};
+dz.ondrop=function(e){e.preventDefault();dz.classList.remove('hover');var f=e.dataTransfer.files[0];if(f){var r=new FileReader();r.onload=function(ev){imgData=ev.target.result;document.getElementById('prevImg').src=ev.target.result;document.getElementById('prevName').textContent=f.name;document.getElementById('prevSize').textContent=(f.size/1024/1024).toFixed(1)+' MB';document.getElementById('prevBox').className='prev-box show';};r.readAsDataURL(f);}};
 var sBtns=document.querySelectorAll('.style-btn');
-for(var si=0;si<sBtns.length;si++){
-  (function(btn){btn.onclick=function(e){e.preventDefault();e.stopPropagation();for(var i=0;i<sBtns.length;i++)sBtns[i].classList.remove('active');btn.classList.add('active');selStyle=btn.getAttribute('data-v');};})(sBtns[si]);
-}
+for(var si=0;si<sBtns.length;si++){(function(btn){btn.onclick=function(e){e.preventDefault();e.stopPropagation();for(var i=0;i<sBtns.length;i++)sBtns[i].classList.remove('active');btn.classList.add('active');selStyle=btn.getAttribute('data-v');};})(sBtns[si]);}
 function showErr(m){var e=document.getElementById('errBox');e.textContent=m;e.className=m?'err show':'err';}
 function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
 
-// ── SMART AI PROMPT BUILDER ───────────────────────────────
 function buildPrompt(vibe,style,scene){
   var v=(vibe||'').toLowerCase();
   var props=[];
-  var propMap={'wine glass':'elegant wine glasses','wine':'wine glasses','champagne':'champagne flutes','cherry':'fresh cherries','cherries':'fresh cherries','heel':'high heels shoes','heels':'high heels shoes','flower':'fresh flowers','flowers':'fresh florals','candle':'flickering candles','candles':'flickering candles','rose':'roses','roses':'fresh roses','ribbon':'silk ribbon','marble':'marble surface','gold':'gold accents','lemon':'fresh lemons','citrus':'citrus slices','envelope':'cream envelope','pampas':'pampas grass','feather':'soft feathers','lace':'delicate lace','pearl':'pearl jewelry'};
-  Object.keys(propMap).forEach(function(k){if(v.indexOf(k)>-1)props.push(propMap[k]);});
-  var colors=[];
-  var colorMap={'pink':'soft pink','blush':'blush pink','red':'rich red','burgundy':'deep burgundy','black':'dramatic black','white':'clean white','cream':'cream','gold':'warm gold','green':'sage green','blue':'soft blue','purple':'romantic purple','coral':'warm coral','peach':'soft peach','neutral':'warm neutral tones'};
-  Object.keys(colorMap).forEach(function(k){if(v.indexOf(k)>-1)colors.push(colorMap[k]);});
-  var styleDesc={
-    editorial:'editorial flat lay photography, natural linen, dried eucalyptus, soft window light, cream tones, professional product photography',
-    luxury:'luxury minimal flat lay, polished white marble, silk ribbon, gold accents, high-end lifestyle photography',
-    moody:'moody romantic atmosphere, burgundy velvet, candlelight, dark roses, dramatic shadows, atmospheric',
-    bright:'bright airy photography, white background, fresh pastel flowers, natural sunlight, clean and joyful',
-    boho:'boho earthy flat lay, pampas grass, terracotta props, woven rattan, dried wildflowers, warm golden light',
-    modern:'modern minimal flat lay, clean white concrete, geometric props, strong shadows, contemporary'
-  };
-  var sceneDesc={
-    flatlay:'flat lay overhead view, design card placed naturally on surface',
-    hand:'person holding design card naturally, close-up hands, soft background, lifestyle photography',
-    fabric:'design card resting on soft fabric, linen or silk texture, layered styling, soft light'
-  };
+  var pm={'wine glass':'elegant wine glasses','wine':'wine glasses','champagne':'champagne flutes','cherry':'fresh cherries','cherries':'fresh cherries','heel':'high heel shoes','heels':'high heel shoes','flower':'fresh flowers','flowers':'fresh florals','candle':'flickering candles','candles':'flickering candles','rose':'roses','roses':'fresh roses','ribbon':'silk ribbon','marble':'marble surface','gold':'gold accents','lemon':'fresh lemons','pampas':'pampas grass','feather':'soft feathers','lace':'delicate lace','envelope':'cream envelope'};
+  Object.keys(pm).forEach(function(k){if(v.indexOf(k)>-1)props.push(pm[k]);});
+  var cols=[];
+  var cm={'pink':'soft pink','blush':'blush pink','red':'rich red','burgundy':'deep burgundy','black':'dramatic black','white':'clean white','cream':'cream and ivory','gold':'warm gold tones','green':'sage green','blue':'soft blue','purple':'romantic purple','coral':'warm coral','neutral':'warm neutral tones','beige':'warm beige'};
+  Object.keys(cm).forEach(function(k){if(v.indexOf(k)>-1)cols.push(cm[k]);});
+  var sd={editorial:'editorial flat lay photography, natural linen, dried eucalyptus, soft diffused window light, cream tones, professional product photography',luxury:'luxury minimal flat lay, polished white marble, silk ribbon, gold accents, elegant white flowers, high-end lifestyle photography',moody:'moody romantic atmosphere, deep burgundy velvet, candlelight, dark roses, dramatic shadows, atmospheric',bright:'bright airy photography, white background, fresh pastel flowers, natural sunlight, clean joyful lifestyle',boho:'boho earthy flat lay, pampas grass, terracotta props, woven rattan, dried wildflowers, warm golden light',modern:'modern minimal flat lay, clean white concrete, geometric marble props, strong shadows, contemporary'};
+  var sc={flatlay:'overhead flat lay view, stationery card placed naturally on styled surface, editorial product photography',angled:'45 degree angled view, stationery card on styled surface, slight tilt, lifestyle photography',fabric:'stationery card resting on soft draped fabric, silk or linen texture, soft natural light',laptop:'open MacBook laptop on minimal styled desk, laptop screen softly glowing, clean desk setup, no visible screen content, lifestyle workspace photography',phone:'smartphone resting on soft fabric surface, phone screen softly glowing, minimal clean styling, lifestyle product photography'};
   var parts=[];
   if(props.length)parts.push(props.join(', '));
-  if(colors.length)parts.push(colors.join(' and ')+' color palette');
-  parts.push(sceneDesc[scene]||sceneDesc.flatlay);
-  parts.push(styleDesc[style]||styleDesc.editorial);
-  parts.push('no text, no words, no people visible except hands if applicable, photorealistic, high quality, 4k');
+  if(cols.length)parts.push(cols.join(' and ')+' color palette');
+  parts.push(sc[scene]||sc.flatlay);
+  parts.push(sd[style]||sd.editorial);
+  parts.push('no text, no words, no faces, photorealistic, high quality, 4k, beautiful composition');
   return parts.join(', ');
 }
 
 async function getAIBg(prompt){
   if(!API_KEY)return null;
   try{
-    var res=await fetch('https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+API_KEY,'Accept':'application/json'},
-      body:JSON.stringify({text_prompts:[{text:prompt,weight:1},{text:'text, words, letters, faces, watermark, ugly, blurry',weight:-1}],cfg_scale:8,height:1024,width:1024,samples:1,steps:40})
-    });
+    var res=await fetch('https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+API_KEY,'Accept':'application/json'},body:JSON.stringify({text_prompts:[{text:prompt,weight:1},{text:'text, words, letters, watermark, ugly, blurry, distorted',weight:-1}],cfg_scale:8,height:1024,width:1024,samples:1,steps:40})});
     if(!res.ok)return null;
     var d=await res.json();
     if(d.artifacts&&d.artifacts[0])return 'data:image/png;base64,'+d.artifacts[0].base64;
@@ -335,41 +279,32 @@ async function getAIBg(prompt){
 
 function mkC(){var c=document.createElement('canvas');c.width=W;c.height=H;return c;}
 
-// Draw full-canvas background image
-function drawBgImg(ctx,src){
+function drawBgFull(ctx,src){
   return new Promise(function(res){
-    if(!src){ctx.fillStyle='#E8DDD0';ctx.fillRect(0,0,W,H);res();return;}
+    if(!src){var g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,'#E8DDD0');g.addColorStop(1,'#D8CCC0');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);res();return;}
     var img=new Image();
     img.onload=function(){
-      // Cover fill — always fills canvas completely
       var scale=Math.max(W/img.width,H/img.height);
       var sw=img.width*scale,sh=img.height*scale;
-      var sx=(W-sw)/2,sy=(H-sh)/2;
-      ctx.drawImage(img,sx,sy,sw,sh);
-      // Subtle vignette
-      var vig=ctx.createRadialGradient(W/2,H/2,W*0.25,W/2,H/2,W*0.85);
-      vig.addColorStop(0,'rgba(0,0,0,0)');vig.addColorStop(1,'rgba(0,0,0,0.22)');
-      ctx.fillStyle=vig;ctx.fillRect(0,0,W,H);
-      res();
+      ctx.drawImage(img,(W-sw)/2,(H-sh)/2,sw,sh);
+      var vig=ctx.createRadialGradient(W/2,H/2,W*0.22,W/2,H/2,W*0.88);
+      vig.addColorStop(0,'rgba(0,0,0,0)');vig.addColorStop(1,'rgba(0,0,0,0.2)');
+      ctx.fillStyle=vig;ctx.fillRect(0,0,W,H);res();
     };
     img.onerror=function(){ctx.fillStyle='#E8DDD0';ctx.fillRect(0,0,W,H);res();};
     img.src=src;
   });
 }
 
-// Draw design card with natural shadow
 function drawCard(ctx,x,y,w,h,tilt){
   return new Promise(function(res){
     if(!imgData){res();return;}
     ctx.save();
     if(tilt){ctx.translate(x+w/2,y+h/2);ctx.rotate(tilt*Math.PI/180);ctx.translate(-(x+w/2),-(y+h/2));}
-    // Deep natural shadow
-    ctx.shadowColor='rgba(0,0,0,0.32)';ctx.shadowBlur=100;ctx.shadowOffsetX=tilt?tilt*8:0;ctx.shadowOffsetY=40;
-    // White card backing
-    ctx.fillStyle='#fff';ctx.beginPath();ctx.roundRect(x,y,w,h,12);ctx.fill();
+    ctx.shadowColor='rgba(0,0,0,0.38)';ctx.shadowBlur=110;ctx.shadowOffsetX=tilt?tilt*5:0;ctx.shadowOffsetY=44;
+    ctx.fillStyle='#fff';ctx.beginPath();ctx.roundRect(x,y,w,h,10);ctx.fill();
     ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;
-    // Design image clipped
-    ctx.beginPath();ctx.roundRect(x,y,w,h,12);ctx.clip();
+    ctx.beginPath();ctx.roundRect(x,y,w,h,10);ctx.clip();
     var img=new Image();
     img.onload=function(){ctx.drawImage(img,x,y,w,h);ctx.restore();res();};
     img.onerror=function(){ctx.restore();res();};
@@ -377,405 +312,233 @@ function drawCard(ctx,x,y,w,h,tilt){
   });
 }
 
-// ── IMAGE 1: SCENE 1 — Flat lay, no text overlay ──────────
-async function makeScene1(vibe,bgUrl){
-  var c=mkC();var ctx=c.getContext('2d');
-  await drawBgImg(ctx,bgUrl);
-  // Design card — centered, slight left tilt, natural
-  var cw=W*0.52,ch=cw*1.3,cx=(W-cw)/2,cy=(H-ch)/2-W*0.04;
-  await drawCard(ctx,cx,cy,cw,ch,-2.5);
-  return c;
-}
-
-// ── IMAGE 2: SCENE 2 — Different styled scene ─────────────
-async function makeScene2(vibe,bgUrl){
-  var c=mkC();var ctx=c.getContext('2d');
-  await drawBgImg(ctx,bgUrl);
-  // Card slightly right, different tilt
-  var cw=W*0.5,ch=cw*1.3,cx=(W-cw)/2+W*0.03,cy=(H-ch)/2-W*0.02;
-  await drawCard(ctx,cx,cy,cw,ch,1.8);
-  return c;
-}
-
-// ── IMAGE 3: SCENE 3 — Third styled scene ─────────────────
-async function makeScene3(vibe,bgUrl){
-  var c=mkC();var ctx=c.getContext('2d');
-  await drawBgImg(ctx,bgUrl);
-  // Card centered, minimal tilt — almost straight for variety
-  var cw=W*0.54,ch=cw*1.3,cx=(W-cw)/2,cy=(H-ch)/2-W*0.01;
-  await drawCard(ctx,cx,cy,cw,ch,-1.0);
-  return c;
-}
-
-// ── IMAGE 4: EDIT ON CANVA — Laptop mockup ────────────────
-async function makeCanvaImage(info){
-  var c=mkC();var ctx=c.getContext('2d');
-
-  // Clean light background
-  ctx.fillStyle='#F8F6F2';ctx.fillRect(0,0,W,H);
-
-  // Subtle texture
-  ctx.save();ctx.globalAlpha=0.03;
-  for(var i=0;i<2000;i++){ctx.fillStyle='#888';ctx.fillRect(Math.random()*W,Math.random()*H,2,2);}
+function drawLogo(ctx,x,y,size,color,alpha){
+  ctx.save();
+  ctx.globalAlpha=alpha||0.72;
+  ctx.fillStyle=color||'white';
+  ctx.font='italic 700 '+size+'px Georgia,serif';
+  ctx.textAlign='right';
+  ctx.shadowColor='rgba(0,0,0,0.2)';ctx.shadowBlur=10;
+  ctx.fillText('LoveyTemplatesCo',x,y);
+  ctx.shadowColor='transparent';ctx.shadowBlur=0;
   ctx.restore();
-
-  // Top section — Canva badge + headline
-  var headerY=160;
-
-  // Canva gradient circle
-  var cgrad=ctx.createRadialGradient(160,headerY,0,160,headerY,90);
-  cgrad.addColorStop(0,'#A855D4');cgrad.addColorStop(1,'#2196F3');
-  ctx.shadowColor='rgba(0,0,0,0.15)';ctx.shadowBlur=24;
-  ctx.beginPath();ctx.arc(160,headerY,90,0,Math.PI*2);ctx.fillStyle=cgrad;ctx.fill();
-  ctx.shadowColor='transparent';ctx.shadowBlur=0;
-  ctx.fillStyle='white';ctx.font='italic bold 62px Georgia,serif';ctx.textAlign='center';
-  ctx.fillText('Canva',160,headerY+22);
-
-  // Headline
-  ctx.fillStyle='#1A1A1A';ctx.font='700 '+(W*0.075)+'px Georgia,serif';ctx.textAlign='left';
-  ctx.fillText('Edit on Canva',280,headerY+30);
-  ctx.fillStyle='#666';ctx.font='500 '+(W*0.032)+'px sans-serif';
-  ctx.fillText('INSTANT AND LIFETIME ACCESS',280,headerY+90);
-
-  // Laptop mockup body
-  var lapX=120,lapY=320,lapW=W-240,lapH=lapW*0.64;
-
-  // Laptop shadow
-  ctx.shadowColor='rgba(0,0,0,0.18)';ctx.shadowBlur=60;ctx.shadowOffsetY=30;
-  ctx.fillStyle='#2A2A2A';ctx.beginPath();ctx.roundRect(lapX,lapY,lapW,lapH,20);ctx.fill();
-  ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
-
-  // Screen bezel
-  ctx.fillStyle='#1A1A1A';ctx.beginPath();ctx.roundRect(lapX+12,lapY+12,lapW-24,lapH-24,12);ctx.fill();
-
-  // Screen content — Canva editor UI
-  var scrX=lapX+28,scrY=lapY+28,scrW=lapW-56,scrH=lapH-56;
-  // Canva editor BG
-  ctx.fillStyle='#111';ctx.beginPath();ctx.roundRect(scrX,scrY,scrW,scrH,8);ctx.fill();
-
-  // Canva toolbar
-  var tbarH=scrH*0.07;
-  var tbg=ctx.createLinearGradient(scrX,scrY,scrX+scrW,scrY);
-  tbg.addColorStop(0,'#6B2FA0');tbg.addColorStop(1,'#2196F3');
-  ctx.fillStyle=tbg;ctx.fillRect(scrX,scrY,scrW,tbarH);
-
-  // Sidebar
-  ctx.fillStyle='#1E1E1E';ctx.fillRect(scrX,scrY+tbarH,scrW*0.18,scrH-tbarH);
-
-  // Canvas area
-  ctx.fillStyle='#2A2A2A';ctx.fillRect(scrX+scrW*0.18,scrY+tbarH,scrW*0.82,scrH-tbarH);
-
-  // Design card in Canva screen
-  var dcW=scrW*0.28,dcH=dcW*1.3;
-  var dcX=scrX+scrW*0.18+(scrW*0.82-dcW)/2;
-  var dcY=scrY+tbarH+(scrH-tbarH-dcH)/2;
-  ctx.fillStyle='white';ctx.shadowColor='rgba(0,0,0,0.3)';ctx.shadowBlur=20;
-  ctx.beginPath();ctx.roundRect(dcX,dcY,dcW,dcH,4);ctx.fill();
-  ctx.shadowColor='transparent';ctx.shadowBlur=0;
-  if(imgData){
-    ctx.save();ctx.beginPath();ctx.roundRect(dcX,dcY,dcW,dcH,4);ctx.clip();
-    var di=new Image();await new Promise(function(res){di.onload=function(){ctx.drawImage(di,dcX,dcY,dcW,dcH);res();};di.onerror=res;di.src=imgData;});
-    ctx.restore();
-  }
-
-  // Laptop base/hinge
-  ctx.fillStyle='#2A2A2A';
-  ctx.beginPath();ctx.moveTo(lapX-30,lapY+lapH);ctx.lineTo(lapX+lapW+30,lapY+lapH);ctx.lineTo(lapX+lapW+60,lapY+lapH+30);ctx.lineTo(lapX-60,lapY+lapH+30);ctx.closePath();ctx.fill();
-  // Keyboard area
-  ctx.fillStyle='#333';ctx.beginPath();ctx.roundRect(lapX-60,lapY+lapH+30,lapW+120,W*0.06,8);ctx.fill();
-  // Trackpad
-  ctx.fillStyle='#2A2A2A';ctx.beginPath();ctx.roundRect(W/2-80,lapY+lapH+42,160,50,6);ctx.fill();
-
-  // Bottom feature bar
-  var barY=lapY+lapH+W*0.08+30;
-  ctx.fillStyle='rgba(0,0,0,0.06)';ctx.beginPath();ctx.roundRect(60,barY,W-120,W*0.1,50);ctx.fill();
-  ctx.strokeStyle='rgba(0,0,0,0.1)';ctx.lineWidth=2;ctx.beginPath();ctx.roundRect(60,barY,W-120,W*0.1,50);ctx.stroke();
-
-  var features=[
-    {icon:'T',label:'Edit all text'},
-    {icon:'Aa',label:'Change fonts'},
-    {icon:'●',label:'Change colors'},
-    {icon:'Ai',label:'AI tools included'}
-  ];
-  var fw=(W-120)/4;
-  features.forEach(function(f,i){
-    var fx=60+i*fw+fw/2;
-    var fy=barY+W*0.05;
-    ctx.fillStyle='#1A1A1A';ctx.font='700 '+(W*0.026)+'px sans-serif';ctx.textAlign='center';
-    ctx.fillText(f.icon,fx,fy-8);
-    ctx.fillStyle='#444';ctx.font='300 '+(W*0.022)+'px sans-serif';
-    ctx.fillText(f.label,fx,fy+32);
-  });
-
-  ctx.fillStyle='#AAA';ctx.font='300 '+(W*0.018)+'px sans-serif';ctx.textAlign='center';
-  ctx.fillText('Canva is free to use. No additional fee required.',W/2,barY+W*0.1+40);
-
-  return c;
 }
 
-// ── IMAGE 5: PRINT AT HOME / USE DIGITALLY ────────────────
-async function makePrintDigital(info){
+async function makeScene1(bgUrl){
   var c=mkC();var ctx=c.getContext('2d');
-
-  // Clean white/cream background
-  ctx.fillStyle='#F8F6F2';ctx.fillRect(0,0,W,H);
-
-  // Left half — Print at Home
-  var lw=W*0.48,padding=80;
-
-  // Left section heading
-  ctx.fillStyle='#1A1A1A';ctx.font='700 '+(W*0.042)+'px sans-serif';ctx.textAlign='left';
-  ctx.fillText('PRINT AT',padding,200);
-  ctx.font='700 '+(W*0.072)+'px Georgia,serif';
-  ctx.fillText('HOME',padding,290);
-
-  // Description box
-  ctx.fillStyle='#EDE6D6';ctx.beginPath();ctx.roundRect(padding,330,lw-padding,160,12);ctx.fill();
-  ctx.fillStyle='#3A2A1A';ctx.font='300 '+(W*0.027)+'px sans-serif';ctx.textAlign='left';
-  var desc1='Download as a PDF with bleed lines';
-  var desc2='and trim marks for easy home printing.';
-  ctx.fillText(desc1,padding+30,410);ctx.fillText(desc2,padding+30,458);
-
-  // Printer illustration area
-  var printBoxY=530,printBoxH=W*0.32;
-  ctx.fillStyle='#E8E0D5';ctx.beginPath();ctx.roundRect(padding,printBoxY,lw-padding,printBoxH,16);ctx.fill();
-
-  // Simple printer drawing
-  var pX=padding+60,pY=printBoxY+50,pW=(lw-padding-120),pH=pW*0.45;
-  ctx.fillStyle='#F0ECE4';ctx.shadowColor='rgba(0,0,0,0.1)';ctx.shadowBlur=20;ctx.shadowOffsetY=8;
-  ctx.beginPath();ctx.roundRect(pX,pY,pW,pH,16);ctx.fill();
-  ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
-  // Printer slot
-  ctx.fillStyle='#D8D0C8';ctx.beginPath();ctx.roundRect(pX+pW*0.1,pY+pH*0.4,pW*0.8,pH*0.15,4);ctx.fill();
-  // Paper coming out
-  ctx.fillStyle='white';ctx.shadowColor='rgba(0,0,0,0.12)';ctx.shadowBlur=12;
-  ctx.beginPath();ctx.roundRect(pX+pW*0.2,pY+pH*0.45,pW*0.6,pH*0.7,4);ctx.fill();
-  ctx.shadowColor='transparent';ctx.shadowBlur=0;
-  // Design on paper
-  if(imgData){
-    ctx.save();ctx.beginPath();ctx.roundRect(pX+pW*0.25,pY+pH*0.52,pW*0.5,pH*0.55,3);ctx.clip();
-    var pi=new Image();await new Promise(function(res){pi.onload=function(){ctx.drawImage(pi,pX+pW*0.25,pY+pH*0.52,pW*0.5,pH*0.55);res();};pi.onerror=res;pi.src=imgData;});
-    ctx.restore();
-  }
-
-  // Divider line
-  ctx.strokeStyle='#D4C4A8';ctx.lineWidth=2;ctx.globalAlpha=0.6;
-  ctx.beginPath();ctx.moveTo(W/2,100);ctx.lineTo(W/2,H-100);ctx.stroke();ctx.globalAlpha=1;
-
-  // Right half — Use Digitally
-  var rx=W/2+padding*0.5;
-  ctx.fillStyle='#1A1A1A';ctx.font='700 '+(W*0.042)+'px sans-serif';ctx.textAlign='left';
-  ctx.fillText('USE IT',rx,200);
-  ctx.font='700 '+(W*0.072)+'px Georgia,serif';
-  ctx.fillText('DIGITALLY',rx,290);
-
-  // Description box
-  ctx.fillStyle='#EDE6D6';ctx.beginPath();ctx.roundRect(rx,330,lw-padding,160,12);ctx.fill();
-  ctx.fillStyle='#3A2A1A';ctx.font='300 '+(W*0.027)+'px sans-serif';ctx.textAlign='left';
-  ctx.fillText('Download as a high quality JPEG or',rx+30,410);ctx.fillText('PNG and share via text or email.',rx+30,458);
-
-  // Phone mockup
-  var phoneW=pW*0.4,phoneH=phoneW*2.1;
-  var phoneX=rx+(lw-padding-phoneW)/2,phoneY=530;
-  ctx.fillStyle='#1A1A1A';ctx.shadowColor='rgba(0,0,0,0.2)';ctx.shadowBlur=30;ctx.shadowOffsetY=12;
-  ctx.beginPath();ctx.roundRect(phoneX,phoneY,phoneW,phoneH,phoneW*0.12);ctx.fill();
-  ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
-  // Screen
-  ctx.fillStyle='white';ctx.beginPath();ctx.roundRect(phoneX+phoneW*0.05,phoneY+phoneH*0.04,phoneW*0.9,phoneH*0.88,phoneW*0.08);ctx.fill();
-  // Design on phone screen
-  if(imgData){
-    var dsW=phoneW*0.82,dsH=dsW*1.3,dsX=phoneX+phoneW*0.09,dsY=phoneY+phoneH*0.1;
-    ctx.save();ctx.beginPath();ctx.roundRect(dsX,dsY,dsW,dsH,6);ctx.clip();
-    var phi=new Image();await new Promise(function(res){phi.onload=function(){ctx.drawImage(phi,dsX,dsY,dsW,dsH);res();};phi.onerror=res;phi.src=imgData;});
-    ctx.restore();
-  }
-
-  // Brand
-  ctx.fillStyle='#C4A882';ctx.globalAlpha=0.5;ctx.font='500 '+(W*0.018)+'px sans-serif';ctx.textAlign='center';
-  ctx.fillText('LoveyTemplatesCo',W/2,H-60);ctx.globalAlpha=1;
-
+  await drawBgFull(ctx,bgUrl);
+  var cw=W*0.52,ch=cw*1.3,cx=(W-cw)/2,cy=(H-ch)/2-W*0.03;
+  await drawCard(ctx,cx,cy,cw,ch,-2.5);
+  drawLogo(ctx,W-60,H-58,W*0.023,'white',0.68);
   return c;
 }
 
-// ── IMAGE 6: WHATS INCLUDED — Clean beige, simple ─────────
+async function makeScene2(bgUrl){
+  var c=mkC();var ctx=c.getContext('2d');
+  await drawBgFull(ctx,bgUrl);
+  var cw=W*0.5,ch=cw*1.3,cx=(W-cw)/2+W*0.02,cy=(H-ch)/2;
+  await drawCard(ctx,cx,cy,cw,ch,2.2);
+  drawLogo(ctx,W-60,H-58,W*0.023,'white',0.68);
+  return c;
+}
+
+async function makeScene3(bgUrl){
+  var c=mkC();var ctx=c.getContext('2d');
+  await drawBgFull(ctx,bgUrl);
+  var cw=W*0.54,ch=cw*1.3,cx=(W-cw)/2-W*0.01,cy=(H-ch)/2+W*0.01;
+  await drawCard(ctx,cx,cy,cw,ch,-1.0);
+  drawLogo(ctx,W-60,H-58,W*0.023,'white',0.68);
+  return c;
+}
+
+async function makeCanvaScene(info,bgUrl){
+  var c=mkC();var ctx=c.getContext('2d');
+  await drawBgFull(ctx,bgUrl);
+  ctx.fillStyle='rgba(0,0,0,0.28)';ctx.fillRect(0,0,W,H);
+
+  var br=W*0.072,bx=130+br,by=150+br;
+  var cg=ctx.createRadialGradient(bx,by,0,bx,by,br);cg.addColorStop(0,'#A855D4');cg.addColorStop(1,'#2196F3');
+  ctx.shadowColor='rgba(0,0,0,0.3)';ctx.shadowBlur=20;
+  ctx.beginPath();ctx.arc(bx,by,br,0,Math.PI*2);ctx.fillStyle=cg;ctx.fill();
+  ctx.shadowColor='transparent';ctx.shadowBlur=0;
+  ctx.fillStyle='white';ctx.font='italic bold '+(br*0.52)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText('Canva',bx,by+br*0.19);
+
+  ctx.fillStyle='white';ctx.textAlign='left';
+  ctx.shadowColor='rgba(0,0,0,0.5)';ctx.shadowBlur=18;
+  ctx.font='700 '+(W*0.074)+'px Georgia,serif';ctx.fillText('Edit on Canva',130+br*2+30,150+br*0.55);
+  ctx.font='500 '+(W*0.028)+'px sans-serif';ctx.fillStyle='rgba(255,255,255,0.88)';
+  ctx.fillText('INSTANT AND LIFETIME ACCESS',130+br*2+30,150+br*1.35);
+  ctx.shadowColor='transparent';ctx.shadowBlur=0;
+
+  var dw=W*0.28,dh=dw*1.3,dx=(W-dw)/2,dy=(H-dh)/2+W*0.04;
+  ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=60;ctx.shadowOffsetY=20;
+  ctx.fillStyle='white';ctx.beginPath();ctx.roundRect(dx,dy,dw,dh,10);ctx.fill();
+  ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+  if(imgData){
+    ctx.save();ctx.beginPath();ctx.roundRect(dx,dy,dw,dh,10);ctx.clip();
+    var di=new Image();await new Promise(function(r){di.onload=function(){ctx.drawImage(di,dx,dy,dw,dh);r();};di.onerror=r;di.src=imgData;});
+    ctx.restore();
+  }
+
+  var features=['Edit all text','Change fonts','Change colors','AI tools included'];
+  var ph=W*0.075,py=H-ph-90,totW=W-240;
+  ctx.fillStyle='rgba(255,255,255,0.14)';ctx.beginPath();ctx.roundRect(120,py,totW,ph,ph/2);ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,0.28)';ctx.lineWidth=2;ctx.beginPath();ctx.roundRect(120,py,totW,ph,ph/2);ctx.stroke();
+  var fw=totW/features.length;
+  features.forEach(function(f,i){ctx.fillStyle='rgba(255,255,255,0.92)';ctx.font='500 '+(W*0.024)+'px sans-serif';ctx.textAlign='center';ctx.fillText(f,120+i*fw+fw/2,py+ph*0.62);});
+  ctx.fillStyle='rgba(255,255,255,0.48)';ctx.font='300 '+(W*0.018)+'px sans-serif';ctx.textAlign='center';
+  ctx.fillText('Canva is free to use — no additional fee required',W/2,H-34);
+
+  drawLogo(ctx,W-80,py-28,W*0.024,'white',0.7);
+  return c;
+}
+
+async function makePrintDigital(info,bgL,bgR){
+  var c=mkC();var ctx=c.getContext('2d');
+  ctx.fillStyle='#1A1A1A';ctx.fillRect(0,0,W,H);
+  var hw=W/2;
+
+  if(bgL){
+    ctx.save();ctx.beginPath();ctx.rect(0,0,hw,H);ctx.clip();
+    var il=new Image();await new Promise(function(r){il.onload=function(){var sc=Math.max(hw/il.width,H/il.height);ctx.drawImage(il,0,0,il.width*sc,il.height*sc);r();};il.onerror=r;il.src=bgL;});
+    ctx.restore();
+  }
+  ctx.fillStyle='rgba(0,0,0,0.42)';ctx.fillRect(0,0,hw,H);
+
+  if(bgR){
+    ctx.save();ctx.beginPath();ctx.rect(hw,0,hw,H);ctx.clip();
+    var ir=new Image();await new Promise(function(r){ir.onload=function(){var sc=Math.max(hw/ir.width,H/ir.height);ctx.drawImage(ir,hw,0,ir.width*sc,ir.height*sc);r();};ir.onerror=r;ir.src=bgR;});
+    ctx.restore();
+  }
+  ctx.fillStyle='rgba(0,0,0,0.48)';ctx.fillRect(hw,0,hw,H);
+
+  ctx.strokeStyle='rgba(255,255,255,0.35)';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(hw,80);ctx.lineTo(hw,H-80);ctx.stroke();
+
+  var lp=90,ty=220;
+  ctx.fillStyle='white';ctx.textAlign='left';
+  ctx.shadowColor='rgba(0,0,0,0.5)';ctx.shadowBlur=14;
+  ctx.font='700 '+(W*0.036)+'px sans-serif';ctx.fillText('PRINT AT',lp,ty);
+  ctx.font='700 '+(W*0.074)+'px Georgia,serif';ctx.fillText('HOME',lp,ty+W*0.077);
+  ctx.shadowColor='transparent';ctx.shadowBlur=0;
+
+  ctx.fillStyle='rgba(255,255,255,0.14)';ctx.beginPath();ctx.roundRect(lp,ty+W*0.105,hw-lp-40,170,10);ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,0.9)';ctx.font='300 '+(W*0.026)+'px sans-serif';
+  ctx.fillText('Download as PDF with bleed lines',lp+22,ty+W*0.105+62);
+  ctx.fillText('and trim marks for home printing.',lp+22,ty+W*0.105+106);
+
+  var dw=hw*0.44,dh=dw*1.3,dx=lp,dy=ty+W*0.105+210;
+  ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=30;ctx.shadowOffsetY=10;
+  ctx.fillStyle='white';ctx.beginPath();ctx.roundRect(dx,dy,dw,dh,8);ctx.fill();
+  ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+  if(imgData){
+    ctx.save();ctx.beginPath();ctx.roundRect(dx,dy,dw,dh,8);ctx.clip();
+    var d1=new Image();await new Promise(function(r){d1.onload=function(){ctx.drawImage(d1,dx,dy,dw,dh);r();};d1.onerror=r;d1.src=imgData;});
+    ctx.restore();
+  }
+
+  var rp=hw+70;
+  ctx.fillStyle='white';ctx.textAlign='left';
+  ctx.shadowColor='rgba(0,0,0,0.5)';ctx.shadowBlur=14;
+  ctx.font='700 '+(W*0.036)+'px sans-serif';ctx.fillText('USE IT',rp,ty);
+  ctx.font='700 '+(W*0.074)+'px Georgia,serif';ctx.fillText('DIGITALLY',rp,ty+W*0.077);
+  ctx.shadowColor='transparent';ctx.shadowBlur=0;
+
+  ctx.fillStyle='rgba(255,255,255,0.14)';ctx.beginPath();ctx.roundRect(rp,ty+W*0.105,hw-70-40,170,10);ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,0.9)';ctx.font='300 '+(W*0.026)+'px sans-serif';
+  ctx.fillText('Download as high quality PNG or',rp+22,ty+W*0.105+62);
+  ctx.fillText('JPG and share digitally.',rp+22,ty+W*0.105+106);
+
+  var pw=hw*0.28,ph2=pw*2.1,px=rp+hw*0.1,py2=dy;
+  ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=30;ctx.shadowOffsetY=10;
+  ctx.fillStyle='#1C1C1E';ctx.beginPath();ctx.roundRect(px,py2,pw,ph2,pw*0.12);ctx.fill();
+  ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+  ctx.fillStyle='white';ctx.beginPath();ctx.roundRect(px+pw*0.06,py2+ph2*0.04,pw*0.88,ph2*0.88,pw*0.08);ctx.fill();
+  if(imgData){
+    var psw=pw*0.8,psh=psw*1.3,psx=px+pw*0.1,psy=py2+ph2*0.09;
+    ctx.save();ctx.beginPath();ctx.roundRect(psx,psy,psw,psh,6);ctx.clip();
+    var d2=new Image();await new Promise(function(r){d2.onload=function(){ctx.drawImage(d2,psx,psy,psw,psh);r();};d2.onerror=r;d2.src=imgData;});
+    ctx.restore();
+  }
+
+  drawLogo(ctx,W-80,H-55,W*0.022,'white',0.62);
+  return c;
+}
+
 async function makeIncluded(info){
   var c=mkC();var ctx=c.getContext('2d');
-
-  // Beige background
   ctx.fillStyle=B.bg;ctx.fillRect(0,0,W,H);
-
-  // Subtle watermark pattern
   ctx.save();ctx.globalAlpha=0.03;ctx.strokeStyle=B.accent;ctx.lineWidth=1.5;
-  for(var row=0;row<14;row++){
-    for(var col=0;col<14;col++){
-      var dx=col*(W/11)+((row%2)*W/22),dy=row*(H/11);
-      ctx.beginPath();ctx.moveTo(dx,dy+H/22);ctx.lineTo(dx+W/22,dy);ctx.lineTo(dx+W/11,dy+H/22);ctx.lineTo(dx+W/22,dy+H/11);ctx.closePath();ctx.stroke();
-    }
-  }
+  for(var row=0;row<14;row++){for(var col=0;col<14;col++){var dx=col*(W/11)+((row%2)*W/22),dy=row*(H/11);ctx.beginPath();ctx.moveTo(dx,dy+H/22);ctx.lineTo(dx+W/22,dy);ctx.lineTo(dx+W/11,dy+H/22);ctx.lineTo(dx+W/22,dy+H/11);ctx.closePath();ctx.stroke();}}
   ctx.restore();
-
-  // Border frame
   var pad=70;
-  ctx.strokeStyle=B.line;ctx.lineWidth=2;ctx.globalAlpha=0.6;
-  ctx.strokeRect(pad,pad,W-pad*2,H-pad*2);
-  ctx.strokeStyle=B.accent;ctx.lineWidth=1;ctx.globalAlpha=0.4;
-  ctx.strokeRect(pad+14,pad+14,W-pad*2-28,H-pad*2-28);
-  ctx.globalAlpha=1;
+  ctx.strokeStyle=B.line;ctx.lineWidth=2;ctx.globalAlpha=0.55;ctx.strokeRect(pad,pad,W-pad*2,H-pad*2);
+  ctx.strokeStyle=B.accent;ctx.lineWidth=1;ctx.globalAlpha=0.35;ctx.strokeRect(pad+14,pad+14,W-pad*2-28,H-pad*2-28);ctx.globalAlpha=1;
+  [[pad,pad],[W-pad,pad],[pad,H-pad],[W-pad,H-pad]].forEach(function(p){ctx.save();ctx.translate(p[0],p[1]);ctx.strokeStyle=B.accent;ctx.lineWidth=2;ctx.globalAlpha=0.45;ctx.beginPath();ctx.moveTo(-18,0);ctx.lineTo(18,0);ctx.moveTo(0,-18);ctx.lineTo(0,18);ctx.stroke();ctx.beginPath();ctx.arc(0,0,7,0,Math.PI*2);ctx.stroke();ctx.restore();});
 
-  // Corner ornaments
-  [[pad,pad],[W-pad,pad],[pad,H-pad],[W-pad,H-pad]].forEach(function(p){
-    ctx.save();ctx.translate(p[0],p[1]);
-    ctx.strokeStyle=B.accent;ctx.lineWidth=2;ctx.globalAlpha=0.5;
-    ctx.beginPath();ctx.moveTo(-18,0);ctx.lineTo(18,0);ctx.moveTo(0,-18);ctx.lineTo(0,18);ctx.stroke();
-    ctx.beginPath();ctx.arc(0,0,7,0,Math.PI*2);ctx.stroke();
-    ctx.restore();
-  });
+  ctx.fillStyle=B.accent;ctx.font='italic 700 '+(W*0.044)+'px Georgia,serif';ctx.textAlign='center';ctx.globalAlpha=0.72;
+  ctx.fillText('LoveyTemplatesCo',W/2,148);ctx.globalAlpha=1;
 
-  // Header
-  ctx.fillStyle=B.dark;ctx.font='italic 700 '+(W*0.095)+'px Georgia,serif';ctx.textAlign='center';
-  ctx.fillText("What's Included",W/2,240);
-  ctx.strokeStyle=B.accent;ctx.lineWidth=3;ctx.lineCap='round';ctx.globalAlpha=0.7;
-  ctx.beginPath();ctx.moveTo(W/2-300,278);ctx.lineTo(W/2+300,278);ctx.stroke();ctx.globalAlpha=1;
-  ctx.fillStyle=B.text2;ctx.font='300 '+(W*0.028)+'px sans-serif';
-  ctx.fillText('Everything you need for the perfect '+info.type,W/2,328);
+  ctx.fillStyle=B.dark;ctx.font='italic 700 '+(W*0.088)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText("What's Included",W/2,252);
+  ctx.strokeStyle=B.accent;ctx.lineWidth=3;ctx.lineCap='round';ctx.globalAlpha=0.65;ctx.beginPath();ctx.moveTo(W/2-280,288);ctx.lineTo(W/2+280,288);ctx.stroke();ctx.globalAlpha=1;
+  ctx.fillStyle=B.text2;ctx.font='300 '+(W*0.027)+'px sans-serif';ctx.fillText('Everything you need for the perfect '+info.type,W/2,336);
 
-  // 6 items — single column, generous spacing
-  var items=[
-    ['Editable Canva Template','Free account works — no paid plan needed'],
-    ['All Text Fully Editable','Name, date, time, venue and all details'],
-    ['Color & Font Swaps','Make it completely yours in minutes'],
-    [info.size+' Print-Ready','Download as PDF, PNG or JPG'],
-    ['Instant Digital Download','Available immediately after purchase'],
-    ['Lifetime Access','Edit and download again anytime']
-  ];
-
-  var zoneTop=390,zoneBot=H-180,itemH=(zoneBot-zoneTop)/6,lx=140;
-
+  var items=[['Editable Canva Template','Free account works — no paid plan needed'],['All Text Fully Editable','Name, date, time, venue and all details'],['Color & Font Swaps','Make it completely yours in minutes'],[info.size+' Print-Ready','Download as PDF, PNG or JPG'],['Instant Digital Download','Available immediately after purchase'],['Lifetime Access','Edit and download again anytime']];
+  var zoneTop=394,zoneBot=H-160,itemH=(zoneBot-zoneTop)/6,lx=140;
   items.forEach(function(item,i){
-    var iy=zoneTop+i*itemH+itemH*0.5;
-
-    // Diamond bullet
-    ctx.save();ctx.translate(lx,iy);ctx.rotate(Math.PI/4);
-    ctx.fillStyle=B.accent;ctx.fillRect(-13,-13,26,26);
-    ctx.fillStyle=B.bg;ctx.fillRect(-7,-7,14,14);
-    ctx.restore();
-
-    // Title
-    ctx.fillStyle=B.dark;ctx.font='600 '+(W*0.038)+'px sans-serif';ctx.textAlign='left';
-    ctx.fillText(item[0],lx+52,iy+12);
-
-    // Description
-    ctx.fillStyle=B.text2;ctx.font='300 '+(W*0.027)+'px sans-serif';
-    ctx.fillText(item[1],lx+52,iy+54);
-
-    // Divider
-    if(i<items.length-1){
-      ctx.strokeStyle=B.line;ctx.lineWidth=1.5;ctx.globalAlpha=0.4;
-      ctx.beginPath();ctx.moveTo(lx,iy+itemH*0.5-8);ctx.lineTo(W-140,iy+itemH*0.5-8);ctx.stroke();ctx.globalAlpha=1;
-    }
+    var iy=zoneTop+i*itemH+itemH*0.48;
+    ctx.save();ctx.translate(lx,iy);ctx.rotate(Math.PI/4);ctx.fillStyle=B.accent;ctx.fillRect(-13,-13,26,26);ctx.fillStyle=B.bg;ctx.fillRect(-7,-7,14,14);ctx.restore();
+    ctx.fillStyle=B.dark;ctx.font='600 '+(W*0.036)+'px sans-serif';ctx.textAlign='left';ctx.fillText(item[0],lx+52,iy+10);
+    ctx.fillStyle=B.text2;ctx.font='300 '+(W*0.026)+'px sans-serif';ctx.fillText(item[1],lx+52,iy+50);
+    if(i<items.length-1){ctx.strokeStyle=B.line;ctx.lineWidth=1.5;ctx.globalAlpha=0.35;ctx.beginPath();ctx.moveTo(lx,iy+itemH*0.5-6);ctx.lineTo(W-140,iy+itemH*0.5-6);ctx.stroke();ctx.globalAlpha=1;}
   });
-
-  ctx.fillStyle=B.accent;ctx.globalAlpha=0.4;ctx.font='500 '+(W*0.017)+'px sans-serif';ctx.textAlign='center';
-  ctx.fillText('LoveyTemplatesCo',W/2,H-80);ctx.globalAlpha=1;
   return c;
 }
 
-// ── ETSY LISTING TEXT GENERATOR ───────────────────────────
-function generateEtsyListing(info){
-  var type=info.type,title=info.title,size=info.size;
-  var kwMap={
-    'Invitation':'Invitation Template, Editable Invite Canva, Printable Invitation Digital Download',
-    'Birthday Invitation':'Birthday Invitation Template, Editable Birthday Invite Canva, Birthday Printable Digital Download',
-    'Bridal / Bachelorette':'Bachelorette Itinerary Template, Bridal Shower Invite Canva, Bachelorette Party Printable',
-    'Baby Shower':'Baby Shower Invitation Template, Editable Baby Shower Invite Canva, Baby Shower Printable',
-    'Itinerary / Planner':'Itinerary Template Canva, Weekend Planner Printable, Editable Itinerary Digital Download',
-    'Menu / Food':'Menu Template Canva, Editable Menu Printable, Digital Menu Download',
-    'Party Sign':'Party Sign Template Canva, Editable Party Printable, Party Sign Digital Download',
-    'Greeting Card':'Greeting Card Template Canva, Editable Card Printable, Digital Card Download',
-    'Other Template':'Canva Template Editable, Printable Digital Download, Instant Download Template'
-  };
-  var kw=kwMap[type]||kwMap['Other Template'];
-  var etsyTitle=title+', '+kw;
-  if(etsyTitle.length>140)etsyTitle=etsyTitle.substring(0,137)+'...';
-
-  var desc='✨ '+title.toUpperCase()+'\n\n';
-  desc+='Planning the perfect celebration just got so much easier! This beautifully designed Canva template is crafted with love and attention to detail — so you can show up to every event looking like you hired a professional designer. (You kind of did.)\n\n';
-  desc+='━━━━━━━━━━━━━━━━━━━━\n✅ WHAT YOU GET\n━━━━━━━━━━━━━━━━━━━━\n\n';
-  desc+='✦ Fully editable Canva template (free account works!)\n';
-  desc+='✦ Customize your name, date, time, venue, and all details\n';
-  desc+='✦ Swap colors and fonts to match your style\n';
-  desc+='✦ Designed at '+size+' — print-ready\n';
-  desc+='✦ Download as PDF, PNG, or JPG\n';
-  desc+='✦ Instant digital download — available right after purchase\n';
-  desc+='✦ Lifetime access — come back and edit anytime\n\n';
-  desc+='━━━━━━━━━━━━━━━━━━━━\n📲 HOW IT WORKS\n━━━━━━━━━━━━━━━━━━━━\n\n';
-  desc+='1️⃣ Purchase this listing\n';
-  desc+='2️⃣ Download the PDF from your Etsy Purchases — the Canva link is inside\n';
-  desc+='3️⃣ Click the link and open the template in Canva (free account works!)\n';
-  desc+='4️⃣ Customize all the text with your details\n';
-  desc+='5️⃣ Download as PDF Print, PNG, or JPG — print or share digitally\n\n';
-  desc+='━━━━━━━━━━━━━━━━━━━━\n💌 QUESTIONS?\n━━━━━━━━━━━━━━━━━━━━\n\n';
-  desc+='Message us on Etsy and we will get back to you as soon as possible. We love helping our customers!\n\n';
-  desc+='⚠️ This is a DIGITAL product. No physical item will be shipped. Due to the instant download nature, refunds are not accepted. Please message us if you have any issues — we will always make it right!\n\n';
-  desc+='© LoveyTemplatesCo — Personal use only. Not for resale.';
-
-  var tagBase={
-    'Invitation':['invitation template','canva template','editable invitation','printable invitation','digital download','instant download','party invitation','custom invitation','canva invitation','printable party','party printable','digital template','editable canva'],
-    'Birthday Invitation':['birthday invitation','birthday canva','editable birthday','birthday printable','party invitation','digital download','instant download','birthday party','printable birthday','canva birthday','birthday template','party template','digital invitation'],
-    'Bridal / Bachelorette':['bachelorette template','bachelorette itinerary','bridal shower invite','bach weekend','bachelorette party','canva template','editable template','digital download','instant download','bridal shower','bach party','girls trip','bridal template'],
-    'Baby Shower':['baby shower invitation','baby shower template','editable baby shower','baby shower canva','digital download','instant download','baby shower invite','neutral baby shower','printable baby','baby shower printable','baby template','shower invitation','canva baby'],
-    'Itinerary / Planner':['itinerary template','weekend planner','canva itinerary','editable planner','digital planner','printable itinerary','bachelorette itinerary','girls trip planner','digital download','instant download','trip itinerary','party planner','travel itinerary'],
-    'Other Template':['canva template','editable template','digital download','instant download','printable template','custom template','digital template','party printable','canva printable','editable printable','printable design','canva design','digital design']
-  };
-  var tags=(tagBase[type]||tagBase['Other Template']).slice(0,13);
-
-  var attrs='Category: Paper & Party Supplies > Invitations & Announcements\n';
-  attrs+='Type: Digital Download\n';
-  attrs+='Occasion: '+type+'\n\n';
-  attrs+='RECOMMENDED PRICING STRATEGY:\n';
-  attrs+='Launch price: $4.99 (to get your first 5-10 reviews fast)\n';
-  attrs+='After 10 reviews: raise to $6.99\n';
-  attrs+='After 25 reviews: raise to $9.99\n';
-  attrs+='Reviews = trust = more sales at higher prices.';
-
-  return{title:etsyTitle,desc:desc,tags:tags.join('\n'),attrs:attrs};
-}
-
-// ── BUYER PDF ─────────────────────────────────────────────
 function generateBuyerPDF(info){
   var doc=new window.jspdf.jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
   var pw=210,ph=297;
   doc.setFillColor(245,240,232);doc.rect(0,0,pw,ph,'F');
   doc.setFillColor(196,168,130);doc.rect(0,0,pw,10,'F');
-  doc.setFontSize(28);doc.setFont('helvetica','bolditalic');doc.setTextColor(42,26,10);doc.text('LoveyTemplatesCo',pw/2,32,{align:'center'});
-  doc.setDrawColor(196,168,130);doc.setLineWidth(0.8);doc.line(30,40,pw-30,40);
+  doc.setFontSize(26);doc.setFont('helvetica','bolditalic');doc.setTextColor(42,26,10);doc.text('LoveyTemplatesCo',pw/2,30,{align:'center'});
+  doc.setDrawColor(196,168,130);doc.setLineWidth(0.8);doc.line(30,38,pw-30,38);
   doc.setFontSize(11);doc.setFont('helvetica','italic');doc.setTextColor(107,90,74);
   var msgs=['You just made the best decision for your party planning - and we are SO here for it!','','LoveyTemplatesCo designs are made with love and a little bit of obsession over the','details, so you can show up to every celebration looking like you hired a designer.','(You kind of did.)','','Your template is waiting for you - just click the link below, make it yours, and get','ready to wow your guests.','','From our creative corner to your celebration - thank you for choosing Lovey!'];
-  var my=52;msgs.forEach(function(m){doc.text(m,pw/2,my,{align:'center'});my+=7;});
+  var my=50;msgs.forEach(function(m){doc.text(m,pw/2,my,{align:'center'});my+=7;});
   doc.setDrawColor(196,168,130);doc.setLineWidth(0.5);doc.line(30,my+3,pw-30,my+3);
-  doc.setFontSize(16);doc.setFont('helvetica','bold');doc.setTextColor(42,26,10);doc.text(info.title,pw/2,my+17,{align:'center'});
-  doc.setFontSize(12);doc.setFont('helvetica','bold');doc.setTextColor(196,92,92);doc.text('YOUR CANVA TEMPLATE LINK',pw/2,my+32,{align:'center'});
-  doc.setFillColor(253,245,243);doc.setDrawColor(196,92,92);doc.setLineWidth(1);doc.roundedRect(20,my+36,pw-40,22,3,3,'FD');
-  doc.setFontSize(10);doc.setFont('helvetica','normal');doc.setTextColor(30,58,110);doc.textWithLink(info.canvaLink||'Your Canva link will appear here',pw/2,my+50,{align:'center',url:info.canvaLink||'#'});
-  var sy2=my+70;
-  doc.setFontSize(12);doc.setFont('helvetica','bold');doc.setTextColor(196,92,92);doc.text('HOW TO ACCESS YOUR TEMPLATE',pw/2,sy2,{align:'center'});
-  var steps=[{num:'1',title:'Purchase confirmed',desc:'You already completed this! Check your email for your Etsy purchase confirmation.'},{num:'2',title:'Click the Canva link above',desc:'Click the link. If you do not have a Canva account, sign up free at canva.com.'},{num:'3',title:'Edit your template',desc:'Click "Use template for free" in Canva. Customize your name, date, time, venue and all details.'},{num:'4',title:'Download and share',desc:'Click Share in Canva and download as PDF, PNG, or JPG to print or share digitally.'}];
-  var stY=sy2+12;
+  doc.setFontSize(15);doc.setFont('helvetica','bold');doc.setTextColor(42,26,10);doc.text(info.title,pw/2,my+16,{align:'center'});
+  doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(196,92,92);doc.text('YOUR CANVA TEMPLATE LINK',pw/2,my+30,{align:'center'});
+  doc.setFillColor(253,245,243);doc.setDrawColor(196,92,92);doc.setLineWidth(1);doc.roundedRect(20,my+34,pw-40,22,3,3,'FD');
+  doc.setFontSize(10);doc.setFont('helvetica','normal');doc.setTextColor(30,58,110);doc.textWithLink(info.canvaLink||'Your Canva link will appear here',pw/2,my+48,{align:'center',url:info.canvaLink||'#'});
+  var sy2=my+68;
+  doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(196,92,92);doc.text('HOW TO ACCESS YOUR TEMPLATE',pw/2,sy2,{align:'center'});
+  var steps=[{num:'1',title:'Purchase confirmed',desc:'Already done! Check your email for your Etsy purchase confirmation.'},{num:'2',title:'Click the Canva link above',desc:'Sign up free at canva.com if you do not have an account yet.'},{num:'3',title:'Edit your template',desc:'Click Use template for free in Canva. Customize all your details.'},{num:'4',title:'Download and share',desc:'Click Share in Canva. Download as PDF, PNG, or JPG to print or share.'}];
+  var stY=sy2+10;
   steps.forEach(function(s){
     doc.setFillColor(196,168,130);doc.circle(27,stY+4,5,'F');
     doc.setFontSize(9);doc.setFont('helvetica','bold');doc.setTextColor(255,255,255);doc.text(s.num,27,stY+7,{align:'center'});
-    doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(42,26,10);doc.text(s.title,38,stY+4);
-    doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(107,90,74);var dl=doc.splitTextToSize(s.desc,pw-52);doc.text(dl,38,stY+13);stY+=dl.length*5.5+22;
+    doc.setFontSize(10);doc.setFont('helvetica','bold');doc.setTextColor(42,26,10);doc.text(s.title,38,stY+4);
+    doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(107,90,74);var dl=doc.splitTextToSize(s.desc,pw-52);doc.text(dl,38,stY+13);stY+=dl.length*5.5+20;
   });
-  doc.setFillColor(237,230,214);doc.setDrawColor(196,168,130);doc.setLineWidth(0.5);doc.roundedRect(20,stY+4,pw-40,26,3,3,'FD');
-  doc.setFontSize(10);doc.setFont('helvetica','bold');doc.setTextColor(42,26,10);doc.text('Need help? Message us on Etsy — we reply fast!',pw/2,stY+15,{align:'center'});
-  doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(107,90,74);doc.text('We are always happy to help you get the most out of your template.',pw/2,stY+24,{align:'center'});
+  doc.setFillColor(237,230,214);doc.setDrawColor(196,168,130);doc.setLineWidth(0.5);doc.roundedRect(20,stY+4,pw-40,24,3,3,'FD');
+  doc.setFontSize(10);doc.setFont('helvetica','bold');doc.setTextColor(42,26,10);doc.text('Need help? Message us on Etsy - we reply fast!',pw/2,stY+14,{align:'center'});
+  doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(107,90,74);doc.text('We are always happy to help you get the most out of your template.',pw/2,stY+22,{align:'center'});
   doc.setFillColor(196,168,130);doc.rect(0,ph-10,pw,10,'F');
   doc.setFontSize(8);doc.setFont('helvetica','italic');doc.setTextColor(255,255,255);doc.text('LoveyTemplatesCo - Made with love for your celebration',pw/2,ph-3,{align:'center'});
   return doc;
 }
 
-// ── GENERATE ──────────────────────────────────────────────
+function generateEtsyListing(info){
+  var type=info.type,title=info.title,size=info.size;
+  var kwMap={'Invitation':'Invitation Template, Editable Invite Canva, Printable Invitation Digital Download','Birthday Invitation':'Birthday Invitation Template, Editable Birthday Invite Canva, Birthday Printable Digital Download','Bridal / Bachelorette':'Bachelorette Itinerary Template, Bridal Shower Invite Canva, Bachelorette Party Printable','Baby Shower':'Baby Shower Invitation Template, Editable Baby Shower Invite Canva, Baby Shower Printable','Itinerary / Planner':'Itinerary Template Canva, Weekend Planner Printable, Editable Itinerary Digital Download','Menu / Food':'Menu Template Canva, Editable Menu Printable, Digital Menu Download','Party Sign':'Party Sign Template Canva, Editable Party Printable, Party Sign Digital Download','Greeting Card':'Greeting Card Template Canva, Editable Card Printable, Digital Card Download','Other Template':'Canva Template Editable, Printable Digital Download, Instant Download Template'};
+  var kw=kwMap[type]||kwMap['Other Template'];
+  var et=title+', '+kw;if(et.length>140)et=et.substring(0,137)+'...';
+  var desc='✨ '+title.toUpperCase()+'\n\nPlanning the perfect celebration just got so much easier! This beautifully designed Canva template is crafted with love and attention to detail — so you can show up to every event looking like you hired a professional designer. (You kind of did.)\n\n━━━━━━━━━━━━━━━━━━━━\n✅ WHAT YOU GET\n━━━━━━━━━━━━━━━━━━━━\n\n✦ Fully editable Canva template (free account works!)\n✦ Customize your name, date, time, venue, and all details\n✦ Swap colors and fonts to match your style\n✦ Designed at '+size+' — print-ready\n✦ Download as PDF, PNG, or JPG\n✦ Instant digital download — available right after purchase\n✦ Lifetime access — come back and edit anytime\n\n━━━━━━━━━━━━━━━━━━━━\n📲 HOW IT WORKS\n━━━━━━━━━━━━━━━━━━━━\n\n1️⃣ Purchase this listing\n2️⃣ Download the PDF from Etsy Purchases — your Canva link is inside\n3️⃣ Open the template in Canva (free account works!)\n4️⃣ Customize all the text with your details\n5️⃣ Download as PDF, PNG, or JPG — print or share digitally\n\n━━━━━━━━━━━━━━━━━━━━\n💌 QUESTIONS?\n━━━━━━━━━━━━━━━━━━━━\n\nMessage us on Etsy — we reply fast and love helping our customers!\n\n⚠️ This is a DIGITAL product. No physical item will be shipped.\n© LoveyTemplatesCo — Personal use only. Not for resale.';
+  var tagBase={'Invitation':['invitation template','canva template','editable invitation','printable invitation','digital download','instant download','party invitation','custom invitation','canva invitation','printable party','party printable','digital template','editable canva'],'Birthday Invitation':['birthday invitation','birthday canva','editable birthday','birthday printable','party invitation','digital download','instant download','birthday party','printable birthday','canva birthday','birthday template','party template','digital invitation'],'Bridal / Bachelorette':['bachelorette template','bachelorette itinerary','bridal shower invite','bach weekend','bachelorette party','canva template','editable template','digital download','instant download','bridal shower','bach party','girls trip','bridal template'],'Baby Shower':['baby shower invitation','baby shower template','editable baby shower','baby shower canva','digital download','instant download','baby shower invite','neutral baby shower','printable baby','baby shower printable','baby template','shower invitation','canva baby'],'Itinerary / Planner':['itinerary template','weekend planner','canva itinerary','editable planner','digital planner','printable itinerary','bachelorette itinerary','girls trip planner','digital download','instant download','trip itinerary','party planner','travel itinerary'],'Other Template':['canva template','editable template','digital download','instant download','printable template','custom template','digital template','party printable','canva printable','editable printable','printable design','canva design','digital design']};
+  var tags=(tagBase[type]||tagBase['Other Template']).slice(0,13);
+  var attrs='Category: Paper & Party Supplies > Invitations & Announcements\nType: Digital Download\nOccasion: '+type+'\n\nPRICING STRATEGY:\nLaunch: $4.99 — gets first reviews fast\nAfter 10 reviews: $6.99\nAfter 25 reviews: $9.99';
+  return{title:et,desc:desc,tags:tags.join('\n'),attrs:attrs};
+}
+
 document.getElementById('genBtn').onclick=async function(){
   var title=document.getElementById('listTitle').value.trim();
   var type=document.getElementById('tType').value;
@@ -791,39 +554,20 @@ document.getElementById('genBtn').onclick=async function(){
   document.getElementById('etsyOutput').className='etsy-output';
   genCanvases=[];pdfDoc=null;
   var info={title:title,type:type,size:size,vibe:vibe,canvaLink:canvaLink};
-
   async function step(i,p){
     document.getElementById('pbar').style.width=p+'%';
     var html='';for(var j=0;j<STEPS.length;j++){html+='<div class="step-row'+(j<i?' done':j===i?' active':'')+'" ><div class="dot"></div>'+STEPS[j]+'</div>';}
     document.getElementById('stepList').innerHTML=html;await sleep(150);
   }
-
   try{
-    await step(0,8);
-
-    // 3 different scene types for variety
-    await step(1,16);
-    var bg1=await getAIBg(buildPrompt(vibe,selStyle,'flatlay'));
-    var s1=await makeScene1(vibe,bg1);genCanvases.push({c:s1,label:'Scene 1'});
-
-    await step(2,28);
-    var bg2=await getAIBg(buildPrompt(vibe,selStyle,'fabric'));
-    var s2=await makeScene2(vibe,bg2);genCanvases.push({c:s2,label:'Scene 2'});
-
-    await step(3,40);
-    var bg3=await getAIBg(buildPrompt(vibe,selStyle,'hand'));
-    var s3=await makeScene3(vibe,bg3);genCanvases.push({c:s3,label:'Scene 3'});
-
-    await step(4,54);
-    var canvaImg=await makeCanvaImage(info);genCanvases.push({c:canvaImg,label:'Edit on Canva'});
-
-    await step(5,66);
-    var printImg=await makePrintDigital(info);genCanvases.push({c:printImg,label:'Print and Digital'});
-
-    await step(6,78);
-    var inc=await makeIncluded(info);genCanvases.push({c:inc,label:'Whats Included'});
-
-    await step(7,88);pdfDoc=generateBuyerPDF(info);
+    await step(0,6);
+    await step(1,14);var bg1=await getAIBg(buildPrompt(vibe,selStyle,'flatlay'));genCanvases.push({c:await makeScene1(bg1),label:'Scene 1'});
+    await step(2,24);var bg2=await getAIBg(buildPrompt(vibe,selStyle,'angled'));genCanvases.push({c:await makeScene2(bg2),label:'Scene 2'});
+    await step(3,34);var bg3=await getAIBg(buildPrompt(vibe,selStyle,'fabric'));genCanvases.push({c:await makeScene3(bg3),label:'Scene 3'});
+    await step(4,46);var bg4=await getAIBg(buildPrompt(vibe,selStyle,'laptop'));genCanvases.push({c:await makeCanvaScene(info,bg4),label:'Edit on Canva'});
+    await step(5,60);var bg5=await getAIBg(buildPrompt(vibe,selStyle,'flatlay'));var bg6=await getAIBg(buildPrompt(vibe,selStyle,'phone'));genCanvases.push({c:await makePrintDigital(info,bg5,bg6),label:'Print and Digital'});
+    await step(6,74);genCanvases.push({c:await makeIncluded(info),label:'Whats Included'});
+    await step(7,86);pdfDoc=generateBuyerPDF(info);
     await step(8,95);etsyData=generateEtsyListing(info);
     await step(9,100);await sleep(300);
     showResults();
@@ -839,10 +583,8 @@ function showResults(){
     var card=document.createElement('div');card.className='img-card';
     var a=document.createElement('a');a.href=url;a.download='LoveyTemplatesCo_'+item.label.replace(/\s/g,'_')+'.png';
     var img=document.createElement('img');img.src=url;img.alt=item.label;a.appendChild(img);
-    var foot=document.createElement('div');foot.className='img-foot';
-    foot.innerHTML='<span>'+(i+1)+'. '+item.label+'</span>';
-    var starBtn=document.createElement('button');starBtn.className='star-btn';
-    starBtn.textContent=isStarred(currentTitle,item.label)?'⭐':'☆';
+    var foot=document.createElement('div');foot.className='img-foot';foot.innerHTML='<span>'+(i+1)+'. '+item.label+'</span>';
+    var starBtn=document.createElement('button');starBtn.className='star-btn';starBtn.textContent=isStarred(currentTitle,item.label)?'⭐':'☆';
     (function(btn,lbl,u){btn.onclick=function(){var added=starImage(currentTitle,lbl,u);btn.textContent=added?'⭐':'☆';};})(starBtn,item.label,url);
     var saveA=document.createElement('a');saveA.href=url;saveA.download='LoveyTemplatesCo_'+item.label.replace(/\s/g,'_')+'.png';saveA.className='save-lnk';saveA.textContent='Save';
     foot.appendChild(starBtn);foot.appendChild(saveA);card.appendChild(a);card.appendChild(foot);grid.appendChild(card);
@@ -850,27 +592,17 @@ function showResults(){
   document.getElementById('resultsBox').className='results show';
   document.getElementById('resultsBox').scrollIntoView({behavior:'smooth'});
 }
-
-document.getElementById('dlAllBtn').onclick=async function(){
-  for(var i=0;i<genCanvases.length;i++){
-    var a=document.createElement('a');a.href=genCanvases[i].c.toDataURL('image/png');
-    a.download='LoveyTemplatesCo_'+genCanvases[i].label.replace(/\s/g,'_')+'.png';a.click();await sleep(400);
-  }
-};
-document.getElementById('dlPdfBtn').onclick=function(){
-  if(!pdfDoc){alert('Please generate first.');return;}
-  pdfDoc.save('LoveyTemplatesCo_'+(document.getElementById('listTitle').value.trim().replace(/\s+/g,'_')||'Template')+'_BuyerGuide.pdf');
-};
+document.getElementById('dlAllBtn').onclick=async function(){for(var i=0;i<genCanvases.length;i++){var a=document.createElement('a');a.href=genCanvases[i].c.toDataURL('image/png');a.download='LoveyTemplatesCo_'+genCanvases[i].label.replace(/\s/g,'_')+'.png';a.click();await sleep(400);}};
+document.getElementById('dlPdfBtn').onclick=function(){if(!pdfDoc){alert('Please generate first.');return;}pdfDoc.save('LoveyTemplatesCo_'+(document.getElementById('listTitle').value.trim().replace(/\s+/g,'_')||'Template')+'_BuyerGuide.pdf');};
 document.getElementById('showEtsyBtn').onclick=function(){
   var out=document.getElementById('etsyOutput');
   var showing=out.className.indexOf('show')>-1;
-  if(showing){out.className='etsy-output';document.getElementById('showEtsyBtn').textContent='&#128203; View Etsy Listing Text';return;}
+  if(showing){out.className='etsy-output';document.getElementById('showEtsyBtn').textContent='&#128203; Etsy Listing Text';return;}
   document.getElementById('etsyTitle').textContent=etsyData.title;
   document.getElementById('etsyDesc').textContent=etsyData.desc;
   document.getElementById('etsyTags').textContent=etsyData.tags;
   document.getElementById('etsyAttrs').textContent=etsyData.attrs;
-  out.className='etsy-output show';
-  document.getElementById('showEtsyBtn').textContent='Hide Etsy Listing Text';
+  out.className='etsy-output show';document.getElementById('showEtsyBtn').textContent='Hide Etsy Listing Text';
   out.scrollIntoView({behavior:'smooth'});
 };
 </script>
