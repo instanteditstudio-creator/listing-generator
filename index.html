@@ -420,44 +420,38 @@ function buildPrompt(vibe,surface,scene){
 }
 
 async function getAIBg(promptObj){
-  if(!API_KEY)return null;
-  // Handle both old string format and new object format
+  // Pollinations AI — free, no API key needed, works from any browser/GitHub Pages
   var mainPrompt = typeof promptObj === 'string' ? promptObj : promptObj.main;
-  var boostPrompt = typeof promptObj === 'object' && promptObj.boost ? promptObj.boost : '';
-
   try{
-    var textPrompts = [
-      {text: mainPrompt, weight: 1}
-    ];
-    // Add boost prompt with extra weight if we have one
-    if(boostPrompt){
-      textPrompts.push({text: boostPrompt, weight: 0.5});
-    }
-    textPrompts.push({text:'text, words, letters, watermark, ugly, blurry, distorted, cartoon, illustration, painting, generic stock photo', weight: -1});
+    var seed = Math.floor(Math.random()*99999);
+    var encoded = encodeURIComponent(mainPrompt);
+    var url = 'https://image.pollinations.ai/prompt/'+encoded+'?width=1024&height=1024&seed='+seed+'&nologo=true&model=flux&enhance=true';
+    var res = await fetch(url);
+    if(!res.ok){console.warn('Pollinations error:',res.status);return null;}
+    var blob = await res.blob();
+    return await new Promise(function(resolve){
+      var reader = new FileReader();
+      reader.onload = function(){resolve(reader.result);};
+      reader.onerror = function(){resolve(null);};
+      reader.readAsDataURL(blob);
+    });
+  }catch(e){console.warn('AI fetch error:',e);return null;}
+}
 
+// UNUSED - kept for reference
+async function _oldStabilityAI(promptObj){
+  var mainPrompt = typeof promptObj === 'string' ? promptObj : promptObj.main;
+  try{
     var res=await fetch('https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image',{
       method:'POST',
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+API_KEY,'Accept':'application/json'},
       body:JSON.stringify({
-        text_prompts: textPrompts,
+        text_prompts: [{text:mainPrompt,weight:1}],
         cfg_scale:10,
         height:1024,
         width:1024,
         samples:1,
         steps:50
-      })
-    });
-    if(!res.ok){
-      var errText = await res.text();
-      console.warn('AI API error:',res.status, errText);
-      return null;
-    }
-    var d=await res.json();
-    if(d.artifacts&&d.artifacts[0])return 'data:image/png;base64,'+d.artifacts[0].base64;
-  }catch(e){console.warn('AI fetch error:',e);}
-  return null;
-}
-
 function mkC(){var c=document.createElement('canvas');c.width=W;c.height=H;return c;}
 
 function drawBgFull(ctx,src){
