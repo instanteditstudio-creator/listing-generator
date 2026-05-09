@@ -485,30 +485,85 @@ function canvaBadge(ctx,cx,cy,r){
   ctx.font=(r*0.22)+'px sans-serif';ctx.fillText('free account',cx,cy+r*0.6);ctx.restore();
 }
 
-// ── IMAGE 1: HERO — AI background, dramatic ───────────────
+// ── IMAGE 1: HERO — Natural, editorial, design IN the scene ─
 async function makeHero(info,bgUrl){
   var c=mkC();var ctx=c.getContext('2d');
   await drawBg(ctx,bgUrl);
-  // Top strip
-  ctx.fillStyle='rgba(255,255,255,0.95)';ctx.fillRect(0,0,W,76);
-  ctx.fillStyle='#1A1A1A';ctx.font='600 '+(W*0.019)+'px sans-serif';ctx.textAlign='center';
-  ctx.fillText(info.type.toUpperCase()+' · EDITABLE CANVA TEMPLATE · INSTANT DOWNLOAD',W/2,48);
-  // Design card
-  var cw=W*0.48,ch=cw*1.3,cx=(W-cw)/2,cy=100;
-  ctx.save();ctx.translate(W/2,cy+ch/2);ctx.rotate(-1.8*Math.PI/180);ctx.translate(-W/2,-(cy+ch/2));
-  await loadImg(ctx,imgData,cx,cy,cw,ch,20);ctx.restore();
-  canvaBadge(ctx,cx+cw-30,cy+ch+44,W*0.055);
-  // Bottom pill — fixed tall enough
-  var py=cy+ch+118,ph=220;
-  ctx.fillStyle='rgba(255,255,255,0.97)';ctx.beginPath();ctx.roundRect(50,py,W-100,ph,22);ctx.fill();
-  // Title auto-size
-  var ts=W*0.056;ctx.fillStyle='#1A1A1A';
-  while(ts>W*0.028){ctx.font='italic 700 '+ts+'px Georgia,serif';if(ctx.measureText(info.title).width<W-200)break;ts-=W*0.002;}
-  ctx.textAlign='center';ctx.fillText(info.title,W/2,py+88);
-  ctx.fillStyle='#777';ctx.font='300 '+(W*0.024)+'px sans-serif';
-  ctx.fillText('Hand-crafted Canva template  ·  Fully editable  ·  Instant digital download',W/2,py+148);
-  ctx.fillStyle='#AAA';ctx.globalAlpha=0.8;ctx.font='500 '+(W*0.016)+'px sans-serif';ctx.textAlign='right';
-  ctx.fillText('LoveyTemplatesCo',W-55,py+ph-20);ctx.globalAlpha=1;
+
+  // Top announcement strip — thin and elegant
+  ctx.fillStyle='rgba(255,255,255,0.92)';ctx.fillRect(0,0,W,68);
+  ctx.fillStyle='#1A1A1A';ctx.font='500 '+(W*0.018)+'px sans-serif';ctx.textAlign='center';
+  ctx.letterSpacing='4px';
+  ctx.fillText(info.type.toUpperCase()+' · EDITABLE CANVA TEMPLATE · INSTANT DOWNLOAD',W/2,44);
+  ctx.letterSpacing='0px';
+
+  // Design card — larger, more dramatic tilt, sits naturally in scene
+  var cw=W*0.52,ch=cw*1.3;
+  var cx=(W-cw)/2 - W*0.02;// Slightly left of center for editorial feel
+  var cy=90;
+
+  // Multi-layer shadow for depth — makes card look physically present
+  ctx.shadowColor='rgba(0,0,0,0.35)';ctx.shadowBlur=120;ctx.shadowOffsetX=W*0.015;ctx.shadowOffsetY=W*0.04;
+  ctx.save();
+  ctx.translate(cx+cw/2,cy+ch/2);
+  ctx.rotate(-3.5*Math.PI/180);// More dramatic tilt
+  ctx.translate(-(cx+cw/2),-(cy+ch/2));
+  // Draw card
+  ctx.beginPath();ctx.roundRect(cx,cy,cw,ch,18);ctx.fillStyle='#fff';ctx.fill();
+  ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;
+  // Clip and draw design image
+  ctx.beginPath();ctx.roundRect(cx,cy,cw,ch,18);ctx.clip();
+  if(imgData){
+    var img2=new Image();
+    await new Promise(function(res){
+      img2.onload=function(){ctx.drawImage(img2,cx,cy,cw,ch);res();};
+      img2.onerror=res;img2.src=imgData;
+    });
+  }
+  ctx.restore();
+  ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;
+
+  // Canva badge — positioned naturally at bottom right of card
+  var badgeX=cx+cw+W*0.01;
+  var badgeY=cy+ch-W*0.04;
+  canvaBadge(ctx,badgeX,badgeY,W*0.058);
+
+  // Bottom text — NO white pill, text sits directly on scene with soft gradient behind
+  var textY=cy+ch+80;
+  var gradH=H-(textY-60);
+
+  // Soft dark gradient at bottom so text is readable over any background
+  var grad=ctx.createLinearGradient(0,textY-80,0,H);
+  grad.addColorStop(0,'rgba(0,0,0,0)');
+  grad.addColorStop(0.3,'rgba(0,0,0,0.55)');
+  grad.addColorStop(1,'rgba(0,0,0,0.75)');
+  ctx.fillStyle=grad;ctx.fillRect(0,textY-80,W,H-(textY-80));
+
+  // Title — large, italic, white, gorgeous
+  var ts=W*0.072;
+  ctx.fillStyle='white';
+  while(ts>W*0.036){
+    ctx.font='italic 700 '+ts+'px Georgia,serif';
+    if(ctx.measureText(info.title).width<W-160)break;
+    ts-=W*0.003;
+  }
+  ctx.textAlign='center';
+  // Subtle text shadow for depth
+  ctx.shadowColor='rgba(0,0,0,0.4)';ctx.shadowBlur=20;
+  ctx.fillText(info.title,W/2,textY+80);
+  ctx.shadowColor='transparent';ctx.shadowBlur=0;
+
+  // Subtitle — lighter weight, more space
+  ctx.fillStyle='rgba(255,255,255,0.82)';
+  ctx.font='300 '+(W*0.026)+'px sans-serif';
+  ctx.fillText('Hand-crafted Canva template  ·  Fully editable  ·  Instant digital download',W/2,textY+150);
+
+  // Shop name — bottom right, subtle
+  ctx.fillStyle='rgba(255,255,255,0.55)';
+  ctx.font='500 '+(W*0.017)+'px sans-serif';
+  ctx.textAlign='right';
+  ctx.fillText('LoveyTemplatesCo',W-60,H-55);
+
   return c;
 }
 
