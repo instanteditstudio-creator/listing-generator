@@ -438,20 +438,6 @@ async function getAIBg(promptObj){
   }catch(e){console.warn('AI fetch error:',e);return null;}
 }
 
-// UNUSED - kept for reference
-async function _oldStabilityAI(promptObj){
-  var mainPrompt = typeof promptObj === 'string' ? promptObj : promptObj.main;
-  try{
-    var res=await fetch('https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+API_KEY,'Accept':'application/json'},
-      body:JSON.stringify({
-        text_prompts: [{text:mainPrompt,weight:1}],
-        cfg_scale:10,
-        height:1024,
-        width:1024,
-        samples:1,
-        steps:50
 function mkC(){var c=document.createElement('canvas');c.width=W;c.height=H;return c;}
 
 function drawBgFull(ctx,src){
