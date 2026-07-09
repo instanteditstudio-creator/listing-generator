@@ -146,11 +146,11 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
     </div>
 
     <div class="card">
-      <h3><div class="num">3</div>Add extra scene details (optional)</h3>
-      <p style="font-size:13px;color:#888;margin-bottom:14px;line-height:1.7;">Anything you type here now leads the prompt — the theme scene supports it underneath.</p>
+      <h3><div class="num">3</div>Describe your scene</h3>
+      <p style="font-size:13px;color:#888;margin-bottom:14px;line-height:1.7;">With the <b>Custom</b> theme, this is the whole scene — your words, nothing else. With a preset theme, your words lead and the theme fills in behind them.</p>
       <div class="field">
-        <label>EXTRA PROPS, COLORS AND MOOD</label>
-        <textarea id="vibe" placeholder="e.g. balloons, confetti, bright and cheerful, aqua blue accents"></textarea>
+        <label>PROPS, COLORS AND MOOD</label>
+        <textarea id="vibe" placeholder="e.g. purple background, purple balloons, glitter, sparkles, bright and cheerful"></textarea>
         <div class="vibe-hint">
           &#127800; Props: balloons, confetti, streamers, cupcakes, candy, presents, wine glass, flowers, candles, shells<br>
           &#127775; Colors: blush, aqua, hot pink, gold, sage, coral, neon, pastel, rainbow<br>
@@ -164,7 +164,8 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
       <h3><div class="num">4</div>Choose your theme</h3>
       <p style="font-size:13px;color:#888;margin-bottom:16px;">Sets the background scene, props, and colors underneath your keywords.</p>
       <div class="surface-grid" id="surfaceGrid">
-        <button class="surface-btn active" data-v="pool_party"><span class="si">&#127946;</span><span class="sn">Pool Party</span><span class="sd">Aqua water, floaties, tropical</span></button>
+        <button class="surface-btn active" data-v="custom"><span class="si">&#10024;</span><span class="sn">Custom</span><span class="sd">Built only from your words above</span></button>
+        <button class="surface-btn" data-v="pool_party"><span class="si">&#127946;</span><span class="sn">Pool Party</span><span class="sd">Aqua water, floaties, tropical</span></button>
         <button class="surface-btn" data-v="baby_pink"><span class="si">&#128118;</span><span class="sn">Baby (Girl)</span><span class="sd">Pink florals, ribbon, pastel</span></button>
         <button class="surface-btn" data-v="baby_blue"><span class="si">&#128166;</span><span class="sn">Baby (Boy)</span><span class="sd">Blue clouds, teddy bear</span></button>
         <button class="surface-btn" data-v="baby_neutral"><span class="si">&#127807;</span><span class="sn">Baby Neutral</span><span class="sd">Sage, cream, pampas grass</span></button>
@@ -219,7 +220,7 @@ header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;just
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 var W=2000,H=2000;
-var imgData=null,selSurface='pool_party',genCanvases=[],pdfDoc=null,currentTitle='';
+var imgData=null,selSurface='custom',genCanvases=[],pdfDoc=null,currentTitle='';
 var etsyData={title:'',desc:'',tags:'',attrs:''};
 var bgFailures=0;
 var STEPS=['Building theme-matched scenes','Generating Scene 1 — styled flat lay','Generating Scene 2 — angled lifestyle','Generating Scene 3 — detail closeup','Generating Edit on Canva scene','Generating Print and Digital scene','Building Whats Included','Generating buyer PDF','Writing your Etsy listing','Done!'];
@@ -259,10 +260,10 @@ retro_pink:{scenes:['pink and white gingham checkered fabric background, yellow 
 
 function interpretKeywords(vibe){
   var v=(vibe||'').toLowerCase();var result={props:[],colors:[],mood:'',leftover:''};
-  var propMap={'wine glass':'crystal wine glasses','champagne':'champagne flutes with bubbles','cherry':'fresh ripe cherries','cherries':'fresh ripe cherries','flower':'fresh cut flowers','flowers':'fresh flowers arranged','rose':'fresh roses in bloom','roses':'fresh roses with petals','peony':'lush pink peonies','peonies':'lush pink peonies','candle':'lit pillar candles','candles':'multiple lit candles with soft flames','ribbon':'silk ribbon loosely tied','bow':'elegant silk bow','envelope':'cream wax-sealed envelope','ring':'diamond engagement ring','pearl':'pearl necklace and earrings','pampas':'pampas grass stems','eucalyptus':'fresh eucalyptus stems','wildflower':'wildflowers arranged','bouquet':'loose flower bouquet','lemon':'fresh sliced lemons','coffee':'coffee cup with saucer','macaroon':'french macaroons','confetti':'colorful confetti scattered everywhere','balloon':'bright colorful balloons floating','balloons':'a full cluster of bright colorful balloons','streamer':'colorful paper streamers','streamers':'colorful paper streamers hanging','shell':'seashells scattered','shells':'seashells and starfish','sunglasses':'stylish sunglasses','flamingo':'pink flamingo float','disco':'disco ball reflecting light','cake':'elegant cake slice','cupcake':'frosted cupcakes with sprinkles','cupcakes':'frosted cupcakes with sprinkles','candy':'colorful candy scattered','present':'wrapped presents with bows','presents':'wrapped presents with colorful bows','gift':'wrapped gift boxes','gifts':'wrapped gift boxes with ribbons','party hat':'colorful party hats','sprinkles':'rainbow sprinkles scattered','lollipop':'colorful lollipops','lollipops':'colorful lollipops'};
+  var propMap={'wine glass':'crystal wine glasses','champagne':'champagne flutes with bubbles','cherry':'fresh ripe cherries','cherries':'fresh ripe cherries','flower':'fresh cut flowers','flowers':'fresh flowers arranged','rose':'fresh roses in bloom','roses':'fresh roses with petals','peony':'lush pink peonies','peonies':'lush pink peonies','candle':'lit pillar candles','candles':'multiple lit candles with soft flames','ribbon':'silk ribbon loosely tied','bow':'elegant silk bow','envelope':'cream wax-sealed envelope','ring':'diamond engagement ring','pearl':'pearl necklace and earrings','pampas':'pampas grass stems','eucalyptus':'fresh eucalyptus stems','wildflower':'wildflowers arranged','bouquet':'loose flower bouquet','lemon':'fresh sliced lemons','coffee':'coffee cup with saucer','macaroon':'french macaroons','confetti':'confetti scattered everywhere','balloon':'balloons floating','balloons':'a full cluster of balloons','streamer':'paper streamers','streamers':'paper streamers hanging','shell':'seashells scattered','shells':'seashells and starfish','sunglasses':'stylish sunglasses','flamingo':'pink flamingo float','disco':'disco ball reflecting light','cake':'elegant cake slice','cupcake':'frosted cupcakes with sprinkles','cupcakes':'frosted cupcakes with sprinkles','candy':'candy scattered','present':'wrapped presents with bows','presents':'wrapped presents with bows','gift':'wrapped gift boxes','gifts':'wrapped gift boxes with ribbons','party hat':'party hats','sprinkles':'sprinkles scattered','lollipop':'lollipops','lollipops':'lollipops','glitter':'fine shimmering glitter scattered across the surface, sparkling light catching','sparkle':'sparkling glitter and shimmer','sparkles':'sparkling glitter and shimmer','sequin':'shiny sequins scattered','sequins':'shiny scattered sequins catching the light','garland':'decorative garland strung overhead','tinsel':'shimmering tinsel strands','ribbon curl':'curled ribbon strands','star':'metallic star confetti','stars':'scattered metallic star confetti','bunting':'triangle bunting flags strung across','candles':'lit birthday candles','number balloon':'large metallic number balloon','foil balloon':'shiny metallic foil balloons'};
   var matchedWords=[];
   Object.keys(propMap).forEach(function(k){if(v.indexOf(k)>-1){result.props.push(propMap[k]);matchedWords.push(k);}});
-  var colorMap={'pink':'soft blush pink palette','blush':'blush and dusty rose tones','red':'rich red crimson tones','burgundy':'deep burgundy wine tones','coral':'warm coral peach tones','gold':'warm gold champagne accents','black':'dramatic black dark tones','white':'crisp white ivory tones','cream':'warm cream ivory tones','green':'sage green botanical tones','sage':'dusty sage eucalyptus tones','blue':'soft dusty blue tones','navy':'deep navy midnight blue','purple':'romantic purple lavender','lavender':'soft lavender lilac tones','aqua':'bright aqua turquoise tones','turquoise':'vibrant turquoise aqua tones','neon':'bright neon vibrant tones','pastel':'soft pastel gentle tones','rainbow':'bright rainbow multicolor palette','rose gold':'rose gold blush metallic'};
+  var colorMap={'pink':'soft blush pink palette','blush':'blush and dusty rose tones','red':'rich red crimson tones','burgundy':'deep burgundy wine tones','coral':'warm coral peach tones','gold':'warm gold champagne accents','black':'dramatic black dark tones','white':'crisp white ivory tones','cream':'warm cream ivory tones','green':'sage green botanical tones','sage':'dusty sage eucalyptus tones','blue':'soft dusty blue tones','navy':'deep navy midnight blue','purple':'rich purple tones throughout','lavender':'soft lavender lilac tones','aqua':'bright aqua turquoise tones','turquoise':'vibrant turquoise aqua tones','neon':'bright neon vibrant tones','pastel':'soft pastel gentle tones','rainbow':'bright rainbow multicolor palette','rose gold':'rose gold blush metallic','violet':'rich violet purple tones','lilac':'soft lilac tones','magenta':'vivid magenta tones','plum':'deep plum purple tones','silver':'cool silver metallic accents','iridescent':'iridescent holographic shimmer','teal':'deep teal tones','mint':'soft mint green tones','yellow':'sunny yellow tones','orange':'warm orange tones'};
   Object.keys(colorMap).forEach(function(k){if(v.indexOf(k)>-1){result.colors.push(colorMap[k]);matchedWords.push(k);}});
   if(v.indexOf('moody')>-1||v.indexOf('dark')>-1||v.indexOf('dramatic')>-1)result.mood='moody dramatic atmosphere, deep shadows, cinematic lighting';
   else if(v.indexOf('bright')>-1||v.indexOf('airy')>-1||v.indexOf('vibrant')>-1)result.mood='bright vibrant atmosphere, clean colorful light, joyful uplifting energy';
@@ -284,13 +285,29 @@ function interpretKeywords(vibe){
 
 // PROMPT BUILDER — user keywords lead, theme scene supports
 function buildPrompt(vibe,themeKey,sceneIndex){
-  var theme=THEMES[themeKey]||THEMES.pool_party;
   var kw=interpretKeywords(vibe);
   var idx=typeof sceneIndex==='number'?sceneIndex%3:0;
   var angles=['overhead flat lay photography, birds-eye view, looking straight down',
               '45-degree angled product photography, editorial diagonal composition',
               'close-up detail photography, shallow depth of field, soft creamy bokeh'];
+  var quality='photorealistic styled product photography, professional commercial photo, beautiful lighting, no text, no words, no letters, no faces, no people, no hands';
   var parts=[];
+
+  if(themeKey==='custom'){
+    // Your exact words go first, unedited — nothing overrides them
+    parts.push(vibe);
+    // Then the enriched versions reinforce the same ideas
+    if(kw.props.length) parts.push(kw.props.join(', '));
+    if(kw.colors.length) parts.push(kw.colors.join(', '));
+    if(kw.mood) parts.push(kw.mood);
+    // Minimal neutral scaffold — a surface and a styled arrangement, nothing thematic
+    parts.push('beautifully styled arrangement on a clean surface, props arranged around empty center space');
+    parts.push(angles[idx]);
+    parts.push(quality);
+    return {main:parts.join(', ')};
+  }
+
+  var theme=THEMES[themeKey]||THEMES.pool_party;
   if(kw.props.length) parts.push(kw.props.join(', '));
   if(kw.colors.length) parts.push(kw.colors.join(', '));
   if(kw.leftover) parts.push(kw.leftover);
@@ -298,7 +315,9 @@ function buildPrompt(vibe,themeKey,sceneIndex){
   parts.push(theme.scenes[idx]);
   parts.push(angles[idx]);
   parts.push(theme.boost);
-  parts.push('photorealistic styled product photography, professional commercial photo, beautiful lighting, no text, no words, no letters, no faces, no people, no hands');
+  // If you named colors, restate them last so they beat the theme's built-in palette
+  if(kw.colors.length) parts.push('entire color palette is '+kw.colors.join(' and '));
+  parts.push(quality);
   return {main:parts.join(', ')};
 }
 
@@ -346,6 +365,7 @@ document.getElementById('genBtn').onclick=async function(){
   var canvaLink=document.getElementById('canvaLink').value.trim();
   if(!imgData){showErr('Please upload your design PNG first.');return;}
   if(!title){showErr('Please enter your listing title.');return;}
+  if(selSurface==='custom'&&!vibe){showErr('Custom theme builds the scene from your description — please fill in step 3, or pick a preset theme instead.');return;}
   showErr('');showWarn('');currentTitle=title;bgFailures=0;
   document.getElementById('genBtn').disabled=true;
   document.getElementById('progressBox').className='progress show';
