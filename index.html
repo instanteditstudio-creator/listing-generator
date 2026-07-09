@@ -1,3 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoveyTemplatesCo — Listing Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#FAF7F2;font-family:'DM Sans',sans-serif;color:#1A1A1A;min-height:100vh;}
+header{background:#1A1A1A;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:#F2DDD5;}
+.logo b{color:#E8856A;font-style:normal;}
+.nav-tabs{display:flex;gap:0;background:#F0E8E0;border-radius:12px;padding:4px;margin-bottom:24px;}
+.nav-tab{flex:1;padding:10px 16px;border:none;border-radius:9px;font-size:13px;font-weight:500;cursor:pointer;background:transparent;color:#888;font-family:'DM Sans',sans-serif;transition:all .2s;}
+.nav-tab.active{background:#fff;color:#C45C5C;box-shadow:0 1px 6px rgba(0,0,0,0.08);}
+.wrap{max-width:900px;margin:0 auto;padding:32px 20px;}
+.hero-txt{text-align:center;margin-bottom:32px;}
+.hero-txt h1{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;line-height:1.2;margin-bottom:8px;}
+.hero-txt h1 em{color:#C45C5C;font-style:italic;}
+.hero-txt p{color:#888;font-size:14px;max-width:460px;margin:0 auto;line-height:1.7;}
+.card{background:#fff;border:1px solid #E8E0DA;border-radius:16px;padding:24px;margin-bottom:14px;box-shadow:0 1px 12px rgba(0,0,0,0.04);}
+.card h3{font-size:14px;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.num{background:#C45C5C;color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+.upload-area{border:2px dashed #DDD;border-radius:12px;padding:28px 20px;text-align:center;background:#FAF7F2;transition:border-color .2s;}
+.upload-area.hover{border-color:#C45C5C;background:#FDF5F3;}
+.upload-area p{font-size:13px;color:#888;margin:6px 0 14px;}
+.upload-btn{display:inline-block;padding:10px 24px;background:#C45C5C;color:#fff;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;}
+.prev-box{display:none;align-items:center;gap:12px;padding:12px 14px;background:#FDF5F3;border:1px solid #F0DDD8;border-radius:10px;margin-top:10px;}
+.prev-box.show{display:flex;}
+.prev-box img{width:40px;height:52px;object-fit:cover;border-radius:5px;}
+.prev-info{flex:1;}
+.pn{font-size:13px;font-weight:500;}
+.ps{font-size:11px;color:#888;margin-top:2px;}
+.clear-btn{background:none;border:none;color:#AAA;cursor:pointer;font-size:18px;padding:4px;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
 .field label{display:block;font-size:12px;color:#888;margin-bottom:4px;font-weight:500;}
 .field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1px solid #E8E0DA;border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;background:#FAF7F2;color:#1A1A1A;outline:none;}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:#C45C5C;background:#fff;}
@@ -35,6 +71,335 @@
 .img-foot{padding:9px 11px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #E8E0DA;gap:6px;}
 .img-foot span{font-size:11px;color:#AAA;text-transform:uppercase;letter-spacing:.06em;flex:1;}
 .star-btn{background:none;border:none;cursor:pointer;font-size:18px;padding:2px 4px;line-height:1;}
+.save-lnk{background:#C45C5C;color:#fff;border:none;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;display:inline-block;}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;}
+.action-btn{flex:1;padding:14px;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;min-width:140px;}
+.etsy-output{display:none;margin-top:20px;}
+.etsy-output.show{display:block;}
+.etsy-section{background:#fff;border:1px solid #E8E0DA;border-radius:12px;padding:20px;margin-bottom:12px;}
+.etsy-section h4{font-size:13px;font-weight:600;color:#C45C5C;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
+.etsy-text{font-size:13px;color:#1A1A1A;line-height:1.7;white-space:pre-wrap;font-family:'DM Sans',sans-serif;background:#FAF7F2;padding:14px;border-radius:8px;border:1px solid #E8E0DA;}
+.copy-btn{margin-top:8px;padding:8px 16px;background:#1A1A1A;color:#fff;border:none;border-radius:8px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;}
+.spin{display:inline-block;width:13px;height:13px;border:2px solid rgba(196,92,92,.25);border-top-color:#C45C5C;border-radius:50%;animation:sp .7s linear infinite;margin-right:7px;vertical-align:middle;}
+@keyframes sp{to{transform:rotate(360deg)}}
+.gallery-empty{text-align:center;padding:60px 20px;color:#888;}
+.listing-group{margin-bottom:28px;}
+.listing-group-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid #E8E0DA;display:flex;justify-content:space-between;align-items:center;}
+.listing-group-title span{font-size:12px;color:#AAA;font-family:'DM Sans',sans-serif;font-weight:400;cursor:pointer;}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.gallery-item{border:1px solid #E8E0DA;border-radius:10px;overflow:hidden;background:#fff;}
+.gallery-item img{width:100%;display:block;}
+.gallery-item-foot{padding:7px 9px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #E8E0DA;}
+.gallery-item-foot span{font-size:10px;color:#AAA;text-transform:uppercase;}
+.gallery-item-foot a{font-size:10px;color:#C45C5C;text-decoration:none;font-weight:600;}
+@media(max-width:580px){.row2{grid-template-columns:1fr}.surface-grid{grid-template-columns:repeat(2,1fr)}.img-grid{grid-template-columns:repeat(2,1fr)}.gallery-grid{grid-template-columns:repeat(2,1fr)}.btn-row{flex-direction:column}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><b>Lovey</b>TemplatesCo</div>
+  <div style="font-size:11px;color:#555;letter-spacing:.1em;text-transform:uppercase;">Listing Generator v2</div>
+</header>
+<div class="wrap">
+  <div class="nav-tabs">
+    <button class="nav-tab active" id="tab-gen-btn" onclick="showTab('generator')">Generate Images</button>
+    <button class="nav-tab" id="tab-gal-btn" onclick="showTab('gallery')">My Approved Images</button>
+  </div>
+
+  <div id="tab-generator">
+    <div class="hero-txt">
+      <h1>Turn Your Design Into<br><em>6 Images That Sell</em></h1>
+      <p>Upload your PNG, pick your theme, add details — get 6 vibrant listing images that match your invitation perfectly.</p>
+    </div>
+
+    <div class="card">
+      <h3><div class="num">1</div>Upload your design PNG</h3>
+      <div class="upload-area" id="dropZone">
+        <div style="font-size:28px;margin-bottom:6px;">&#128444;</div>
+        <p>Export from Canva as PNG — your design appears exactly as created</p>
+        <label for="fileIn" class="upload-btn">Choose PNG File</label>
+        <input type="file" id="fileIn" accept="image/*" style="display:none;">
+      </div>
+      <div class="prev-box" id="prevBox">
+        <img id="prevImg" src="" alt="preview">
+        <div class="prev-info"><div class="pn" id="prevName"></div><div class="ps" id="prevSize"></div></div>
+        <button class="clear-btn" id="clearBtn">x</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><div class="num">2</div>Design details</h3>
+      <div class="row2">
+        <div class="field"><label>LISTING TITLE</label><input type="text" id="listTitle" placeholder="e.g. Wildflower Bridal Shower Invitation"></div>
+        <div class="field"><label>CANVA TEMPLATE LINK</label><input type="text" id="canvaLink" placeholder="https://www.canva.com/design/..."></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>TEMPLATE TYPE</label>
+          <select id="tType"><option>Invitation</option><option>Birthday Invitation</option><option>Bridal / Bachelorette</option><option>Baby Shower</option><option>Itinerary / Planner</option><option>Menu / Food</option><option>Party Sign</option><option>Greeting Card</option><option>Other Template</option></select>
+        </div>
+        <div class="field"><label>DESIGN SIZE</label>
+          <select id="dSize"><option>5x7 inches</option><option>4x6 inches</option><option>5x5 inches</option><option>A4 / Letter</option><option>Half Sheet</option></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><div class="num">3</div>Add extra scene details (optional)</h3>
+      <p style="font-size:13px;color:#888;margin-bottom:14px;line-height:1.7;">The theme below drives your main scene. Add extra props, colors, or mood here to customize further.</p>
+      <div class="field">
+        <label>EXTRA PROPS, COLORS AND MOOD</label>
+        <textarea id="vibe" placeholder="e.g. extra pink roses, gold confetti, bright and cheerful, aqua blue accents"></textarea>
+        <div class="vibe-hint">
+          &#127800; Props: add extras — wine glass, confetti, balloons, shells, flowers, ribbon, candles<br>
+          &#127775; Colors: boost — blush, aqua, hot pink, gold, sage, coral, neon, pastel<br>
+          &#9728; Mood: romantic, elegant, moody, bright, dramatic, playful, boho, vibrant, tropical<br>
+          &#128161; <b>Theme below drives the main scene — your keywords add extra detail on top</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><div class="num">4</div>Choose your theme</h3>
+      <p style="font-size:13px;color:#888;margin-bottom:16px;">Match your invitation theme — this drives the ENTIRE background scene, props, and colors.</p>
+      <div class="surface-grid" id="surfaceGrid" style="grid-template-columns:repeat(4,1fr);">
+        <button class="surface-btn active" data-v="pool_party">
+          <span class="si">&#127946;</span>
+          <span class="sn">Pool Party</span>
+          <span class="sd">Aqua water, floaties, tropical</span>
+        </button>
+        <button class="surface-btn" data-v="baby_pink">
+          <span class="si">&#128118;</span>
+          <span class="sn">Baby (Girl)</span>
+          <span class="sd">Pink florals, ribbon, pastel</span>
+        </button>
+        <button class="surface-btn" data-v="baby_blue">
+          <span class="si">&#128166;</span>
+          <span class="sn">Baby (Boy)</span>
+          <span class="sd">Blue clouds, teddy bear</span>
+        </button>
+        <button class="surface-btn" data-v="baby_neutral">
+          <span class="si">&#127807;</span>
+          <span class="sn">Baby Neutral</span>
+          <span class="sd">Sage, cream, pampas grass</span>
+        </button>
+        <button class="surface-btn" data-v="wedding">
+          <span class="si">&#128141;</span>
+          <span class="sn">Wedding</span>
+          <span class="sd">Rings, wax seal, roses, linen</span>
+        </button>
+        <button class="surface-btn" data-v="wedding_sage">
+          <span class="si">&#127811;</span>
+          <span class="sn">Wedding Green</span>
+          <span class="sd">Eucalyptus, kraft, organic</span>
+        </button>
+        <button class="surface-btn" data-v="bachelorette">
+          <span class="si">&#127870;</span>
+          <span class="sn">Bachelorette</span>
+          <span class="sd">Pink, champagne, disco glam</span>
+        </button>
+        <button class="surface-btn" data-v="bridal">
+          <span class="si">&#127800;</span>
+          <span class="sn">Bridal Shower</span>
+          <span class="sd">Blush roses, teacup, lace</span>
+        </button>
+        <button class="surface-btn" data-v="birthday_kids">
+          <span class="si">&#127880;</span>
+          <span class="sn">Kids Birthday</span>
+          <span class="sd">Balloons, confetti, colorful</span>
+        </button>
+        <button class="surface-btn" data-v="birthday_glam">
+          <span class="si">&#127863;</span>
+          <span class="sn">Adult Birthday</span>
+          <span class="sd">Black gold, champagne, luxury</span>
+        </button>
+        <button class="surface-btn" data-v="tropical">
+          <span class="si">&#127796;</span>
+          <span class="sn">Summer</span>
+          <span class="sd">Tropical flowers, shells, bright</span>
+        </button>
+        <button class="surface-btn" data-v="retro_pink">
+          <span class="si">&#128515;</span>
+          <span class="sn">Retro Smiley</span>
+          <span class="sd">Gingham, daisies, smiley faces</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="err" id="errBox"></div>
+    <button class="gen-btn" id="genBtn">Generate My 6 Images + Buyer PDF + Etsy Listing</button>
+
+    <div class="progress" id="progressBox">
+      <div class="card">
+        <h3><span class="spin"></span>Generating your images...</h3>
+        <div class="pbar-wrap"><div class="pbar" id="pbar"></div></div>
+        <div id="stepList"></div>
+      </div>
+    </div>
+
+    <div class="results" id="resultsBox">
+      <div class="results-hdr"><h2>Everything Is Ready</h2><p>6 listing images + buyer PDF + Etsy listing text</p></div>
+      <div class="img-grid" id="imgGrid"></div>
+      <div class="btn-row">
+        <button class="action-btn" style="background:#1A1A1A;" id="dlAllBtn">&#8659; Download All 6</button>
+        <button class="action-btn" style="background:#C45C5C;" id="dlPdfBtn">&#8659; Buyer PDF</button>
+        <button class="action-btn" style="background:#F56400;" id="showEtsyBtn">&#128203; Etsy Listing Text</button>
+      </div>
+      <div class="etsy-output" id="etsyOutput">
+        <div class="etsy-section"><h4>Etsy Listing Title</h4><div class="etsy-text" id="etsyTitle"></div><button class="copy-btn" onclick="copyText('etsyTitle')">Copy Title</button></div>
+        <div class="etsy-section"><h4>Listing Description</h4><div class="etsy-text" id="etsyDesc"></div><button class="copy-btn" onclick="copyText('etsyDesc')">Copy Description</button></div>
+        <div class="etsy-section"><h4>Tags</h4><div class="etsy-text" id="etsyTags"></div><button class="copy-btn" onclick="copyText('etsyTags')">Copy Tags</button></div>
+        <div class="etsy-section"><h4>Category &amp; Pricing</h4><div class="etsy-text" id="etsyAttrs"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-gallery" style="display:none;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <div><h2 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;">My Approved Images</h2><p style="font-size:13px;color:#888;margin-top:4px;">Your permanent shop library</p></div>
+      <button onclick="clearAllGallery()" style="font-size:12px;color:#AAA;background:none;border:none;cursor:pointer;">Clear all</button>
+    </div>
+    <div id="galleryContent"></div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+var W=2000,H=2000;
+var imgData=null,selSurface='pool_party',genCanvases=[],pdfDoc=null,currentTitle='';
+var etsyData={title:'',desc:'',tags:'',attrs:''};
+var STEPS=['Building theme-matched scenes','Generating Scene 1 — styled flat lay','Generating Scene 2 — angled lifestyle','Generating Scene 3 — detail closeup','Generating Edit on Canva scene','Generating Print and Digital scene','Building Whats Included','Generating buyer PDF','Writing your Etsy listing','Done!'];
+var B={bg:'#F5F0E8',bg2:'#EDE6D6',text:'#2A1A0A',text2:'#6B5A4A',accent:'#C4A882',line:'#D4C4A8',dark:'#3A2A1A'};
+
+function showTab(t){document.getElementById('tab-generator').style.display=t==='generator'?'block':'none';document.getElementById('tab-gallery').style.display=t==='gallery'?'block':'none';document.getElementById('tab-gen-btn').classList.toggle('active',t==='generator');document.getElementById('tab-gal-btn').classList.toggle('active',t==='gallery');if(t==='gallery')renderGallery();}
+function getGallery(){try{return JSON.parse(localStorage.getItem('ltco_gallery')||'{}');}catch(e){return {};}}
+function saveGallery(g){try{localStorage.setItem('ltco_gallery',JSON.stringify(g));}catch(e){}}
+function starImage(title,label,url){var g=getGallery();if(!g[title])g[title]=[];var idx=-1;for(var i=0;i<g[title].length;i++){if(g[title][i].label===label){idx=i;break;}}if(idx>-1){g[title].splice(idx,1);if(!g[title].length)delete g[title];saveGallery(g);return false;}g[title].push({label:label,url:url,date:new Date().toLocaleDateString()});saveGallery(g);return true;}
+function isStarred(title,label){var g=getGallery();return !!(g[title]&&g[title].some(function(i){return i.label===label;}));}
+function renderGallery(){var g=getGallery();var keys=Object.keys(g);var el=document.getElementById('galleryContent');if(!keys.length){el.innerHTML='<div class="gallery-empty"><div style="font-size:48px;">&#11088;</div><p style="margin-top:8px;">No approved images yet.</p><button onclick="showTab(\'generator\')" style="margin-top:16px;padding:10px 20px;background:#C45C5C;color:white;border:none;border-radius:10px;cursor:pointer;font-size:13px;">Go Generate</button></div>';return;}var html='';keys.forEach(function(title){var items=g[title];html+='<div class="listing-group"><div class="listing-group-title">'+title+' ('+items.length+')<span onclick="deleteGroup(\''+encodeURIComponent(title)+'\')">Delete</span></div><div class="gallery-grid">';items.forEach(function(item){html+='<div class="gallery-item"><img src="'+item.url+'"><div class="gallery-item-foot"><span>'+item.label+'</span><a href="'+item.url+'" download>Save</a></div></div>';});html+='</div></div>';});el.innerHTML=html;}
+function deleteGroup(enc){var t=decodeURIComponent(enc);if(!confirm('Delete "'+t+'"?'))return;var g=getGallery();delete g[t];saveGallery(g);renderGallery();}
+function clearAllGallery(){if(!confirm('Clear all?'))return;localStorage.removeItem('ltco_gallery');renderGallery();}
+function copyText(id){navigator.clipboard.writeText(document.getElementById(id).textContent).then(function(){var btn=document.getElementById(id).parentNode.querySelector('.copy-btn');var orig=btn.textContent;btn.textContent='Copied!';btn.style.background='#2D6A4F';setTimeout(function(){btn.textContent=orig;btn.style.background='#1A1A1A';},2000);});}
+document.getElementById('fileIn').onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){imgData=ev.target.result;document.getElementById('prevImg').src=ev.target.result;document.getElementById('prevName').textContent=f.name;document.getElementById('prevSize').textContent=(f.size/1024/1024).toFixed(1)+' MB';document.getElementById('prevBox').className='prev-box show';};r.readAsDataURL(f);};
+document.getElementById('clearBtn').onclick=function(){imgData=null;document.getElementById('prevBox').className='prev-box';document.getElementById('fileIn').value='';};
+var dz=document.getElementById('dropZone');dz.ondragover=function(e){e.preventDefault();dz.classList.add('hover');};dz.ondragleave=function(){dz.classList.remove('hover');};dz.ondrop=function(e){e.preventDefault();dz.classList.remove('hover');var f=e.dataTransfer.files[0];if(f){var r=new FileReader();r.onload=function(ev){imgData=ev.target.result;document.getElementById('prevImg').src=ev.target.result;document.getElementById('prevName').textContent=f.name;document.getElementById('prevSize').textContent=(f.size/1024/1024).toFixed(1)+' MB';document.getElementById('prevBox').className='prev-box show';};r.readAsDataURL(f);}};
+var sBtns=document.querySelectorAll('.surface-btn');for(var si=0;si<sBtns.length;si++){(function(btn){btn.onclick=function(e){e.preventDefault();e.stopPropagation();for(var i=0;i<sBtns.length;i++)sBtns[i].classList.remove('active');btn.classList.add('active');selSurface=btn.getAttribute('data-v');};})(sBtns[si]);}
+function showErr(m){var e=document.getElementById('errBox');e.textContent=m;e.className=m?'err show':'err';}
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
+
+// ══════════════════════════════════════════════════════════════
+// THEME ENGINE V2 — Each theme has 3 COMPLETELY DIFFERENT scenes
+// ══════════════════════════════════════════════════════════════
+var THEMES={
+pool_party:{scenes:['bright turquoise swimming pool water surface seen from above, pink inflatable pool float ring, tropical palm leaves casting shadows on white pool deck, pink striped beach towel, colorful beach ball, bright warm sunlight, summer party vibes, aqua blue water ripples','poolside scene with pink and white striped cabana umbrella, tall tropical cocktail drinks with fruit garnish, coral hibiscus flowers, sparkling aqua pool water in background, oversized pink sunglasses, coconut shell, sunscreen bottle on pool edge, vacation vibes','white marble pool deck with scattered tropical frangipani flowers, pink flamingo pool float in sparkling blue water background, fresh sliced watermelon on plate, tropical monstera leaves, ice cold lemonade in mason jar, cheerful bright summer atmosphere'],boost:'vibrant aqua turquoise pool water, bright hot pink, tropical summer poolside, cheerful colorful sunlight'},
+baby_pink:{scenes:['soft pink silk fabric draped elegantly, fresh blush pink peonies and white roses arrangement, delicate pink satin ribbon curled, small pink baby booties, pearl beads scattered, soft dreamy window light, feminine and tender baby shower styling','white marble surface with pink peony petals scattered artfully, soft pink tulle fabric gathered, tiny gold star confetti, miniature pink rattle, cream envelope with pink wax seal, elegant and delicate baby shower aesthetic','rustic white wood surface with fresh pink floral wreath, dried blush roses, soft pink macarons on porcelain plate, baby pink ribbon bow tied, eucalyptus sprigs, gentle warm golden light'],boost:'soft blush pink, feminine pastel, fresh peonies, baby shower elegance, dreamy romantic'},
+baby_blue:{scenes:['soft powder blue knit blanket as background, white cotton clouds scattered, small blue teddy bear, blue and white striped ribbon, fresh white daisies, silver star confetti, gentle soft natural lighting, serene baby boy theme','white surface with blue hydrangea flowers arranged beautifully, soft blue satin fabric draped, tiny blue baby shoes, silver rattle toy, scattered blue paper stars, clean bright studio light, calming and peaceful','light natural wood surface with blue balloon garland in background, fresh eucalyptus greenery, blue and silver wrapped gift box, white knit booties, blue glass vase with white flowers, warm natural window light'],boost:'powder blue, soft serene calm, baby boy shower, white and blue, gentle sweet'},
+baby_neutral:{scenes:['warm cream linen fabric surface with dried pampas grass arrangement, sage green eucalyptus stems, wooden baby rattle, neutral beige knit blanket folded, terracotta clay pot with succulent, warm golden hour light, earthy organic','white concrete surface with boho dried flower arrangement in earth tones, woven rattan basket, cream muslin cloth draped, wooden beads on string, sage green leaves, warm natural organic feel, gender neutral','natural wood table with sage green and cream floral arrangement, terracotta candle, raw cotton stems, woven jute coaster, neutral linen napkin, soft pampas grass, warm and inviting atmosphere'],boost:'sage green, warm cream, earthy natural boho, organic gender neutral'},
+wedding:{scenes:['cream linen fabric surface with gold wax seal stamp, fresh white roses and dusty pink flowers, antique gold ring on cream ribbon, cream envelope with calligraphy, soft warm romantic light, timeless and elegant','polished white marble surface with fresh rose bouquet in blush and cream, vintage gold perfume bottle, pearl necklace draped, ivory silk ribbon, gold foil accents, luxury editorial wedding styling, sophisticated','warm cream ceramic plate on natural linen, fresh eucalyptus and white rose boutonniere, gold wedding bands on cream velvet ring box, dried lavender sprigs, cream wax sealed envelope, soft natural light, romantic'],boost:'cream and gold, white roses, elegant romantic, luxury wedding, timeless refined'},
+wedding_sage:{scenes:['natural linen surface with fresh eucalyptus garland arranged, kraft brown envelope, olive green wax seal, dried sage stems, white cotton ribbon, rustic twine, warm organic natural light, earthy wedding','warm wood surface with eucalyptus branches, sage green velvet ribbon, cream and green floral arrangement, brown kraft paper, wooden ring box, dried wheat stems, earthy natural tones, botanical','cream textured paper on sage green fabric, fresh olive branch stems, kraft envelope with pressed flower, green glass vase, raw cotton bolls, warm golden light through window, organic natural'],boost:'sage green eucalyptus, natural organic, kraft and green, earthy botanical wedding'},
+bachelorette:{scenes:['hot pink silk fabric background, champagne bottle with gold confetti explosion, disco ball reflecting sparkles, gold mylar balloons, hot pink feather boa, sparkly gold party accessories, glamorous fun celebration','white marble surface with pink champagne glasses filled, fresh hot pink roses arrangement, gold glitter scattered, miniature disco ball, pink satin ribbon curled, bride-to-be gold tiara, party atmosphere, energetic','pink velvet surface with gold champagne flutes, hot pink peony arrangement, gold star garland hanging, sparkly confetti scattered, elegant pink macarons stacked, gold ring, glamorous girls night bachelorette vibes'],boost:'hot pink, gold glitter, disco ball, champagne, glamorous party celebration'},
+bridal:{scenes:['soft blush silk fabric with fresh pink garden roses, vintage porcelain teacup and saucer, delicate lace trim, pearl string, cream envelope with pink wax seal, soft romantic window light, feminine bridal','white surface with blush and white peony arrangement, champagne glass, soft pink ribbon curled elegantly, fresh strawberries on small plate, gold foil details, elegant feminine bridal shower styling','cream linen with fresh mixed floral bouquet in blush pink white and sage, vintage perfume bottle, pink macarons arranged, pearl earrings, soft tulle fabric draped, dreamy bridal atmosphere'],boost:'blush pink, white roses, elegant feminine, bridal shower, soft romantic dreamy'},
+birthday_kids:{scenes:['bright colorful balloon arch in rainbow colors on white background, scattered multicolor confetti and streamers, wrapped presents with colorful bows, party hats, fun cheerful bright happy atmosphere, joyful kids celebration','pastel pink and blue balloon cluster with gold accents, colorful rainbow sprinkle confetti on white surface, lollipops, small wrapped gifts with ribbons, party blower, white frosted cupcakes with sprinkles, happy bright scene','colorful party setup with bright balloon garland overhead, confetti burst everywhere, streamers in vibrant rainbow colors, candy jars filled with colorful candy, party favor bags, bright festive joyful energetic celebration'],boost:'colorful bright vibrant, balloons confetti, kids birthday party, joyful happy celebration'},
+birthday_glam:{scenes:['black velvet surface with gold champagne bottle and two crystal flutes, gold confetti and star scatter, black and gold balloon cluster, lit taper candles in gold holders, luxurious sophisticated dark celebration','dark moody surface with gold flatware, black linen napkin, champagne glass with bubbles, gold glitter scattered, black roses in gold vase, dramatic warm candle light, high end upscale celebration, elegant','black marble surface with gold leaf flakes scattered, crystal champagne coupe glass, gold picture frame, black velvet ribbon, gold sparkler sticks, elegant dark moody dramatic lighting, refined luxury'],boost:'black and gold luxury, champagne, elegant dark moody, sophisticated upscale celebration'},
+tropical:{scenes:['bright scene with fresh tropical monstera leaves and pink hibiscus flowers, coconut halves, fresh sliced tropical fruits arranged, woven rattan placemat, seashells scattered, bright warm tropical sunlight, vacation vibes','sandy beach texture with tropical flower lei garland, starfish and shells, coral and turquoise accessories, palm frond shadow patterns, colorful tropical cocktail with umbrella, bright ocean blue water background, island paradise','white surface with tropical flower arrangement in bright coral pink and yellow, fresh pineapple, coconut drink with umbrella, monstera leaf, woven basket, bright cheerful summer tropical energy'],boost:'tropical flowers bright, coral turquoise, summer vacation island, vibrant warm paradise'},
+retro_pink:{scenes:['pink and white gingham checkered fabric background, yellow smiley face stress balls scattered, white daisies, retro pink rotary phone, colorful candy, confetti, bright cheerful retro y2k aesthetic, playful fun','pastel pink surface with smiley face yellow balloons, fresh white daisies in cute pink vase, retro star stickers scattered, rainbow confetti, pink heart sunglasses, groovy retro happy vibes, nostalgic','white surface with pink gingham ribbon curled, yellow smiley cookies on plate, daisy chain flower crown, retro sticker sheet, pink and yellow balloon cluster, pastel confetti scattered, playful fun nostalgic'],boost:'pink gingham, yellow smiley faces, white daisies, retro groovy y2k, playful aesthetic'}
+};
+
+// ── KEYWORD INTERPRETER ───────────────────────────────────
+function interpretKeywords(vibe){
+  var v=(vibe||'').toLowerCase();var result={props:[],colors:[],mood:''};
+  var propMap={'wine glass':'crystal wine glasses','champagne':'champagne flutes with bubbles','cherry':'fresh ripe cherries','cherries':'fresh ripe cherries','flower':'fresh cut flowers','flowers':'fresh flowers arranged','rose':'fresh roses in bloom','roses':'fresh roses with petals','peony':'lush pink peonies','peonies':'lush pink peonies','candle':'lit pillar candles','candles':'multiple lit candles with soft flames','ribbon':'silk ribbon loosely tied','bow':'elegant silk bow','envelope':'cream wax-sealed envelope','ring':'diamond engagement ring','pearl':'pearl necklace and earrings','pampas':'pampas grass stems','eucalyptus':'fresh eucalyptus stems','wildflower':'wildflowers arranged','bouquet':'loose flower bouquet','lemon':'fresh sliced lemons','coffee':'coffee cup with saucer','macaroon':'french macaroons','confetti':'delicate confetti scattered','balloon':'colorful balloons','balloons':'colorful balloon cluster','shell':'seashells scattered','shells':'seashells and starfish','sunglasses':'stylish sunglasses','flamingo':'pink flamingo float','disco':'disco ball reflecting light','cake':'elegant cake slice','cupcake':'frosted cupcakes'};
+  Object.keys(propMap).forEach(function(k){if(v.indexOf(k)>-1)result.props.push(propMap[k]);});
+  var colorMap={'pink':'soft blush pink palette','blush':'blush and dusty rose tones','red':'rich red crimson tones','burgundy':'deep burgundy wine tones','coral':'warm coral peach tones','gold':'warm gold champagne accents','black':'dramatic black dark tones','white':'crisp white ivory tones','cream':'warm cream ivory tones','green':'sage green botanical tones','sage':'dusty sage eucalyptus tones','blue':'soft dusty blue tones','navy':'deep navy midnight blue','purple':'romantic purple lavender','lavender':'soft lavender lilac tones','aqua':'bright aqua turquoise tones','turquoise':'vibrant turquoise aqua tones','neon':'bright neon vibrant tones','pastel':'soft pastel gentle tones','rose gold':'rose gold blush metallic'};
+  Object.keys(colorMap).forEach(function(k){if(v.indexOf(k)>-1)result.colors.push(colorMap[k]);});
+  if(v.indexOf('moody')>-1||v.indexOf('dark')>-1||v.indexOf('dramatic')>-1)result.mood='moody dramatic atmosphere, deep shadows, cinematic lighting';
+  else if(v.indexOf('bright')>-1||v.indexOf('airy')>-1||v.indexOf('vibrant')>-1)result.mood='bright vibrant atmosphere, clean colorful light, joyful uplifting energy';
+  else if(v.indexOf('romantic')>-1||v.indexOf('soft')>-1||v.indexOf('dreamy')>-1)result.mood='soft romantic atmosphere, gentle dreamy light, intimate and warm';
+  else if(v.indexOf('luxury')>-1||v.indexOf('elegant')>-1)result.mood='luxurious elegant atmosphere, refined sophisticated, high-end';
+  else if(v.indexOf('boho')>-1||v.indexOf('earthy')>-1)result.mood='bohemian earthy atmosphere, organic natural, warm golden tones';
+  else if(v.indexOf('playful')>-1||v.indexOf('fun')>-1||v.indexOf('whimsical')>-1)result.mood='playful whimsical atmosphere, bright cheerful, fun energetic';
+  else if(v.indexOf('tropical')>-1)result.mood='tropical vibrant atmosphere, warm bright colorful, island vacation vibes';
+  return result;
+}
+
+// ── CORE PROMPT BUILDER — THEME-DRIVEN ────────────────────
+function buildPrompt(vibe,themeKey,sceneIndex){
+  var theme=THEMES[themeKey]||THEMES.pool_party;
+  var kw=interpretKeywords(vibe);
+  var idx=typeof sceneIndex==='number'?sceneIndex%3:0;
+  var sceneDesc=theme.scenes[idx];
+  var angles=['overhead flat lay photography, birds-eye view, looking straight down at styled surface',
+              '45-degree angled product photography, editorial diagonal composition, depth and dimension',
+              'close-up detail photography, shallow depth of field, beautiful creamy bokeh, macro styling'];
+  var angle=angles[idx];
+  var parts=[];
+  parts.push(sceneDesc);
+  if(kw.props.length>0) parts.push(kw.props.slice(0,3).join(', '));
+  if(kw.colors.length>0) parts.push(kw.colors.slice(0,2).join(', '));
+  if(kw.mood) parts.push(kw.mood);
+  parts.push(angle);
+  parts.push(theme.boost);
+  parts.push('photorealistic styled product photography, professional commercial photo, high quality, 8k, beautiful lighting, no text, no words, no writing, no letters, no numbers, no faces, no people, no hands');
+  return {main:parts.join(', '),boost:theme.boost};
+}
+
+async function getAIBg(promptObj){
+  var mainPrompt=typeof promptObj==='string'?promptObj:promptObj.main;
+  try{var seed=Math.floor(Math.random()*99999);var encoded=encodeURIComponent(mainPrompt);var url='https://image.pollinations.ai/prompt/'+encoded+'?width=1024&height=1024&seed='+seed+'&nologo=true&model=flux&enhance=true';var res=await fetch(url);if(!res.ok)return null;var blob=await res.blob();return await new Promise(function(resolve){var reader=new FileReader();reader.onload=function(){resolve(reader.result);};reader.onerror=function(){resolve(null);};reader.readAsDataURL(blob);});}catch(e){console.warn('AI error:',e);return null;}
+}
+function mkC(){var c=document.createElement('canvas');c.width=W;c.height=H;return c;}
+function drawBgFull(ctx,src){return new Promise(function(res){if(!src){var g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,'#E8DDD0');g.addColorStop(1,'#D8CCC0');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);res();return;}var img=new Image();img.onload=function(){var scale=Math.max(W/img.width,H/img.height);var sw=img.width*scale,sh=img.height*scale;ctx.drawImage(img,(W-sw)/2,(H-sh)/2,sw,sh);var vig=ctx.createRadialGradient(W/2,H/2,W*0.22,W/2,H/2,W*0.88);vig.addColorStop(0,'rgba(0,0,0,0)');vig.addColorStop(1,'rgba(0,0,0,0.18)');ctx.fillStyle=vig;ctx.fillRect(0,0,W,H);res();};img.onerror=function(){ctx.fillStyle='#E8DDD0';ctx.fillRect(0,0,W,H);res();};img.src=src;});}
+function drawCard(ctx,x,y,w,h,tilt){return new Promise(function(res){if(!imgData){res();return;}ctx.save();if(tilt){ctx.translate(x+w/2,y+h/2);ctx.rotate(tilt*Math.PI/180);ctx.translate(-(x+w/2),-(y+h/2));}ctx.shadowColor='rgba(0,0,0,0.38)';ctx.shadowBlur=110;ctx.shadowOffsetX=tilt?tilt*5:0;ctx.shadowOffsetY=44;ctx.fillStyle='#fff';ctx.beginPath();ctx.roundRect(x,y,w,h,10);ctx.fill();ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;ctx.beginPath();ctx.roundRect(x,y,w,h,10);ctx.clip();var img=new Image();img.onload=function(){ctx.drawImage(img,x,y,w,h);ctx.restore();res();};img.onerror=function(){ctx.restore();res();};img.src=imgData;});}
+function drawLogo(ctx,x,y,size,color,alpha){ctx.save();ctx.globalAlpha=alpha||0.72;ctx.fillStyle=color||'white';ctx.font='italic 700 '+size+'px Georgia,serif';ctx.textAlign='right';ctx.shadowColor='rgba(0,0,0,0.2)';ctx.shadowBlur=10;ctx.fillText('LoveyTemplatesCo',x,y);ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.restore();}
+async function makeScene1(bgUrl){var c=mkC();var ctx=c.getContext('2d');await drawBgFull(ctx,bgUrl);var cw=W*0.52,ch=cw*1.3,cx=(W-cw)/2,cy=(H-ch)/2-W*0.03;await drawCard(ctx,cx,cy,cw,ch,-2.5);drawLogo(ctx,W-60,H-58,W*0.023,'white',0.7);return c;}
+async function makeScene2(bgUrl){var c=mkC();var ctx=c.getContext('2d');await drawBgFull(ctx,bgUrl);var cw=W*0.5,ch=cw*1.3,cx=(W-cw)/2+W*0.025,cy=(H-ch)/2;await drawCard(ctx,cx,cy,cw,ch,2.2);drawLogo(ctx,W-60,H-58,W*0.023,'white',0.7);return c;}
+async function makeScene3(bgUrl){var c=mkC();var ctx=c.getContext('2d');await drawBgFull(ctx,bgUrl);var cw=W*0.56,ch=cw*1.3,cx=(W-cw)/2-W*0.01,cy=(H-ch)/2+W*0.01;await drawCard(ctx,cx,cy,cw,ch,-1.0);drawLogo(ctx,W-60,H-58,W*0.023,'white',0.7);return c;}
+
+async function makeCanvaScene(info,bgUrl){var c=mkC();var ctx=c.getContext('2d');await drawBgFull(ctx,bgUrl);ctx.fillStyle='rgba(0,0,0,0.3)';ctx.fillRect(0,0,W,H);var br=W*0.072,bx=130+br,by=155+br;var cg=ctx.createRadialGradient(bx,by,0,bx,by,br);cg.addColorStop(0,'#A855D4');cg.addColorStop(1,'#2196F3');ctx.shadowColor='rgba(0,0,0,0.3)';ctx.shadowBlur=20;ctx.beginPath();ctx.arc(bx,by,br,0,Math.PI*2);ctx.fillStyle=cg;ctx.fill();ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.fillStyle='white';ctx.font='italic bold '+(br*0.52)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText('Canva',bx,by+br*0.19);ctx.fillStyle='white';ctx.textAlign='left';ctx.shadowColor='rgba(0,0,0,0.5)';ctx.shadowBlur=18;ctx.font='700 '+(W*0.074)+'px Georgia,serif';ctx.fillText('Edit on Canva',130+br*2+30,155+br*0.55);ctx.font='500 '+(W*0.028)+'px sans-serif';ctx.fillStyle='rgba(255,255,255,0.88)';ctx.fillText('INSTANT AND LIFETIME ACCESS',130+br*2+30,155+br*1.35);ctx.shadowColor='transparent';ctx.shadowBlur=0;var dw=W*0.28,dh=dw*1.3,dx=(W-dw)/2,dy=(H-dh)/2+W*0.04;ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=60;ctx.shadowOffsetY=20;ctx.fillStyle='white';ctx.beginPath();ctx.roundRect(dx,dy,dw,dh,10);ctx.fill();ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;if(imgData){ctx.save();ctx.beginPath();ctx.roundRect(dx,dy,dw,dh,10);ctx.clip();var di=new Image();await new Promise(function(r){di.onload=function(){ctx.drawImage(di,dx,dy,dw,dh);r();};di.onerror=r;di.src=imgData;});ctx.restore();}var features=['Edit all text','Change fonts','Change colors','AI tools included'];var ph=W*0.075,py=H-ph-90,totW=W-240;ctx.fillStyle='rgba(255,255,255,0.14)';ctx.beginPath();ctx.roundRect(120,py,totW,ph,ph/2);ctx.fill();ctx.strokeStyle='rgba(255,255,255,0.28)';ctx.lineWidth=2;ctx.beginPath();ctx.roundRect(120,py,totW,ph,ph/2);ctx.stroke();var fw=totW/features.length;features.forEach(function(f2,i){ctx.fillStyle='rgba(255,255,255,0.92)';ctx.font='500 '+(W*0.024)+'px sans-serif';ctx.textAlign='center';ctx.fillText(f2,120+i*fw+fw/2,py+ph*0.62);});ctx.fillStyle='rgba(255,255,255,0.48)';ctx.font='300 '+(W*0.018)+'px sans-serif';ctx.textAlign='center';ctx.fillText('Canva is free to use',W/2,H-34);drawLogo(ctx,W-80,py-28,W*0.024,'white',0.7);return c;}
+
+async function makePrintDigital(info,bgL,bgR){var c=mkC();var ctx=c.getContext('2d');ctx.fillStyle='#1A1A1A';ctx.fillRect(0,0,W,H);var hw=W/2;if(bgL){ctx.save();ctx.beginPath();ctx.rect(0,0,hw,H);ctx.clip();var il=new Image();await new Promise(function(r){il.onload=function(){var sc=Math.max(hw/il.width,H/il.height);ctx.drawImage(il,0,0,il.width*sc,il.height*sc);r();};il.onerror=r;il.src=bgL;});ctx.restore();}ctx.fillStyle='rgba(0,0,0,0.42)';ctx.fillRect(0,0,hw,H);if(bgR){ctx.save();ctx.beginPath();ctx.rect(hw,0,hw,H);ctx.clip();var ir=new Image();await new Promise(function(r){ir.onload=function(){var sc=Math.max(hw/ir.width,H/ir.height);ctx.drawImage(ir,hw,0,ir.width*sc,ir.height*sc);r();};ir.onerror=r;ir.src=bgR;});ctx.restore();}ctx.fillStyle='rgba(0,0,0,0.48)';ctx.fillRect(hw,0,hw,H);ctx.strokeStyle='rgba(255,255,255,0.35)';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(hw,80);ctx.lineTo(hw,H-80);ctx.stroke();var lp=90,ty=220;ctx.fillStyle='white';ctx.textAlign='left';ctx.shadowColor='rgba(0,0,0,0.5)';ctx.shadowBlur=14;ctx.font='700 '+(W*0.036)+'px sans-serif';ctx.fillText('PRINT AT',lp,ty);ctx.font='700 '+(W*0.074)+'px Georgia,serif';ctx.fillText('HOME',lp,ty+W*0.077);ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.fillStyle='rgba(255,255,255,0.14)';ctx.beginPath();ctx.roundRect(lp,ty+W*0.105,hw-lp-40,170,10);ctx.fill();ctx.fillStyle='rgba(255,255,255,0.9)';ctx.font='300 '+(W*0.026)+'px sans-serif';ctx.fillText('Download as PDF with bleed lines',lp+22,ty+W*0.105+62);ctx.fillText('and trim marks for home printing.',lp+22,ty+W*0.105+106);var dw2=hw*0.44,dh2=dw2*1.3,dx2=lp,dy2=ty+W*0.105+210;ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=30;ctx.shadowOffsetY=10;ctx.fillStyle='white';ctx.beginPath();ctx.roundRect(dx2,dy2,dw2,dh2,8);ctx.fill();ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;if(imgData){ctx.save();ctx.beginPath();ctx.roundRect(dx2,dy2,dw2,dh2,8);ctx.clip();var d1=new Image();await new Promise(function(r){d1.onload=function(){ctx.drawImage(d1,dx2,dy2,dw2,dh2);r();};d1.onerror=r;d1.src=imgData;});ctx.restore();}var rp=hw+70;ctx.fillStyle='white';ctx.textAlign='left';ctx.shadowColor='rgba(0,0,0,0.5)';ctx.shadowBlur=14;ctx.font='700 '+(W*0.036)+'px sans-serif';ctx.fillText('USE IT',rp,ty);ctx.font='700 '+(W*0.074)+'px Georgia,serif';ctx.fillText('DIGITALLY',rp,ty+W*0.077);ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.fillStyle='rgba(255,255,255,0.14)';ctx.beginPath();ctx.roundRect(rp,ty+W*0.105,hw-70-40,170,10);ctx.fill();ctx.fillStyle='rgba(255,255,255,0.9)';ctx.font='300 '+(W*0.026)+'px sans-serif';ctx.fillText('Download as high quality PNG or',rp+22,ty+W*0.105+62);ctx.fillText('JPG and share digitally.',rp+22,ty+W*0.105+106);var pw2=hw*0.28,ph3=pw2*2.1,px2=rp+hw*0.1,py3=dy2;ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=30;ctx.shadowOffsetY=10;ctx.fillStyle='#1C1C1E';ctx.beginPath();ctx.roundRect(px2,py3,pw2,ph3,pw2*0.12);ctx.fill();ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;ctx.fillStyle='white';ctx.beginPath();ctx.roundRect(px2+pw2*0.06,py3+ph3*0.04,pw2*0.88,ph3*0.88,pw2*0.08);ctx.fill();if(imgData){var psw=pw2*0.8,psh=psw*1.3,psx=px2+pw2*0.1,psy=py3+ph3*0.09;ctx.save();ctx.beginPath();ctx.roundRect(psx,psy,psw,psh,6);ctx.clip();var d22=new Image();await new Promise(function(r){d22.onload=function(){ctx.drawImage(d22,psx,psy,psw,psh);r();};d22.onerror=r;d22.src=imgData;});ctx.restore();}drawLogo(ctx,W-80,H-55,W*0.022,'white',0.62);return c;}
+
+async function makeIncluded(info){var c=mkC();var ctx=c.getContext('2d');ctx.fillStyle=B.bg;ctx.fillRect(0,0,W,H);ctx.save();ctx.globalAlpha=0.03;ctx.strokeStyle=B.accent;ctx.lineWidth=1.5;for(var row=0;row<14;row++){for(var col=0;col<14;col++){var dx3=col*(W/11)+((row%2)*W/22),dy3=row*(H/11);ctx.beginPath();ctx.moveTo(dx3,dy3+H/22);ctx.lineTo(dx3+W/22,dy3);ctx.lineTo(dx3+W/11,dy3+H/22);ctx.lineTo(dx3+W/22,dy3+H/11);ctx.closePath();ctx.stroke();}}ctx.restore();var pad=70;ctx.strokeStyle=B.line;ctx.lineWidth=2;ctx.globalAlpha=0.55;ctx.strokeRect(pad,pad,W-pad*2,H-pad*2);ctx.strokeStyle=B.accent;ctx.lineWidth=1;ctx.globalAlpha=0.35;ctx.strokeRect(pad+14,pad+14,W-pad*2-28,H-pad*2-28);ctx.globalAlpha=1;[[pad,pad],[W-pad,pad],[pad,H-pad],[W-pad,H-pad]].forEach(function(p){ctx.save();ctx.translate(p[0],p[1]);ctx.strokeStyle=B.accent;ctx.lineWidth=2;ctx.globalAlpha=0.45;ctx.beginPath();ctx.moveTo(-18,0);ctx.lineTo(18,0);ctx.moveTo(0,-18);ctx.lineTo(0,18);ctx.stroke();ctx.beginPath();ctx.arc(0,0,7,0,Math.PI*2);ctx.stroke();ctx.restore();});ctx.fillStyle=B.accent;ctx.font='italic 700 '+(W*0.044)+'px Georgia,serif';ctx.textAlign='center';ctx.globalAlpha=0.72;ctx.fillText('LoveyTemplatesCo',W/2,148);ctx.globalAlpha=1;ctx.fillStyle=B.dark;ctx.font='italic 700 '+(W*0.088)+'px Georgia,serif';ctx.textAlign='center';ctx.fillText("What's Included",W/2,252);ctx.strokeStyle=B.accent;ctx.lineWidth=3;ctx.lineCap='round';ctx.globalAlpha=0.65;ctx.beginPath();ctx.moveTo(W/2-280,288);ctx.lineTo(W/2+280,288);ctx.stroke();ctx.globalAlpha=1;ctx.fillStyle=B.text2;ctx.font='300 '+(W*0.027)+'px sans-serif';ctx.fillText('Everything you need for the perfect '+info.type,W/2,336);var items=[['Editable Canva Template','Free account works — no paid plan needed'],['All Text Fully Editable','Name, date, time, venue and all details'],['Color & Font Swaps','Make it completely yours in minutes'],[info.size+' Print-Ready','Download as PDF, PNG or JPG'],['Instant Digital Download','Available immediately after purchase'],['Lifetime Access','Edit and download again anytime']];var zoneTop=394,zoneBot=H-160,itemH2=(zoneBot-zoneTop)/6,lx2=140;items.forEach(function(item,i){var iy=zoneTop+i*itemH2+itemH2*0.48;ctx.save();ctx.translate(lx2,iy);ctx.rotate(Math.PI/4);ctx.fillStyle=B.accent;ctx.fillRect(-13,-13,26,26);ctx.fillStyle=B.bg;ctx.fillRect(-7,-7,14,14);ctx.restore();ctx.fillStyle=B.dark;ctx.font='600 '+(W*0.036)+'px sans-serif';ctx.textAlign='left';ctx.fillText(item[0],lx2+52,iy+10);ctx.fillStyle=B.text2;ctx.font='300 '+(W*0.026)+'px sans-serif';ctx.fillText(item[1],lx2+52,iy+50);if(i<items.length-1){ctx.strokeStyle=B.line;ctx.lineWidth=1.5;ctx.globalAlpha=0.35;ctx.beginPath();ctx.moveTo(lx2,iy+itemH2*0.5-6);ctx.lineTo(W-140,iy+itemH2*0.5-6);ctx.stroke();ctx.globalAlpha=1;}});return c;}
+
+function generateBuyerPDF(info){var doc=new window.jspdf.jsPDF({orientation:'portrait',unit:'mm',format:'a4'});var pw=210,ph=297;doc.setFillColor(245,240,232);doc.rect(0,0,pw,ph,'F');doc.setFillColor(196,168,130);doc.rect(0,0,pw,10,'F');doc.setFontSize(26);doc.setFont('helvetica','bolditalic');doc.setTextColor(42,26,10);doc.text('LoveyTemplatesCo',pw/2,30,{align:'center'});doc.setDrawColor(196,168,130);doc.setLineWidth(0.8);doc.line(30,38,pw-30,38);doc.setFontSize(11);doc.setFont('helvetica','italic');doc.setTextColor(107,90,74);var msgs=['You just made the best decision for your party planning!','','Your template is waiting for you - just click the link below,','make it yours, and get ready to wow your guests.','','From our creative corner to your celebration - thank you!'];var my=50;msgs.forEach(function(m){doc.text(m,pw/2,my,{align:'center'});my+=7;});doc.setDrawColor(196,168,130);doc.setLineWidth(0.5);doc.line(30,my+3,pw-30,my+3);doc.setFontSize(15);doc.setFont('helvetica','bold');doc.setTextColor(42,26,10);doc.text(info.title,pw/2,my+16,{align:'center'});doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(196,92,92);doc.text('YOUR CANVA TEMPLATE LINK',pw/2,my+30,{align:'center'});doc.setFillColor(253,245,243);doc.setDrawColor(196,92,92);doc.setLineWidth(1);doc.roundedRect(20,my+34,pw-40,22,3,3,'FD');doc.setFontSize(10);doc.setFont('helvetica','normal');doc.setTextColor(30,58,110);doc.textWithLink(info.canvaLink||'Your Canva link here',pw/2,my+48,{align:'center',url:info.canvaLink||'#'});var sy=my+68;doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(196,92,92);doc.text('HOW TO ACCESS',pw/2,sy,{align:'center'});var steps=[{n:'1',t:'Purchase confirmed',d:'Check email for confirmation.'},{n:'2',t:'Click the Canva link above',d:'Sign up free at canva.com if needed.'},{n:'3',t:'Edit your template',d:'Customize name, date, time, venue.'},{n:'4',t:'Download and share',d:'PDF, PNG, or JPG to print or share.'}];var stY=sy+10;steps.forEach(function(s){doc.setFillColor(196,168,130);doc.circle(27,stY+4,5,'F');doc.setFontSize(9);doc.setFont('helvetica','bold');doc.setTextColor(255,255,255);doc.text(s.n,27,stY+7,{align:'center'});doc.setFontSize(10);doc.setFont('helvetica','bold');doc.setTextColor(42,26,10);doc.text(s.t,38,stY+4);doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(107,90,74);doc.text(s.d,38,stY+13);stY+=25;});doc.setFillColor(237,230,214);doc.roundedRect(20,stY+4,pw-40,24,3,3,'FD');doc.setFontSize(10);doc.setFont('helvetica','bold');doc.setTextColor(42,26,10);doc.text('Need help? Message us on Etsy!',pw/2,stY+18,{align:'center'});doc.setFillColor(196,168,130);doc.rect(0,ph-10,pw,10,'F');doc.setFontSize(8);doc.setFont('helvetica','italic');doc.setTextColor(255,255,255);doc.text('LoveyTemplatesCo',pw/2,ph-3,{align:'center'});return doc;}
+
+function generateEtsyListing(info){var type=info.type,title=info.title,size=info.size;var kwMap={'Invitation':'Invitation Template, Editable Invite Canva, Printable Invitation Digital Download','Birthday Invitation':'Birthday Invitation Template, Editable Birthday Invite, Birthday Printable Digital','Bridal / Bachelorette':'Bachelorette Template, Bridal Shower Invite Canva, Bachelorette Party Printable','Baby Shower':'Baby Shower Invitation Template, Editable Baby Shower Invite, Baby Shower Printable','Itinerary / Planner':'Itinerary Template Canva, Weekend Planner Printable, Editable Itinerary Download','Other Template':'Canva Template Editable, Printable Digital Download, Instant Download'};var kw=kwMap[type]||kwMap['Other Template'];var et=title+', '+kw;if(et.length>140)et=et.substring(0,137)+'...';var desc='\u2728 '+title.toUpperCase()+'\n\nPlanning the perfect celebration just got easier! This Canva template is crafted with love so you can show up looking like you hired a designer.\n\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\u2705 WHAT YOU GET\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\u2726 Fully editable Canva template (free account works!)\n\u2726 Customize name, date, time, venue and all details\n\u2726 Swap colors and fonts to match your style\n\u2726 '+size+' print-ready\n\u2726 Download as PDF, PNG, or JPG\n\u2726 Instant digital download\n\u2726 Lifetime access\n\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udcf2 HOW IT WORKS\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n1\ufe0f\u20e3 Purchase this listing\n2\ufe0f\u20e3 Get your Canva link via Etsy message\n3\ufe0f\u20e3 Open and customize in Canva (free!)\n4\ufe0f\u20e3 Download and print or share digitally\n\n\u26a0\ufe0f DIGITAL product. No physical item shipped.\n\u00a9 LoveyTemplatesCo — Personal use only.';var tagBase={'Invitation':['invitation template','canva template','editable invitation','printable invitation','digital download','instant download','party invitation','custom invitation','canva invitation','printable party','party printable','digital template','editable canva'],'Birthday Invitation':['birthday invitation','birthday canva','editable birthday','birthday printable','party invitation','digital download','instant download','birthday party','printable birthday','canva birthday','birthday template','party template','digital invitation'],'Bridal / Bachelorette':['bachelorette template','bachelorette itinerary','bridal shower invite','bach weekend','bachelorette party','canva template','editable template','digital download','instant download','bridal shower','bach party','girls trip','bridal template'],'Baby Shower':['baby shower invitation','baby shower template','editable baby shower','baby shower canva','digital download','instant download','baby shower invite','neutral baby shower','printable baby','baby shower printable','baby template','shower invitation','canva baby'],'Other Template':['canva template','editable template','digital download','instant download','printable template','custom template','digital template','party printable','canva printable','editable printable','printable design','canva design','digital design']};var tags=(tagBase[type]||tagBase['Other Template']).slice(0,13);var attrs='Category: Paper & Party Supplies > Invitations\nType: Digital Download\nOccasion: '+type+'\n\nPRICING:\nLaunch: $4.99\nAfter 10 reviews: $6.99\nAfter 25 reviews: $9.99';return{title:et,desc:desc,tags:tags.join('\n'),attrs:attrs};}
+
+document.getElementById('genBtn').onclick=async function(){
+  var title=document.getElementById('listTitle').value.trim();
+  var type=document.getElementById('tType').value;
+  var size=document.getElementById('dSize').value;
+  var vibe=document.getElementById('vibe').value.trim();
+  var canvaLink=document.getElementById('canvaLink').value.trim();
+  if(!imgData){showErr('Please upload your design PNG first.');return;}
+  if(!title){showErr('Please enter your listing title.');return;}
+  showErr('');currentTitle=title;
+  document.getElementById('genBtn').disabled=true;
+  document.getElementById('progressBox').className='progress show';
+  document.getElementById('resultsBox').className='results';
+  document.getElementById('etsyOutput').className='etsy-output';
+  genCanvases=[];pdfDoc=null;
+  var info={title:title,type:type,size:size,vibe:vibe,canvaLink:canvaLink};
+  async function step(i,p){document.getElementById('pbar').style.width=p+'%';var html='';for(var j=0;j<STEPS.length;j++){html+='<div class="step-row'+(j<i?' done':j===i?' active':'')+'" ><div class="dot"></div>'+STEPS[j]+'</div>';}document.getElementById('stepList').innerHTML=html;await sleep(150);}
+  try{
+    await step(0,5);
+    await step(1,13);var p1=buildPrompt(vibe,selSurface,0);var bg1=await getAIBg(p1);genCanvases.push({c:await makeScene1(bg1),label:'Scene 1 Flat Lay'});
+    await step(2,23);var p2=buildPrompt(vibe,selSurface,1);var bg2=await getAIBg(p2);genCanvases.push({c:await makeScene2(bg2),label:'Scene 2 Angled'});
+    await step(3,33);var p3=buildPrompt(vibe,selSurface,2);var bg3=await getAIBg(p3);genCanvases.push({c:await makeScene3(bg3),label:'Scene 3 Closeup'});
+    await step(4,45);var p4=buildPrompt(vibe,selSurface,0);var bg4=await getAIBg(p4);genCanvases.push({c:await makeCanvaScene(info,bg4),label:'Edit on Canva'});
+    await step(5,58);var p5=buildPrompt(vibe,selSurface,1);var bg5=await getAIBg(p5);var p6=buildPrompt(vibe,selSurface,2);var bg6=await getAIBg(p6);genCanvases.push({c:await makePrintDigital(info,bg5,bg6),label:'Print and Digital'});
+    await step(6,72);genCanvases.push({c:await makeIncluded(info),label:'Whats Included'});
+    await step(7,84);pdfDoc=generateBuyerPDF(info);
+    await step(8,94);etsyData=generateEtsyListing(info);
+    await step(9,100);await sleep(300);showResults();
+  }catch(e){showErr('Error: '+e.message);console.error(e);}
+  document.getElementById('genBtn').disabled=false;document.getElementById('progressBox').className='progress';
+};
+function showResults(){var grid=document.getElementById('imgGrid');grid.innerHTML='';genCanvases.forEach(function(item,i){var url=item.c.toDataURL('image/png');var card=document.createElement('div');card.className='img-card';var a=document.createElement('a');a.href=url;a.download='LoveyTemplatesCo_'+item.label.replace(/\s/g,'_')+'.png';var img=document.createElement('img');img.src=url;img.alt=item.label;a.appendChild(img);var foot=document.createElement('div');foot.className='img-foot';foot.innerHTML='<span>'+(i+1)+'. '+item.label+'</span>';var starBtn=document.createElement('button');starBtn.className='star-btn';starBtn.textContent=isStarred(currentTitle,item.label)?'\u2b50':'\u2606';(function(btn,lbl,u){btn.onclick=function(){var added=starImage(currentTitle,lbl,u);btn.textContent=added?'\u2b50':'\u2606';};})(starBtn,item.label,url);var saveA=document.createElement('a');saveA.href=url;saveA.download='LoveyTemplatesCo_'+item.label.replace(/\s/g,'_')+'.png';saveA.className='save-lnk';saveA.textContent='Save';foot.appendChild(starBtn);foot.appendChild(saveA);card.appendChild(a);card.appendChild(foot);grid.appendChild(card);});document.getElementById('resultsBox').className='results show';document.getElementById('resultsBox').scrollIntoView({behavior:'smooth'});}
+document.getElementById('dlAllBtn').onclick=async function(){for(var i=0;i<genCanvases.length;i++){var a=document.createElement('a');a.href=genCanvases[i].c.toDataURL('image/png');a.download='LoveyTemplatesCo_'+genCanvases[i].label.replace(/\s/g,'_')+'.png';a.click();await sleep(400);}};
+document.getElementById('dlPdfBtn').onclick=function(){if(!pdfDoc){alert('Generate first.');return;}pdfDoc.save('LoveyTemplatesCo_BuyerGuide.pdf');};
+document.getElementById('showEtsyBtn').onclick=function(){var out=document.getElementById('etsyOutput');var showing=out.className.indexOf('show')>-1;if(showing){out.className='etsy-output';return;}document.getElementById('etsyTitle').textContent=etsyData.title;document.getElementById('etsyDesc').textContent=etsyData.desc;document.getElementById('etsyTags').textContent=etsyData.tags;document.getElementById('etsyAttrs').textContent=etsyData.attrs;out.className='etsy-output show';out.scrollIntoView({behavior:'smooth'});};
+</script>
+</body>
+</html>.star-btn{background:none;border:none;cursor:pointer;font-size:18px;padding:2px 4px;line-height:1;}
 .save-lnk{background:#C45C5C;color:#fff;border:none;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;display:inline-block;}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap;}
 .action-btn{flex:1;padding:14px;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;min-width:140px;}
