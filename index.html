@@ -352,7 +352,223 @@ async function makeCanvaScene(info,bgUrl){var c=mkC();var ctx=c.getContext('2d')
 async function makePrintDigital(info,bgL,bgR){var c=mkC();var ctx=c.getContext('2d');ctx.fillStyle='#1A1A1A';ctx.fillRect(0,0,W,H);var hw=W/2;if(bgL){ctx.save();ctx.beginPath();ctx.rect(0,0,hw,H);ctx.clip();var il=new Image();await new Promise(function(r){il.onload=function(){var sc=Math.max(hw/il.width,H/il.height);ctx.drawImage(il,0,0,il.width*sc,il.height*sc);r();};il.onerror=r;il.src=bgL;});ctx.restore();}ctx.fillStyle='rgba(0,0,0,0.42)';ctx.fillRect(0,0,hw,H);if(bgR){ctx.save();ctx.beginPath();ctx.rect(hw,0,hw,H);ctx.clip();var ir=new Image();await new Promise(function(r){ir.onload=function(){var sc=Math.max(hw/ir.width,H/ir.height);ctx.drawImage(ir,hw,0,ir.width*sc,ir.height*sc);r();};ir.onerror=r;ir.src=bgR;});ctx.restore();}ctx.fillStyle='rgba(0,0,0,0.48)';ctx.fillRect(hw,0,hw,H);ctx.strokeStyle='rgba(255,255,255,0.35)';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(hw,80);ctx.lineTo(hw,H-80);ctx.stroke();var lp=90,ty=220;ctx.fillStyle='white';ctx.textAlign='left';ctx.shadowColor='rgba(0,0,0,0.5)';ctx.shadowBlur=14;ctx.font='700 '+(W*0.036)+'px sans-serif';ctx.fillText('PRINT AT',lp,ty);ctx.font='700 '+(W*0.074)+'px Georgia,serif';ctx.fillText('HOME',lp,ty+W*0.077);ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.fillStyle='rgba(255,255,255,0.14)';ctx.beginPath();ctx.roundRect(lp,ty+W*0.105,hw-lp-40,170,10);ctx.fill();ctx.fillStyle='rgba(255,255,255,0.9)';ctx.font='300 '+(W*0.026)+'px sans-serif';ctx.fillText('Download as PDF with bleed lines',lp+22,ty+W*0.105+62);ctx.fillText('and trim marks for home printing.',lp+22,ty+W*0.105+106);var dw2=hw*0.44,dh2=dw2*1.3,dx2=lp,dy2=ty+W*0.105+210;ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=30;ctx.shadowOffsetY=10;ctx.fillStyle='white';ctx.beginPath();ctx.roundRect(dx2,dy2,dw2,dh2,8);ctx.fill();ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;if(imgData){ctx.save();ctx.beginPath();ctx.roundRect(dx2,dy2,dw2,dh2,8);ctx.clip();var d1=new Image();await new Promise(function(r){d1.onload=function(){ctx.drawImage(d1,dx2,dy2,dw2,dh2);r();};d1.onerror=r;d1.src=imgData;});ctx.restore();}var rp=hw+70;ctx.fillStyle='white';ctx.textAlign='left';ctx.shadowColor='rgba(0,0,0,0.5)';ctx.shadowBlur=14;ctx.font='700 '+(W*0.036)+'px sans-serif';ctx.fillText('USE IT',rp,ty);ctx.font='700 '+(W*0.074)+'px Georgia,serif';ctx.fillText('DIGITALLY',rp,ty+W*0.077);ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.fillStyle='rgba(255,255,255,0.14)';ctx.beginPath();ctx.roundRect(rp,ty+W*0.105,hw-70-40,170,10);ctx.fill();ctx.fillStyle='rgba(255,255,255,0.9)';ctx.font='300 '+(W*0.026)+'px sans-serif';ctx.fillText('Download as high quality PNG or',rp+22,ty+W*0.105+62);ctx.fillText('JPG and share digitally.',rp+22,ty+W*0.105+106);var pw2=hw*0.28,ph3=pw2*2.1,px2=rp+hw*0.1,py3=dy2;ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=30;ctx.shadowOffsetY=10;ctx.fillStyle='#1C1C1E';ctx.beginPath();ctx.roundRect(px2,py3,pw2,ph3,pw2*0.12);ctx.fill();ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;ctx.fillStyle='white';ctx.beginPath();ctx.roundRect(px2+pw2*0.06,py3+ph3*0.04,pw2*0.88,ph3*0.88,pw2*0.08);ctx.fill();if(imgData){var psw=pw2*0.8,psh=psw*1.3,psx=px2+pw2*0.1,psy=py3+ph3*0.09;ctx.save();ctx.beginPath();ctx.roundRect(psx,psy,psw,psh,6);ctx.clip();var d22=new Image();await new Promise(function(r){d22.onload=function(){ctx.drawImage(d22,psx,psy,psw,psh);r();};d22.onerror=r;d22.src=imgData;});ctx.restore();}drawLogo(ctx,W-80,H-55,W*0.022,'white',0.62);return c;}
 
 
-function generateBuyerPDF(info){var doc=new window.jspdf.jsPDF({orientation:'portrait',unit:'mm',format:'a4'});var pw=210,ph=297;doc.setFillColor(245,240,232);doc.rect(0,0,pw,ph,'F');doc.setFillColor(196,168,130);doc.rect(0,0,pw,10,'F');doc.setFontSize(26);doc.setFont('helvetica','bolditalic');doc.setTextColor(42,26,10);doc.text('LoveyTemplatesCo',pw/2,30,{align:'center'});doc.setDrawColor(196,168,130);doc.setLineWidth(0.8);doc.line(30,38,pw-30,38);doc.setFontSize(11);doc.setFont('helvetica','italic');doc.setTextColor(107,90,74);var msgs=['You just made the best decision for your party planning!','','Your template is waiting for you - just click the link below,','make it yours, and get ready to wow your guests.','','From our creative corner to your celebration - thank you!'];var my=50;msgs.forEach(function(m){doc.text(m,pw/2,my,{align:'center'});my+=7;});doc.setDrawColor(196,168,130);doc.setLineWidth(0.5);doc.line(30,my+3,pw-30,my+3);doc.setFontSize(15);doc.setFont('helvetica','bold');doc.setTextColor(42,26,10);doc.text(info.title,pw/2,my+16,{align:'center'});doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(196,92,92);doc.text('YOUR CANVA TEMPLATE LINK',pw/2,my+30,{align:'center'});doc.setFillColor(253,245,243);doc.setDrawColor(196,92,92);doc.setLineWidth(1);doc.roundedRect(20,my+34,pw-40,22,3,3,'FD');doc.setFontSize(10);doc.setFont('helvetica','normal');doc.setTextColor(30,58,110);doc.textWithLink(info.canvaLink||'Your Canva link here',pw/2,my+48,{align:'center',url:info.canvaLink||'#'});var sy=my+68;doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(196,92,92);doc.text('HOW TO ACCESS',pw/2,sy,{align:'center'});var steps=[{n:'1',t:'Purchase confirmed',d:'Check email for confirmation.'},{n:'2',t:'Click the Canva link above',d:'Sign up free at canva.com if needed.'},{n:'3',t:'Edit your template',d:'Customize name, date, time, venue.'},{n:'4',t:'Download and share',d:'PDF, PNG, or JPG to print or share.'}];var stY=sy+10;steps.forEach(function(s){doc.setFillColor(196,168,130);doc.circle(27,stY+4,5,'F');doc.setFontSize(9);doc.setFont('helvetica','bold');doc.setTextColor(255,255,255);doc.text(s.n,27,stY+7,{align:'center'});doc.setFontSize(10);doc.setFont('helvetica','bold');doc.setTextColor(42,26,10);doc.text(s.t,38,stY+4);doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(107,90,74);doc.text(s.d,38,stY+13);stY+=25;});doc.setFillColor(237,230,214);doc.roundedRect(20,stY+4,pw-40,24,3,3,'FD');doc.setFontSize(10);doc.setFont('helvetica','bold');doc.setTextColor(42,26,10);doc.text('Need help? Message us on Etsy!',pw/2,stY+18,{align:'center'});doc.setFillColor(196,168,130);doc.rect(0,ph-10,pw,10,'F');doc.setFontSize(8);doc.setFont('helvetica','italic');doc.setTextColor(255,255,255);doc.text('LoveyTemplatesCo',pw/2,ph-3,{align:'center'});return doc;}
+function generateBuyerPDF(info){
+  var doc=new window.jspdf.jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  var pw=210,ph=297,cx=pw/2;
+  // palette
+  var cream=[255,251,247],blush=[206,127,141],blushInk=[168,90,105],sage=[126,156,132],
+      gold=[216,178,106],lav=[136,116,172],ink=[74,59,65],inkSoft=[140,118,128],butter=[255,243,221];
+  function fill(c){doc.setFillColor(c[0],c[1],c[2]);}
+  function stroke(c){doc.setDrawColor(c[0],c[1],c[2]);}
+  function txt(c){doc.setTextColor(c[0],c[1],c[2]);}
+
+  // ---- background + soft corner tints ----
+  fill(cream);doc.rect(0,0,pw,ph,'F');
+  doc.setGState(new doc.GState({opacity:0.12}));
+  fill(blush);doc.circle(18,26,42,'F');
+  fill(sage);doc.circle(pw-18,30,40,'F');
+  fill(lav);doc.circle(20,ph-30,40,'F');
+  fill(butter);doc.circle(pw-20,ph-26,44,'F');
+  doc.setGState(new doc.GState({opacity:1}));
+
+  // ---- doodle helpers ----
+  function star(x,y,r){stroke(gold);doc.setLineWidth(0.7);var pts=[];for(var i=0;i<10;i++){var ang=Math.PI/5*i-Math.PI/2;var rr=(i%2?r*0.42:r);pts.push([x+Math.cos(ang)*rr,y+Math.sin(ang)*rr]);}for(var i=0;i<10;i++){var a=pts[i],b=pts[(i+1)%10];doc.line(a[0],a[1],b[0],b[1]);}}
+  function sparkle(x,y,r){stroke(gold);doc.setLineWidth(0.6);doc.line(x-r,y,x+r,y);doc.line(x,y-r,x,y+r);doc.line(x-r*0.6,y-r*0.6,x+r*0.6,y+r*0.6);doc.line(x-r*0.6,y+r*0.6,x+r*0.6,y-r*0.6);}
+  function heart(x,y,s){fill(blush);doc.circle(x-s*0.5,y-s*0.3,s*0.55,'F');doc.circle(x+s*0.5,y-s*0.3,s*0.55,'F');doc.triangle(x-s,y-s*0.1,x+s,y-s*0.1,x,y+s,'F');}
+  function envelope(x,y,w){var h=w*0.66;stroke(inkSoft);doc.setLineWidth(0.6);fill([255,255,255]);doc.roundedRect(x,y,w,h,1.5,1.5,'FD');doc.line(x,y,x+w/2,y+h*0.55);doc.line(x+w,y,x+w/2,y+h*0.55);heart(x+w/2,y+h*0.62,1.4);}
+  function arrow(x,y){stroke(sage);doc.setLineWidth(1);doc.setLineCap('round');doc.lines([[6,-3],[6,3],[5,-2]],x,y,[1,1],'S',false);
+    // simple curved arrow
+    doc.setLineWidth(1.1);doc.line(x,y,x+11,y+2);doc.line(x+11,y+2,x+7,y-1.5);doc.line(x+11,y+2,x+7.5,y+5);}
+
+  // ---- line-art botanical helpers ----
+  // a slim curved stem — returns the path points so things can attach to it
+  function sprig(x,y,ang,len,curve,col,lw){
+    stroke(col);doc.setLineWidth(lw||0.5);doc.setLineCap('round');
+    var steps=12,px=x,py=y,pts=[[x,y]];
+    for(var i=1;i<=steps;i++){
+      var t=i/steps;
+      var nx=x+Math.cos(ang)*len*t - Math.sin(ang)*curve*Math.sin(t*Math.PI);
+      var ny=y+Math.sin(ang)*len*t + Math.cos(ang)*curve*Math.sin(t*Math.PI);
+      doc.line(px,py,nx,ny);pts.push([nx,ny]);px=nx;py=ny;
+    }
+    return {x:px,y:py,pts:pts};
+  }
+  // a small outlined leaf at a point along a direction
+  function leaf(x,y,ang,len,col,lw){
+    stroke(col);doc.setLineWidth(lw||0.5);doc.setLineCap('round');
+    var ex=x+Math.cos(ang)*len, ey=y+Math.sin(ang)*len;
+    var c1x=x+Math.cos(ang+0.6)*len*0.55, c1y=y+Math.sin(ang+0.6)*len*0.55;
+    var c2x=x+Math.cos(ang-0.6)*len*0.55, c2y=y+Math.sin(ang-0.6)*len*0.55;
+    // two curved sides via short line approximation of a bezier
+    function curveTo(ax,ay,cx1,cy1,bx,by){var s=6,px=ax,py=ay;for(var i=1;i<=s;i++){var t=i/s,mt=1-t;var qx=mt*mt*ax+2*mt*t*cx1+t*t*bx,qy=mt*mt*ay+2*mt*t*cy1+t*t*by;doc.line(px,py,qx,qy);px=qx;py=qy;}}
+    curveTo(x,y,c1x,c1y,ex,ey);
+    curveTo(x,y,c2x,c2y,ex,ey);
+    // center vein
+    doc.setLineWidth((lw||0.5)*0.7);doc.line(x,y,ex,ey);
+  }
+  // a leafy stem: leaves sit ON the stem path and follow its local direction
+  function leafyStem(x,y,ang,len,curve,col){
+    var s=sprig(x,y,ang,len,curve,col,0.5);
+    var pts=s.pts, n=pts.length;
+    // place 3 leaf pairs at even points along the path (skip the very base and tip)
+    [0.28,0.5,0.72].forEach(function(f){
+      var idx=Math.round(f*(n-1));
+      var p=pts[idx], prev=pts[Math.max(0,idx-1)];
+      var tang=Math.atan2(p[1]-prev[1], p[0]-prev[0]); // local stem direction
+      var sz=5.2*(1-f*0.35);
+      leaf(p[0],p[1],tang+0.7,sz,col,0.4);
+      leaf(p[0],p[1],tang-0.7,sz,col,0.4);
+    });
+    return s;
+  }
+  // a simple 5-petal outline flower with tiny center
+  function lineFlower(x,y,r,petalCol,coreCol){
+    stroke(petalCol);doc.setLineWidth(0.5);doc.setLineCap('round');
+    for(var i=0;i<5;i++){
+      var a=Math.PI*2/5*i - Math.PI/2;
+      var px=x+Math.cos(a)*r, py=y+Math.sin(a)*r;
+      var lc=x+Math.cos(a-0.5)*r*0.7, lcy=y+Math.sin(a-0.5)*r*0.7;
+      var rc=x+Math.cos(a+0.5)*r*0.7, rcy=y+Math.sin(a+0.5)*r*0.7;
+      function cv(ax,ay,cx1,cy1,bx,by){var s=6,qx=ax,qy=ay;for(var k=1;k<=s;k++){var t=k/s,mt=1-t;var nx=mt*mt*ax+2*mt*t*cx1+t*t*bx,ny=mt*mt*ay+2*mt*t*cy1+t*t*by;doc.line(qx,qy,nx,ny);qx=nx;qy=ny;}}
+      cv(x,y,lc,lcy,px,py);
+      cv(x,y,rc,rcy,px,py);
+    }
+    fill(coreCol||gold);doc.circle(x,y,r*0.16,'F');
+  }
+  // tiny closed bud on a short stem
+  function lineBud(x,y,ang,col){
+    stroke(col);doc.setLineWidth(0.5);doc.setLineCap('round');
+    var ex=x+Math.cos(ang)*4,ey=y+Math.sin(ang)*4;
+    doc.line(x,y,ex,ey);
+    function cv(ax,ay,cx1,cy1,bx,by){var s=6,qx=ax,qy=ay;for(var k=1;k<=s;k++){var t=k/s,mt=1-t;var nx=mt*mt*ax+2*mt*t*cx1+t*t*bx,ny=mt*mt*ay+2*mt*t*cy1+t*t*by;doc.line(qx,qy,nx,ny);qx=nx;qy=ny;}}
+    var tx=ex+Math.cos(ang)*3.2,ty=ey+Math.sin(ang)*3.2;
+    cv(ex,ey,ex+Math.cos(ang+0.9)*3,ey+Math.sin(ang+0.9)*3,tx,ty);
+    cv(ex,ey,ex+Math.cos(ang-0.9)*3,ey+Math.sin(ang-0.9)*3,tx,ty);
+  }
+  // corner spray of line botanicals; dx,dy inward direction — kept simple and airy
+  // corner laurel: a fine quarter-arc hugging the corner with evenly spaced
+  // identical leaf pairs and one flower seated exactly on the corner diagonal.
+  function cornerLaurel(cxn,cyn,dx,dy){
+    var green=[150,180,154], R=30, segs=26;
+    var a0 = (dx>0 ? (dy>0?0:-Math.PI/2) : (dy>0?Math.PI/2:Math.PI));
+    var a1 = a0 + Math.PI/2;
+    stroke(green);doc.setLineWidth(0.45);doc.setLineCap('round');
+    var px=cxn+Math.cos(a0)*R, py=cyn+Math.sin(a0)*R;
+    for(var i=1;i<=segs;i++){
+      var t=a0+(a1-a0)*i/segs;
+      var nx=cxn+Math.cos(t)*R, ny=cyn+Math.sin(t)*R;
+      doc.line(px,py,nx,ny);px=nx;py=ny;
+    }
+    // identical leaf pairs at even angles (center left clear for the flower)
+    [0.12,0.28,0.72,0.88].forEach(function(f){
+      var t=a0+(a1-a0)*f;
+      var lx=cxn+Math.cos(t)*R, ly=cyn+Math.sin(t)*R;
+      var tang=t+Math.PI/2;
+      leaf(lx,ly,tang+0.65,4.6,green,0.4);
+      leaf(lx,ly,tang-0.65,4.6,green,0.4);
+    });
+    // one flower centered on the corner diagonal
+    var tm=a0+(a1-a0)*0.5;
+    lineFlower(cxn+Math.cos(tm)*R, cyn+Math.sin(tm)*R, 5, blush, gold);
+    // a single deliberate gold dot just beyond it
+    doc.setGState(new doc.GState({opacity:0.65}));fill(gold);
+    doc.circle(cxn+Math.cos(tm)*(R+8), cyn+Math.sin(tm)*(R+8),0.8,'F');
+    doc.setGState(new doc.GState({opacity:1}));
+  }
+
+  // ---- corner laurels (anchored at the true page corners) ----
+  cornerLaurel(0,0,1,1);
+  cornerLaurel(pw,0,-1,1);
+  cornerLaurel(0,ph-11,1,-1);
+  cornerLaurel(pw,ph-11,-1,-1);
+
+  // ---- header ----
+  var y=24;
+  doc.setFont('helvetica','bolditalic');doc.setFontSize(30);
+  // two-tone brand: Lovey (blush) + TemplatesCo (ink)
+  doc.setFontSize(30);
+  var lead='Lovey',rest='TemplatesCo';
+  var wl=doc.getTextWidth(lead),wr=doc.getTextWidth(rest);var startx=cx-(wl+wr)/2;
+  txt(blush);doc.text(lead,startx,y,{align:'left'});
+  txt(ink);doc.text(rest,startx+wl,y,{align:'left'});
+  doc.setFont('helvetica','normal');doc.setFontSize(9);txt(sage);
+  doc.text('T E M P L A T E S   M A D E   W I T H   L O V E',cx,y+7,{align:'center'});
+
+  // ---- WOOHOO hero ----
+  star(38,48,4);star(30,58,2.6);sparkle(52,42,3);
+  star(pw-38,48,4);star(pw-30,58,2.6);sparkle(pw-52,42,3);
+  doc.setFont('helvetica','bold');doc.setFontSize(46);txt(ink);
+  doc.text('WOOHOO!',cx,58,{align:'center'});
+  doc.setFontSize(15);txt(blushInk);doc.setFont('helvetica','bold');
+  doc.text('YOUR TEMPLATE IS READY TO EDIT!',cx,72,{align:'center'});
+  doc.setFont('helvetica','normal');doc.setFontSize(10.5);txt(inkSoft);
+  doc.text('Everything happens right here in Canva — no waiting on email.',cx,80,{align:'center'});
+
+  // ---- template name ----
+  doc.setFont('helvetica','bolditalic');doc.setFontSize(17);txt(ink);
+  doc.text(info.title||'Your Template',cx,95,{align:'center'});
+
+  // ---- Canva link box ----
+  envelope(pw-46,100,20);
+  doc.setFont('helvetica','bold');doc.setFontSize(12);txt(blush);
+  doc.text('TAP YOUR CANVA TEMPLATE LINK',cx,108,{align:'center'});
+  fill([253,245,243]);stroke(blush);doc.setLineWidth(1);
+  doc.roundedRect(28,112,pw-56,18,4,4,'FD');
+  doc.setFont('helvetica','normal');doc.setFontSize(11);txt([46,90,140]);
+  var link=info.canvaLink||'Your Canva link will appear here';
+  doc.textWithLink(link,cx,123,{align:'center',url:info.canvaLink||'#'});
+
+  // ---- HOW TO EDIT steps ----
+  var sy=144;
+  doc.setFont('helvetica','bold');doc.setFontSize(13);txt(sage);
+  doc.text('HOW TO EDIT IN CANVA',cx,sy,{align:'center'});
+  sparkle(cx-52,sy-1.5,2.4);sparkle(cx+52,sy-1.5,2.4);
+  var steps=[
+    ['1','Open the link','It opens your design straight in Canva — free account is fine.'],
+    ['2','Make it yours','Change the names, date, time, venue, colors and fonts.'],
+    ['3','Download','Hit Share, then Download as PDF, PNG, or JPG.'],
+    ['4','Print or share','Print at home, send to a print shop, or text it out.']
+  ];
+  var stY=sy+10,rowH=17;
+  var altColors=[sage,blush,lav,gold];
+  steps.forEach(function(s,i){
+    var c=altColors[i%4];
+    fill(c);doc.circle(28,stY+2,6,'F');
+    doc.setFont('helvetica','bold');doc.setFontSize(11);txt([255,255,255]);
+    doc.text(s[0],28,stY+3.6,{align:'center'});
+    doc.setFont('helvetica','bold');doc.setFontSize(12);txt(ink);
+    doc.text(s[1],40,stY+1,{align:'left'});
+    doc.setFont('helvetica','normal');doc.setFontSize(9.5);txt(inkSoft);
+    doc.text(s[2],40,stY+7,{align:'left'});
+    stY+=rowH;
+  });
+
+  // ---- didn't work / help box ----
+  var hy=stY+2;
+  fill(butter);stroke(gold);doc.setLineWidth(0.8);
+  doc.roundedRect(28,hy,pw-56,26,4,4,'FD');
+  heart(38,hy+13,2.2);
+  doc.setFont('helvetica','bold');doc.setFontSize(11);txt(blushInk);
+  doc.text('Need a hand?',48,hy+10,{align:'left'});
+  doc.setFont('helvetica','normal');doc.setFontSize(9.5);txt(inkSoft);
+  doc.text('Message us anytime on Etsy — we reply fast and love helping!',48,hy+18,{align:'left'});
+
+  // ---- thank you + footer ----
+  var ty=hy+36;
+  // decorative hearts kept out in the margins, clear of text
+  doc.setFont('helvetica','italic');doc.setFontSize(11);txt(inkSoft);
+  doc.text('From our little studio to your celebration \u2014 thank you!',cx,ty,{align:'center'});
+  // review nudge (no inline glyph that renders oddly)
+  doc.setFont('helvetica','bold');doc.setFontSize(10);txt(blush);
+  doc.text('If you love it, a 5-star review makes our whole day!',cx,ty+8,{align:'center'});
+
+  // footer bar
+  fill(blush);doc.rect(0,ph-11,pw,11,'F');
+  doc.setFont('helvetica','bolditalic');doc.setFontSize(9);txt([255,255,255]);
+  doc.text('LoveyTemplatesCo   \u00b7   Templates Made With Love',cx,ph-4,{align:'center'});
+
+  return doc;
+}
 
 function generateEtsyListing(info){var type=info.type,title=info.title,size=info.size;var kwMap={'Invitation':'Invitation Template, Editable Invite Canva, Printable Invitation Digital Download','Birthday Invitation':'Birthday Invitation Template, Editable Birthday Invite, Birthday Printable Digital','Bridal / Bachelorette':'Bachelorette Template, Bridal Shower Invite Canva, Bachelorette Party Printable','Baby Shower':'Baby Shower Invitation Template, Editable Baby Shower Invite, Baby Shower Printable','Itinerary / Planner':'Itinerary Template Canva, Weekend Planner Printable, Editable Itinerary Download','Other Template':'Canva Template Editable, Printable Digital Download, Instant Download'};var kw=kwMap[type]||kwMap['Other Template'];var et=title+', '+kw;if(et.length>140)et=et.substring(0,137)+'...';var desc='\u2728 '+title.toUpperCase()+'\n\nPlanning the perfect celebration just got easier! This Canva template is crafted with love so you can show up looking like you hired a designer.\n\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\u2705 WHAT YOU GET\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\u2726 Fully editable Canva template (free account works!)\n\u2726 Customize name, date, time, venue and all details\n\u2726 Swap colors and fonts to match your style\n\u2726 '+size+' print-ready\n\u2726 Download as PDF, PNG, or JPG\n\u2726 Instant digital download\n\u2726 Lifetime access\n\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udcf2 HOW IT WORKS\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n1\ufe0f\u20e3 Purchase this listing\n2\ufe0f\u20e3 Get your Canva link via Etsy message\n3\ufe0f\u20e3 Open and customize in Canva (free!)\n4\ufe0f\u20e3 Download and print or share digitally\n\n\u26a0\ufe0f DIGITAL product. No physical item shipped.\n\u00a9 LoveyTemplatesCo — Personal use only.';var tagBase={'Invitation':['invitation template','canva template','editable invitation','printable invitation','digital download','instant download','party invitation','custom invitation','canva invitation','printable party','party printable','digital template','editable canva'],'Birthday Invitation':['birthday invitation','birthday canva','editable birthday','birthday printable','party invitation','digital download','instant download','birthday party','printable birthday','canva birthday','birthday template','party template','digital invitation'],'Bridal / Bachelorette':['bachelorette template','bachelorette itinerary','bridal shower invite','bach weekend','bachelorette party','canva template','editable template','digital download','instant download','bridal shower','bach party','girls trip','bridal template'],'Baby Shower':['baby shower invitation','baby shower template','editable baby shower','baby shower canva','digital download','instant download','baby shower invite','neutral baby shower','printable baby','baby shower printable','baby template','shower invitation','canva baby'],'Other Template':['canva template','editable template','digital download','instant download','printable template','custom template','digital template','party printable','canva printable','editable printable','printable design','canva design','digital design']};var tags=(tagBase[type]||tagBase['Other Template']).slice(0,13);var attrs='Category: Paper & Party Supplies > Invitations\nType: Digital Download\nOccasion: '+type+'\n\nPRICING:\nLaunch: $4.99\nAfter 10 reviews: $6.99\nAfter 25 reviews: $9.99';return{title:et,desc:desc,tags:tags.join('\n'),attrs:attrs};}
 
