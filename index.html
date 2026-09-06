@@ -294,15 +294,32 @@ function buildPrompt(vibe,themeKey,sceneIndex){
   var parts=[];
 
   if(themeKey==='custom'){
-    // Your exact words go first, unedited — nothing overrides them
-    parts.push(vibe);
-    // Then the enriched versions reinforce the same ideas
-    if(kw.props.length) parts.push(kw.props.join(', '));
+    // Users often type labels like "Colors: pink, Props: glitter" — strip the labels,
+    // keep the words. Label words dilute the image prompt and produce empty scenes.
+    var cleaned=(vibe||'')
+      .replace(/\b(colors?|props?|moods?|vibes?|themes?)\s*[:\-]\s*/gi,'')
+      .replace(/[\r\n]+/g,', ')
+      .replace(/\s*,\s*/g,', ')
+      .replace(/(,\s*)+/g,', ')
+      .replace(/^[,\s]+|[,\s]+$/g,'');
+    // Give each of the three scenes its own surface so they don't come out identical/flat
+    var surfaceVariants=[
+      'luxurious draped silk fabric surface with soft folds catching the light',
+      'polished marble tabletop with scattered decorative accents and soft shadows',
+      'rich velvet fabric surface with dramatic texture and depth'
+    ];
+    // Build a full preset-quality scene from the user's own words
+    var sceneBits=['lavishly styled product photography scene on '+surfaceVariants[idx]];
+    if(kw.props.length) sceneBits.push(kw.props.join(', '));
+    if(cleaned) sceneBits.push(cleaned);
+    if(kw.leftover) sceneBits.push(kw.leftover);
+    sceneBits.push('abundant decorative props filling the frame, arranged around an empty center space');
+    parts.push(sceneBits.join(', '));
     if(kw.colors.length) parts.push(kw.colors.join(', '));
-    if(kw.mood) parts.push(kw.mood);
-    // Minimal neutral scaffold — a surface and a styled arrangement, nothing thematic
-    parts.push('beautifully styled arrangement on a clean surface, props arranged around empty center space');
+    parts.push(kw.mood||'festive celebratory atmosphere, rich abundant styling, beautiful depth of field');
     parts.push(angles[idx]);
+    // Restate the palette last so it wins
+    if(kw.colors.length) parts.push('entire color palette is '+kw.colors.join(' and '));
     parts.push(quality);
     return {main:parts.join(', ')};
   }
