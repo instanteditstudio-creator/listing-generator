@@ -290,7 +290,7 @@ function buildPrompt(vibe,themeKey,sceneIndex){
   var angles=['overhead flat lay photography, birds-eye view, looking straight down',
               '45-degree angled product photography, editorial diagonal composition',
               'close-up detail photography, shallow depth of field, soft creamy bokeh'];
-  var quality='photorealistic styled product photography, professional commercial photo, beautiful lighting, no text, no words, no letters, no faces, no people, no hands';
+  var quality='photorealistic styled product photography, professional commercial photo, beautiful lighting, natural realistic proportions, physically accurate well-formed objects, props softly out of focus in the background, crisp clean surfaces, no text, no words, no letters, no faces, no people, no hands, no deformed objects, no warped shapes';
   var parts=[];
 
   if(themeKey==='custom'){
@@ -313,7 +313,7 @@ function buildPrompt(vibe,themeKey,sceneIndex){
     if(kw.props.length) sceneBits.push(kw.props.join(', '));
     if(cleaned) sceneBits.push(cleaned);
     if(kw.leftover) sceneBits.push(kw.leftover);
-    sceneBits.push('abundant decorative props filling the frame, arranged around an empty center space');
+    sceneBits.push('a few elegant props artfully placed and gently blurred, clean uncluttered composition, empty center space');
     parts.push(sceneBits.join(', '));
     if(kw.colors.length) parts.push(kw.colors.join(', '));
     parts.push(kw.mood||'festive celebratory atmosphere, rich abundant styling, beautiful depth of field');
@@ -343,7 +343,7 @@ async function getAIBg(promptObj){
   for(var attempt=0;attempt<3;attempt++){
     try{
       var seed=Math.floor(Math.random()*99999);
-      var url='https://image.pollinations.ai/prompt/'+encodeURIComponent(p)+'?width=1024&height=1024&seed='+seed+'&nologo=true';
+      var url='https://image.pollinations.ai/prompt/'+encodeURIComponent(p)+'?width=1024&height=1024&seed='+seed+'&nologo=true&model=flux';
       var res=await fetch(url);
       if(!res.ok){console.warn('Pollinations HTTP '+res.status);await sleep(2000);continue;}
       var blob=await res.blob();
